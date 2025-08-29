@@ -1,7 +1,8 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 import { questions, Question } from '../data/questions';
 import QuestionDetail from './QuestionDetail';
 import { Filter, SortAsc, SortDesc } from 'lucide-react';
+import ViewTracker from '../utils/viewTracker';
 
 const gradients = [
   'from-indigo-500 to-blue-600',
@@ -16,6 +17,11 @@ const MainContent: React.FC = () => {
   const [selected, setSelected] = useState<Question | null>(null);
   const [filter, setFilter] = useState<string>('all');
   const [sortBy, setSortBy] = useState<'popular' | 'recent' | 'difficulty'>('popular');
+
+  // Track page view when component mounts
+  useEffect(() => {
+    ViewTracker.trackPageView('main');
+  }, []);
 
   const filteredAndSortedQuestions = useMemo(() => {
     let filtered = questions;
@@ -92,6 +98,8 @@ const MainContent: React.FC = () => {
             </div>
           </div>
         </div>
+
+
 
 
 
