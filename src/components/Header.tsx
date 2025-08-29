@@ -46,13 +46,13 @@ const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
 
           <div className="flex-1 flex items-center justify-center mx-2 sm:mx-4">
             <div className="flex items-center space-x-4">
-              <div className="flex items-center space-x-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white px-4 py-2 rounded-full shadow-lg">
-                <div className="w-2 h-2 bg-white rounded-full animate-pulse"></div>
-                <span className="font-semibold text-sm sm:text-base">Trending Interview Questions</span>
-                <div className="w-2 h-2 bg-white rounded-full animate-pulse"></div>
+              <div className="flex items-center space-x-2 bg-white border-2 border-gray-300 text-gray-800 px-4 py-2 rounded-lg shadow-sm">
+                <div className="w-1.5 h-1.5 bg-blue-600 rounded-full"></div>
+                <span className="font-medium text-sm sm:text-base tracking-wide">TRENDING INTERVIEW QUESTIONS</span>
+                <div className="w-1.5 h-1.5 bg-blue-600 rounded-full"></div>
               </div>
-              <div className="flex items-center space-x-2 bg-gray-100 text-gray-700 px-3 py-2 rounded-full">
-                <Eye className="h-4 w-4 text-blue-600" />
+              <div className="flex items-center space-x-2 bg-white border border-gray-300 text-gray-700 px-3 py-2 rounded-lg">
+                <Eye className="h-4 w-4 text-gray-600" />
                 <span className="font-medium text-sm">{totalViews.toLocaleString()} Views</span>
               </div>
             </div>
