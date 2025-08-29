@@ -46,6 +46,7 @@ const MainContent: React.FC = () => {
   const categories = [
     { id: 'all', name: 'All Problems', count: questions.length },
     { id: 'AI/ML Systems', name: 'AI/ML Systems', count: questions.filter(q => q.category === 'AI/ML Systems').length },
+    { id: 'Scalable Systems', name: 'Scalable Systems', count: questions.filter(q => q.category === 'Scalable Systems').length },
   ];
 
   if (selected) {

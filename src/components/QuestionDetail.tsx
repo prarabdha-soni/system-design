@@ -5211,6 +5211,333 @@ class TextAnalyzer implements ITextAnalyzer {
                     </section>
                   )}
 
+                  {question.title.includes('Concurrency and Coroutines') && (
+                    <section>
+                      <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                        <div className="w-8 h-8 bg-gradient-to-r from-green-500 to-emerald-600 rounded-lg flex items-center justify-center mr-3">
+                          <FileText className="h-5 w-5 text-white" />
+                        </div>
+                        Concurrency and Coroutines - Comprehensive Q&A Guide
+                      </h2>
+                      <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-8 border border-green-100">
+                        <div className="space-y-8">
+                          {/* Q1 */}
+                          <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+                            <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                              <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">Q1</span>
+                              What is the difference between coroutines and threads?
+                            </h3>
+                            <div className="bg-gray-50 rounded-lg p-4">
+                              <p className="text-gray-700 leading-relaxed mb-3">
+                                <strong>Answer:</strong>
+                              </p>
+                              <ul className="text-gray-700 leading-relaxed space-y-2">
+                                <li>Coroutines are lightweight and use cooperative multitasking, switching only when they await.</li>
+                                <li>Threads are heavier since each requires its own stack and involve preemptive multitasking, where the OS decides when to switch.</li>
+                                <li>Context switching in threads is expensive, while in coroutines it's controlled manually via await.</li>
+                              </ul>
+                            </div>
+                          </div>
+
+                          {/* Q2 */}
+                          <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+                            <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                              <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">Q2</span>
+                              What is the Global Interpreter Lock (GIL) and why is it required?
+                            </h3>
+                            <div className="bg-gray-50 rounded-lg p-4">
+                              <p className="text-gray-700 leading-relaxed mb-3">
+                                <strong>Answer:</strong>
+                              </p>
+                              <ul className="text-gray-700 leading-relaxed space-y-2">
+                                <li>The GIL is a mutex that ensures only one thread executes Python bytecode at a time.</li>
+                                <li>Required because Python uses reference counting for memory management, and updating reference counts isn't thread-safe.</li>
+                                <li>Removing GIL would either risk deadlocks or hurt single-thread performance.</li>
+                              </ul>
+                            </div>
+                          </div>
+
+                          {/* Q3 */}
+                          <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+                            <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                              <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">Q3</span>
+                              What is the difference between preemptive vs cooperative multitasking?
+                            </h3>
+                            <div className="bg-gray-50 rounded-lg p-4">
+                              <p className="text-gray-700 leading-relaxed mb-3">
+                                <strong>Answer:</strong>
+                              </p>
+                              <ul className="text-gray-700 leading-relaxed space-y-2">
+                                <li>Preemptive multitasking: OS decides which thread runs, interrupting threads arbitrarily (used in threads).</li>
+                                <li>Cooperative multitasking: Tasks voluntarily yield control (await in asyncio).</li>
+                              </ul>
+                            </div>
+                          </div>
+
+                          {/* Q4 */}
+                          <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+                            <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                              <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">Q4</span>
+                              What are blocking vs non-blocking functions?
+                            </h3>
+                            <div className="bg-gray-50 rounded-lg p-4">
+                              <p className="text-gray-700 leading-relaxed mb-3">
+                                <strong>Answer:</strong>
+                              </p>
+                              <ul className="text-gray-700 leading-relaxed space-y-2">
+                                <li>Blocking: Halts execution until the task completes (e.g., <code>time.sleep</code>).</li>
+                                <li>Non-blocking: Yields control while waiting (e.g., <code>await asyncio.sleep</code>).</li>
+                                <li>Non-blocking allows concurrency without waiting.</li>
+                              </ul>
+                            </div>
+                          </div>
+
+                          {/* Q5 */}
+                          <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+                            <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                              <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">Q5</span>
+                              Why are threading and multiprocessing synchronous while asyncio is asynchronous?
+                            </h3>
+                            <div className="bg-gray-50 rounded-lg p-4">
+                              <p className="text-gray-700 leading-relaxed mb-3">
+                                <strong>Answer:</strong>
+                              </p>
+                              <ul className="text-gray-700 leading-relaxed space-y-2">
+                                <li>Threading and multiprocessing still wait for blocking calls to complete, so execution can be delayed.</li>
+                                <li>AsyncIO uses an event loop where tasks yield control instead of blocking → allowing true asynchronous execution.</li>
+                              </ul>
+                            </div>
+                          </div>
+
+                          {/* Q6 */}
+                          <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+                            <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                              <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">Q6</span>
+                              Why is threading prone to race conditions but asyncio less so?
+                            </h3>
+                            <div className="bg-gray-50 rounded-lg p-4">
+                              <p className="text-gray-700 leading-relaxed mb-3">
+                                <strong>Answer:</strong>
+                              </p>
+                              <ul className="text-gray-700 leading-relaxed space-y-2">
+                                <li>Threading uses multiple threads that may access shared memory simultaneously → race conditions.</li>
+                                <li>Asyncio uses a single thread, so race conditions only occur at explicit await points, making them rarer.</li>
+                              </ul>
+                            </div>
+                          </div>
+
+                          {/* Q7 */}
+                          <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+                            <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                              <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">Q7</span>
+                              How do you use a ThreadPool in Python?
+                            </h3>
+                            <div className="bg-gray-50 rounded-lg p-4">
+                              <p className="text-gray-700 leading-relaxed mb-3">
+                                <strong>Answer:</strong>
+                              </p>
+                              <pre className="bg-gray-100 p-3 rounded text-sm mb-3 overflow-x-auto">
+{`from multiprocessing.pool import ThreadPool
+
+def fetch(url):
+    return requests.get(url).text
+
+urls = ["https://example.com", "https://python.org"]
+
+with ThreadPool(5) as pool:
+    results = pool.map(fetch, urls)`}
+                              </pre>
+                              <p className="text-gray-700 leading-relaxed">
+                                <code>ThreadPool.map()</code> executes the function across threads and collects results.
+                              </p>
+                            </div>
+                          </div>
+
+                          {/* Q8 */}
+                          <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+                            <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                              <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">Q8</span>
+                              How do you use a Pool in multiprocessing?
+                            </h3>
+                            <div className="bg-gray-50 rounded-lg p-4">
+                              <p className="text-gray-700 leading-relaxed mb-3">
+                                <strong>Answer:</strong>
+                              </p>
+                              <pre className="bg-gray-100 p-3 rounded text-sm mb-3 overflow-x-auto">
+{`from multiprocessing import Pool
+
+def square(n):
+    return n * n
+
+with Pool(4) as pool:
+    results = pool.map(square, [1, 2, 3, 4, 5])`}
+                              </pre>
+                              <p className="text-gray-700 leading-relaxed">
+                                Each worker runs in a separate process, enabling parallel execution on multiple CPUs.
+                              </p>
+                            </div>
+                          </div>
+
+                          {/* Q9 */}
+                          <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+                            <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                              <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">Q9</span>
+                              How does ThreadPoolExecutor differ from ProcessPoolExecutor?
+                            </h3>
+                            <div className="bg-gray-50 rounded-lg p-4">
+                              <p className="text-gray-700 leading-relaxed mb-3">
+                                <strong>Answer:</strong>
+                              </p>
+                              <ul className="text-gray-700 leading-relaxed space-y-2">
+                                <li>ThreadPoolExecutor: Uses threads, good for I/O-bound tasks.</li>
+                                <li>ProcessPoolExecutor: Uses processes, good for CPU-bound tasks.</li>
+                                <li>Both provide a unified API via <code>executor.map</code>.</li>
+                              </ul>
+                            </div>
+                          </div>
+
+                          {/* Q10 */}
+                          <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+                            <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                              <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">Q10</span>
+                              What does as_completed do in ThreadPoolExecutor?
+                            </h3>
+                            <div className="bg-gray-50 rounded-lg p-4">
+                              <p className="text-gray-700 leading-relaxed mb-3">
+                                <strong>Answer:</strong>
+                              </p>
+                              <p className="text-gray-700 leading-relaxed mb-3">
+                                Returns results in the order tasks finish, not in the order they were submitted.
+                              </p>
+                              <pre className="bg-gray-100 p-3 rounded text-sm mb-3 overflow-x-auto">
+{`from concurrent.futures import ThreadPoolExecutor, as_completed
+
+with ThreadPoolExecutor(3) as executor:
+    futures = [executor.submit(fetch, url) for url in urls]
+    for future in as_completed(futures):
+        print(future.result())`}
+                              </pre>
+                            </div>
+                          </div>
+
+                          {/* Q11 */}
+                          <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+                            <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                              <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">Q11</span>
+                              What are some key asyncio functions?
+                            </h3>
+                            <div className="bg-gray-50 rounded-lg p-4">
+                              <p className="text-gray-700 leading-relaxed mb-3">
+                                <strong>Answer:</strong>
+                              </p>
+                              <ul className="text-gray-700 leading-relaxed space-y-2">
+                                <li><code>asyncio.run(coro)</code> → runs main coroutine.</li>
+                                <li><code>asyncio.create_task(coro)</code> → schedules coroutine to run.</li>
+                                <li><code>asyncio.gather(*coros)</code> → runs multiple coroutines concurrently.</li>
+                                <li><code>asyncio.as_completed(coros)</code> → yields results as they finish.</li>
+                                <li><code>asyncio.to_thread(fn, *args)</code> → runs a blocking function in a separate thread.</li>
+                                <li><code>asyncio.wait_for(coro, timeout)</code> → adds timeout.</li>
+                              </ul>
+                            </div>
+                          </div>
+
+                          {/* Q12 */}
+                          <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+                            <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                              <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">Q12</span>
+                              How do you write async code in Python?
+                            </h3>
+                            <div className="bg-gray-50 rounded-lg p-4">
+                              <p className="text-gray-700 leading-relaxed mb-3">
+                                <strong>Answer:</strong>
+                              </p>
+                              <p className="text-gray-700 leading-relaxed mb-3">
+                                Use <code>async def</code> to define a coroutine, <code>await</code> to yield control, and <code>async with</code> or <code>async for</code> for context managers and loops.
+                              </p>
+                              <pre className="bg-gray-100 p-3 rounded text-sm mb-3 overflow-x-auto">
+{`import asyncio
+
+async def say_hello():
+    await asyncio.sleep(1)
+    print("Hello")
+
+asyncio.run(say_hello())`}
+                              </pre>
+                            </div>
+                          </div>
+
+                          {/* Q13 */}
+                          <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+                            <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                              <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">Q13</span>
+                              Why does asyncio use queues (asyncio.Queue)?
+                            </h3>
+                            <div className="bg-gray-50 rounded-lg p-4">
+                              <p className="text-gray-700 leading-relaxed mb-3">
+                                <strong>Answer:</strong>
+                              </p>
+                              <ul className="text-gray-700 leading-relaxed space-y-2">
+                                <li>Useful for producer-consumer patterns.</li>
+                                <li>Tasks can await <code>q.get()</code> and await <code>q.put(item)</code>.</li>
+                                <li><code>q.join()</code> waits until all items are processed, and <code>consumer.cancel()</code> can stop consumers.</li>
+                              </ul>
+                            </div>
+                          </div>
+
+                          {/* Q14 */}
+                          <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+                            <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                              <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">Q14</span>
+                              Why do we need asyncio.to_thread?
+                            </h3>
+                            <div className="bg-gray-50 rounded-lg p-4">
+                              <p className="text-gray-700 leading-relaxed mb-3">
+                                <strong>Answer:</strong>
+                              </p>
+                              <p className="text-gray-700 leading-relaxed">
+                                To offload blocking functions (e.g., file I/O, DB calls) into threads so they don't block the event loop.
+                              </p>
+                            </div>
+                          </div>
+
+                          {/* Q15 */}
+                          <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+                            <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                              <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">Q15</span>
+                              Why do we still need locks in multiprocessing?
+                            </h3>
+                            <div className="bg-gray-50 rounded-lg p-4">
+                              <p className="text-gray-700 leading-relaxed mb-3">
+                                <strong>Answer:</strong>
+                              </p>
+                              <ul className="text-gray-700 leading-relaxed space-y-2">
+                                <li>Even though processes don't share memory by default, they can use shared objects (multiprocessing.Value, Array, or Manager).</li>
+                                <li>Locks are required to safely update shared state.</li>
+                              </ul>
+                            </div>
+                          </div>
+
+                          {/* Q16 */}
+                          <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+                            <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                              <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">Q16</span>
+                              Why can't we use a normal dictionary in multiprocessing instead of Manager().dict()?
+                            </h3>
+                            <div className="bg-gray-50 rounded-lg p-4">
+                              <p className="text-gray-700 leading-relaxed mb-3">
+                                <strong>Answer:</strong>
+                              </p>
+                              <ul className="text-gray-700 leading-relaxed space-y-2">
+                                <li>Regular dict lives in one process memory space.</li>
+                                <li>Manager().dict() provides a proxy object that enables safe sharing across processes via IPC (inter-process communication).</li>
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </section>
+                  )}
+
                   {question.title.includes('ElevenLabs') && (
                     <section>
                       <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">
