@@ -362,31 +362,40 @@ const QuestionDetail: React.FC<QuestionDetailProps> = ({ question }) => {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
         <div className="grid grid-cols-1 gap-6 sm:gap-8">
-          {/* Tabs */}
-          <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
-            <div className="border-b border-gray-200">
-              <nav className="flex space-x-4 sm:space-x-8 px-4 sm:px-6">
-                {tabs.map((tab) => {
-                  const Icon = tab.icon;
-                  return (
-                    <button
-                      key={tab.id}
-                      onClick={() => setActiveTab(tab.id)}
-                      className={`flex items-center space-x-2 py-4 border-b-2 font-medium text-sm transition-colors ${
-                        activeTab === tab.id
-                          ? 'border-blue-500 text-blue-600'
-                          : 'border-transparent text-gray-500 hover:text-gray-700'
-                      }`}
-                    >
-                      <Icon className="h-4 w-4" />
-                      <span>{tab.label}</span>
-                    </button>
-                  );
-                })}
-              </nav>
+          {/* Enhanced Tabs - Hide for GitHub Repos */}
+          {!question.title.includes('Top August Repos') && (
+            <div className="mb-4">
+              <div className="flex items-center justify-center space-x-2 text-sm text-gray-600 bg-blue-50 rounded-lg py-2 px-4 border border-blue-100">
+                <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
+                <span className="font-medium">💡 Switch between HLD (High-Level Design) and LLD (Low-Level Design) tabs below</span>
+              </div>
             </div>
+          )}
+          {!question.title.includes('Top August Repos') && (
+            <div className="bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm">
+              <div className="border-b border-gray-200 bg-gradient-to-r from-gray-50 to-gray-100">
+                <nav className="flex space-x-2 sm:space-x-4 px-4 sm:px-6">
+                  {tabs.map((tab) => {
+                    const Icon = tab.icon;
+                    return (
+                      <button
+                        key={tab.id}
+                        onClick={() => setActiveTab(tab.id)}
+                        className={`flex items-center space-x-3 py-6 px-6 sm:px-8 border-b-3 font-semibold text-base sm:text-lg transition-all duration-200 rounded-t-lg ${
+                          activeTab === tab.id
+                            ? 'border-blue-600 text-blue-700 bg-white shadow-sm transform -translate-y-px'
+                            : 'border-transparent text-gray-600 hover:text-gray-800 hover:bg-white/50'
+                        }`}
+                      >
+                        <Icon className={`h-5 w-5 sm:h-6 sm:w-6 ${activeTab === tab.id ? 'text-blue-600' : 'text-gray-500'}`} />
+                        <span className="font-bold">{tab.label}</span>
+                      </button>
+                    );
+                  })}
+                </nav>
+              </div>
 
-            <div className="p-4 sm:p-6">
+              <div className="p-6 sm:p-8">
               {activeTab === 'hld' && (
                 <div className="space-y-8 sm:space-y-12">
                   {/* System Architecture Overview */}
@@ -398,6 +407,9 @@ const QuestionDetail: React.FC<QuestionDetailProps> = ({ question }) => {
                       {question.title.includes('Perplexity') && 'Perplexity - AI Search Engine Architecture'}
                       {question.title.includes('ElevenLabs') && 'ElevenLabs - AI Voice Generation Architecture'}
                       {question.title.includes('ChatGPT') && 'ChatGPT - Conversational AI Architecture'}
+                      {question.title.includes('Netflix') && 'Netflix - Video Streaming Architecture'}
+                      {question.title.includes('Uber') && 'Uber - Ride-Sharing Platform Architecture'}
+                      {question.title.includes('Twitter') && 'Twitter - Social Media Platform Architecture'}
 
                     </h2>
                     
@@ -499,6 +511,615 @@ const QuestionDetail: React.FC<QuestionDetailProps> = ({ question }) => {
                                 <div className="flex items-center justify-between">
                                   <span className="font-medium text-gray-700">Availability:</span>
                                   <span className="text-blue-600 font-bold">99.9%</span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
+                    {question.title.includes('Netflix') && (
+                      <div className="bg-gradient-to-r from-red-50 to-pink-50 rounded-xl p-6 border border-red-200 mb-8">
+                        <div className="flex items-start space-x-4">
+                          <div className="w-12 h-12 bg-red-500 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <Target className="h-6 w-6 text-white" />
+                          </div>
+                          <div>
+                            <h3 className="text-lg font-bold text-gray-900 mb-2">🎯 Netflix Goal: Seamless Global Streaming</h3>
+                            <div className="grid md:grid-cols-2 gap-4 text-sm">
+                              <div className="space-y-2">
+                                <div className="flex items-center justify-between">
+                                  <span className="font-medium text-gray-700">Startup Time (p95):</span>
+                                  <span className="text-red-600 font-bold">≤ 3.0s</span>
+                                </div>
+                                <div className="flex items-center justify-between">
+                                  <span className="font-medium text-gray-700">Concurrent Streams:</span>
+                                  <span className="text-green-600 font-bold">100M+</span>
+                                </div>
+                              </div>
+                              <div className="space-y-2">
+                                <div className="flex items-center justify-between">
+                                  <span className="font-medium text-gray-700">Video Quality:</span>
+                                  <span className="text-purple-600 font-bold">4K HDR Adaptive</span>
+                                </div>
+                                <div className="flex items-center justify-between">
+                                  <span className="font-medium text-gray-700">Global Coverage:</span>
+                                  <span className="text-blue-600 font-bold">190+ Countries</span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
+                    {question.title.includes('Uber') && (
+                      <div className="bg-gradient-to-r from-black-50 to-gray-50 rounded-xl p-6 border border-gray-200 mb-8">
+                        <div className="flex items-start space-x-4">
+                          <div className="w-12 h-12 bg-black rounded-lg flex items-center justify-center flex-shrink-0">
+                            <Target className="h-6 w-6 text-white" />
+                          </div>
+                          <div>
+                            <h3 className="text-lg font-bold text-gray-900 mb-2">🎯 Uber Goal: Real-Time Mobility Platform</h3>
+                            <div className="grid md:grid-cols-2 gap-4 text-sm">
+                              <div className="space-y-2">
+                                <div className="flex items-center justify-between">
+                                  <span className="font-medium text-gray-700">Matching Time (p95):</span>
+                                  <span className="text-red-600 font-bold">≤ 5.0s</span>
+                                </div>
+                                <div className="flex items-center justify-between">
+                                  <span className="font-medium text-gray-700">Concurrent Rides:</span>
+                                  <span className="text-green-600 font-bold">10M+</span>
+                                </div>
+                              </div>
+                              <div className="space-y-2">
+                                <div className="flex items-center justify-between">
+                                  <span className="font-medium text-gray-700">Location Accuracy:</span>
+                                  <span className="text-purple-600 font-bold">±5 meters</span>
+                                </div>
+                                <div className="flex items-center justify-between">
+                                  <span className="font-medium text-gray-700">Global Cities:</span>
+                                  <span className="text-blue-600 font-bold">10,000+</span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
+                    {question.title.includes('Twitter') && (
+                      <div className="bg-gradient-to-r from-blue-50 to-cyan-50 rounded-xl p-6 border border-blue-200 mb-8">
+                        <div className="flex items-start space-x-4">
+                          <div className="w-12 h-12 bg-blue-500 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <Target className="h-6 w-6 text-white" />
+                          </div>
+                          <div>
+                            <h3 className="text-lg font-bold text-gray-900 mb-2">🎯 Twitter Goal: Real-Time Social Platform</h3>
+                            <div className="grid md:grid-cols-2 gap-4 text-sm">
+                              <div className="space-y-2">
+                                <div className="flex items-center justify-between">
+                                  <span className="font-medium text-gray-700">Feed Latency (p95):</span>
+                                  <span className="text-red-600 font-bold">≤ 200ms</span>
+                                </div>
+                                <div className="flex items-center justify-between">
+                                  <span className="font-medium text-gray-700">Daily Tweets:</span>
+                                  <span className="text-green-600 font-bold">500M+</span>
+                                </div>
+                              </div>
+                              <div className="space-y-2">
+                                <div className="flex items-center justify-between">
+                                  <span className="font-medium text-gray-700">Active Users:</span>
+                                  <span className="text-purple-600 font-bold">400M+</span>
+                                </div>
+                                <div className="flex items-center justify-between">
+                                  <span className="font-medium text-gray-700">Global Reach:</span>
+                                  <span className="text-blue-600 font-bold">200+ Countries</span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
+                    {question.title.includes('Netflix') && (
+                      <div className="bg-gradient-to-br from-red-50 to-pink-50 rounded-xl p-8 border border-red-100">
+                        <div className="grid lg:grid-cols-3 gap-8">
+                          <div className="lg:col-span-2">
+                            <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+                              <svg viewBox="0 0 900 500" className="w-full h-auto">
+                              <defs>
+                                <linearGradient id="clientGradNetflix" x1="0" y1="0" x2="1" y2="1">
+                                  <stop offset="0%" stopColor="#dc2626" />
+                                  <stop offset="100%" stopColor="#b91c1c" />
+                                </linearGradient>
+                                <linearGradient id="cdnGrad" x1="0" y1="0" x2="1" y2="1">
+                                  <stop offset="0%" stopColor="#f59e0b" />
+                                  <stop offset="100%" stopColor="#d97706" />
+                                </linearGradient>
+                                <linearGradient id="streamingGrad" x1="0" y1="0" x2="1" y2="1">
+                                  <stop offset="0%" stopColor="#8b5cf6" />
+                                  <stop offset="100%" stopColor="#7c3aed" />
+                                </linearGradient>
+                                <linearGradient id="recommendationGrad" x1="0" y1="0" x2="1" y2="1">
+                                  <stop offset="0%" stopColor="#06b6d4" />
+                                  <stop offset="100%" stopColor="#0891b2" />
+                                </linearGradient>
+                                <linearGradient id="storageGrad" x1="0" y1="0" x2="1" y2="1">
+                                  <stop offset="0%" stopColor="#10b981" />
+                                  <stop offset="100%" stopColor="#059669" />
+                                </linearGradient>
+                              </defs>
+                              
+                              {/* Client Layer */}
+                              <rect x="50" y="30" width="120" height="60" rx="12" fill="url(#clientGradNetflix)" />
+                              <text x="110" y="55" textAnchor="middle" fill="white" fontSize="14" fontWeight="600">Client</text>
+                              <text x="110" y="70" textAnchor="middle" fill="white" fontSize="10">Web/TV/Mobile</text>
+
+                              {/* CDN Edge */}
+                              <rect x="220" y="30" width="160" height="60" rx="12" fill="url(#cdnGrad)" />
+                              <text x="300" y="50" textAnchor="middle" fill="white" fontSize="14" fontWeight="600">CDN Edge</text>
+                              <text x="300" y="65" textAnchor="middle" fill="white" fontSize="9">Global Distribution • Cache</text>
+
+                              {/* Streaming Engine */}
+                              <rect x="430" y="30" width="180" height="60" rx="12" fill="url(#streamingGrad)" />
+                              <text x="520" y="50" textAnchor="middle" fill="white" fontSize="14" fontWeight="600">Streaming Engine</text>
+                              <text x="520" y="65" textAnchor="middle" fill="white" fontSize="9">Adaptive Bitrate • Quality</text>
+
+                              {/* Recommendation Engine */}
+                              <rect x="50" y="140" width="160" height="50" rx="8" fill="url(#recommendationGrad)" />
+                              <text x="130" y="160" textAnchor="middle" fill="white" fontSize="12" fontWeight="600">Recommendation Engine</text>
+                              <text x="130" y="175" textAnchor="middle" fill="white" fontSize="8">ML Models • Personalization</text>
+
+                              {/* Content Management */}
+                              <rect x="240" y="140" width="160" height="50" rx="8" fill="url(#storageGrad)" />
+                              <text x="320" y="160" textAnchor="middle" fill="white" fontSize="12" fontWeight="600">Content Management</text>
+                              <text x="320" y="175" textAnchor="middle" fill="white" fontSize="8">Metadata • Encoding</text>
+
+                              {/* User Profile Service */}
+                              <rect x="430" y="140" width="160" height="50" rx="8" fill="url(#streamingGrad)" />
+                              <text x="510" y="160" textAnchor="middle" fill="white" fontSize="12" fontWeight="600">User Profile Service</text>
+                              <text x="510" y="175" textAnchor="middle" fill="white" fontSize="8">Watch History • Preferences</text>
+
+                              {/* Analytics Engine */}
+                              <rect x="50" y="220" width="160" height="50" rx="8" fill="url(#cdnGrad)" />
+                              <text x="130" y="240" textAnchor="middle" fill="white" fontSize="12" fontWeight="600">Analytics Engine</text>
+                              <text x="130" y="255" textAnchor="middle" fill="white" fontSize="8">Viewing Patterns • A/B Testing</text>
+
+                              {/* Payment & Billing */}
+                              <rect x="240" y="220" width="160" height="50" rx="8" fill="url(#recommendationGrad)" />
+                              <text x="320" y="240" textAnchor="middle" fill="white" fontSize="12" fontWeight="600">Payment & Billing</text>
+                              <text x="320" y="255" textAnchor="middle" fill="white" fontSize="8">Subscriptions • Plans</text>
+
+                              {/* Storage Layer */}
+                              <rect x="430" y="220" width="160" height="50" rx="8" fill="url(#storageGrad)" />
+                              <text x="510" y="240" textAnchor="middle" fill="white" fontSize="12" fontWeight="600">Storage Layer</text>
+                              <text x="510" y="255" textAnchor="middle" fill="white" fontSize="8">S3 • Database • Cache</text>
+
+                              {/* Storage Services */}
+                              <rect x="50" y="320" width="120" height="40" rx="6" fill="#6b7280" />
+                              <text x="110" y="340" textAnchor="middle" fill="white" fontSize="10" fontWeight="600">S3</text>
+                              <text x="110" y="350" textAnchor="middle" fill="white" fontSize="8">Video Storage</text>
+
+                              <rect x="190" y="320" width="120" height="40" rx="6" fill="#6b7280" />
+                              <text x="250" y="340" textAnchor="middle" fill="white" fontSize="10" fontWeight="600">DynamoDB</text>
+                              <text x="250" y="350" textAnchor="middle" fill="white" fontSize="8">User Data</text>
+
+                              <rect x="330" y="320" width="120" height="40" rx="6" fill="#6b7280" />
+                              <text x="390" y="340" textAnchor="middle" fill="white" fontSize="10" fontWeight="600">ElastiCache</text>
+                              <text x="390" y="350" textAnchor="middle" fill="white" fontSize="8">Session Cache</text>
+
+                              <rect x="470" y="320" width="120" height="40" rx="6" fill="#6b7280" />
+                              <text x="530" y="340" textAnchor="middle" fill="white" fontSize="10" fontWeight="600">RDS</text>
+                              <text x="530" y="350" textAnchor="middle" fill="white" fontSize="8">Analytics</text>
+
+                              {/* Connection Lines */}
+                              <line x1="170" y1="60" x2="220" y2="60" stroke="#6b7280" strokeWidth="2" />
+                              <line x1="380" y1="60" x2="430" y2="60" stroke="#6b7280" strokeWidth="2" />
+                              <line x1="130" y1="190" x2="130" y2="220" stroke="#6b7280" strokeWidth="2" />
+                              <line x1="320" y1="190" x2="320" y2="220" stroke="#6b7280" strokeWidth="2" />
+                              <line x1="510" y1="190" x2="510" y2="220" stroke="#6b7280" strokeWidth="2" />
+                              <line x1="130" y1="270" x2="130" y2="320" stroke="#6b7280" strokeWidth="2" />
+                              <line x1="320" y1="270" x2="320" y2="320" stroke="#6b7280" strokeWidth="2" />
+                              <line x1="510" y1="270" x2="510" y2="320" stroke="#6b7280" strokeWidth="2" />
+                              </svg>
+                            </div>
+                          </div>
+
+                          <div className="space-y-6">
+                            <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+                              <h3 className="font-semibold text-gray-900 mb-4 flex items-center">
+                                <div className="w-6 h-6 bg-red-100 rounded-lg flex items-center justify-center mr-3">
+                                  <Server className="h-4 w-4 text-red-600" />
+                                </div>
+                                Streaming Components
+                              </h3>
+                              <div className="space-y-3 text-sm">
+                                <div className="flex items-start space-x-3 p-3 bg-red-50 rounded-lg">
+                                  <div className="w-6 h-6 bg-red-500 rounded-full flex items-center justify-center text-white text-xs font-bold">1</div>
+                                  <div>
+                                    <p className="font-medium text-gray-900">Adaptive Bitrate</p>
+                                    <p className="text-gray-600">Dynamic quality selection based on network conditions</p>
+                                  </div>
+                                </div>
+                                <div className="flex items-start space-x-3 p-3 bg-red-50 rounded-lg">
+                                  <div className="w-6 h-6 bg-red-500 rounded-full flex items-center justify-center text-white text-xs font-bold">2</div>
+                                  <div>
+                                    <p className="font-medium text-gray-900">CDN Distribution</p>
+                                    <p className="text-gray-600">Global edge servers for low-latency delivery</p>
+                                  </div>
+                                </div>
+                                <div className="flex items-start space-x-3 p-3 bg-red-50 rounded-lg">
+                                  <div className="w-6 h-6 bg-red-500 rounded-full flex items-center justify-center text-white text-xs font-bold">3</div>
+                                  <div>
+                                    <p className="font-medium text-gray-900">Content Encoding</p>
+                                    <p className="text-gray-600">Multiple quality levels and formats</p>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+                              <h3 className="font-semibold text-gray-900 mb-4 flex items-center">
+                                <div className="w-6 h-6 bg-pink-100 rounded-lg flex items-center justify-center mr-3">
+                                  <Database className="h-4 w-4 text-pink-600" />
+                                </div>
+                                Data Management
+                              </h3>
+                              <div className="space-y-3 text-sm">
+                                <div className="flex items-center justify-between p-3 bg-pink-50 rounded-lg">
+                                  <span className="font-medium text-gray-700">Video Storage</span>
+                                  <span className="text-pink-600 font-medium">S3 • Multi-Region</span>
+                                </div>
+                                <div className="flex items-center justify-between p-3 bg-pink-50 rounded-lg">
+                                  <span className="font-medium text-gray-700">User Data</span>
+                                  <span className="text-pink-600 font-medium">DynamoDB • Global Tables</span>
+                                </div>
+                                <div className="flex items-center justify-between p-3 bg-pink-50 rounded-lg">
+                                  <span className="font-medium text-gray-700">Analytics</span>
+                                  <span className="text-pink-600 font-medium">Redshift • Kinesis</span>
+                                </div>
+                                <div className="flex items-center justify-between p-3 bg-pink-50 rounded-lg">
+                                  <span className="font-medium text-gray-700">Caching</span>
+                                  <span className="text-pink-600 font-medium">ElastiCache • CloudFront</span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
+                    {question.title.includes('Uber') && (
+                      <div className="bg-gradient-to-br from-black-50 to-gray-50 rounded-xl p-8 border border-gray-100">
+                        <div className="grid lg:grid-cols-3 gap-8">
+                          <div className="lg:col-span-2">
+                            <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+                              <svg viewBox="0 0 900 500" className="w-full h-auto">
+                              <defs>
+                                <linearGradient id="clientGradUber" x1="0" y1="0" x2="1" y2="1">
+                                  <stop offset="0%" stopColor="#000000" />
+                                  <stop offset="100%" stopColor="#374151" />
+                                </linearGradient>
+                                <linearGradient id="matchingGrad" x1="0" y1="0" x2="1" y2="1">
+                                  <stop offset="0%" stopColor="#10b981" />
+                                  <stop offset="100%" stopColor="#059669" />
+                                </linearGradient>
+                                <linearGradient id="locationGrad" x1="0" y1="0" x2="1" y2="1">
+                                  <stop offset="0%" stopColor="#3b82f6" />
+                                  <stop offset="100%" stopColor="#1d4ed8" />
+                                </linearGradient>
+                                <linearGradient id="pricingGrad" x1="0" y1="0" x2="1" y2="1">
+                                  <stop offset="0%" stopColor="#f59e0b" />
+                                  <stop offset="100%" stopColor="#d97706" />
+                                </linearGradient>
+                                <linearGradient id="paymentGrad" x1="0" y1="0" x2="1" y2="1">
+                                  <stop offset="0%" stopColor="#8b5cf6" />
+                                  <stop offset="100%" stopColor="#7c3aed" />
+                                </linearGradient>
+                              </defs>
+                              
+                              {/* Client Layer */}
+                              <rect x="50" y="30" width="120" height="60" rx="12" fill="url(#clientGradUber)" />
+                              <text x="110" y="55" textAnchor="middle" fill="white" fontSize="14" fontWeight="600">Client</text>
+                              <text x="110" y="70" textAnchor="middle" fill="white" fontSize="10">Rider/Driver Apps</text>
+
+                              {/* API Gateway */}
+                              <rect x="220" y="30" width="160" height="60" rx="12" fill="url(#matchingGrad)" />
+                              <text x="300" y="50" textAnchor="middle" fill="white" fontSize="14" fontWeight="600">API Gateway</text>
+                              <text x="300" y="65" textAnchor="middle" fill="white" fontSize="9">Load Balancer • Auth • Rate Limits</text>
+
+                              {/* Matching Engine */}
+                              <rect x="430" y="30" width="180" height="60" rx="12" fill="url(#locationGrad)" />
+                              <text x="520" y="50" textAnchor="middle" fill="white" fontSize="14" fontWeight="600">Matching Engine</text>
+                              <text x="520" y="65" textAnchor="middle" fill="white" fontSize="9">Driver-Rider Pairing • ETA</text>
+
+                              {/* Location Service */}
+                              <rect x="50" y="140" width="160" height="50" rx="8" fill="url(#locationGrad)" />
+                              <text x="130" y="160" textAnchor="middle" fill="white" fontSize="12" fontWeight="600">Location Service</text>
+                              <text x="130" y="175" textAnchor="middle" fill="white" fontSize="8">GPS Tracking • Geofencing</text>
+
+                              {/* Pricing Engine */}
+                              <rect x="240" y="140" width="160" height="50" rx="8" fill="url(#pricingGrad)" />
+                              <text x="320" y="160" textAnchor="middle" fill="white" fontSize="12" fontWeight="600">Pricing Engine</text>
+                              <text x="320" y="175" textAnchor="middle" fill="white" fontSize="8">Dynamic Pricing • Surge</text>
+
+                              {/* Payment Service */}
+                              <rect x="430" y="140" width="160" height="50" rx="8" fill="url(#paymentGrad)" />
+                              <text x="510" y="160" textAnchor="middle" fill="white" fontSize="12" fontWeight="600">Payment Service</text>
+                              <text x="510" y="175" textAnchor="middle" fill="white" fontSize="8">Processing • Refunds</text>
+
+                              {/* Driver Management */}
+                              <rect x="50" y="220" width="160" height="50" rx="8" fill="url(#matchingGrad)" />
+                              <text x="130" y="240" textAnchor="middle" fill="white" fontSize="12" fontWeight="600">Driver Management</text>
+                              <text x="130" y="255" textAnchor="middle" fill="white" fontSize="8">Onboarding • Verification</text>
+
+                              {/* Trip Management */}
+                              <rect x="240" y="220" width="160" height="50" rx="8" fill="url(#locationGrad)" />
+                              <text x="320" y="240" textAnchor="middle" fill="white" fontSize="12" fontWeight="600">Trip Management</text>
+                              <text x="320" y="255" textAnchor="middle" fill="white" fontSize="8">Route Optimization • ETA</text>
+
+                              {/* Analytics Engine */}
+                              <rect x="430" y="220" width="160" height="50" rx="8" fill="url(#pricingGrad)" />
+                              <text x="510" y="240" textAnchor="middle" fill="white" fontSize="12" fontWeight="600">Analytics Engine</text>
+                              <text x="510" y="255" textAnchor="middle" fill="white" fontSize="8">Demand Prediction • ML</text>
+
+                              {/* Storage Layer */}
+                              <rect x="50" y="320" width="120" height="40" rx="6" fill="#6b7280" />
+                              <text x="110" y="340" textAnchor="middle" fill="white" fontSize="10" fontWeight="600">PostgreSQL</text>
+                              <text x="110" y="350" textAnchor="middle" fill="white" fontSize="8">User Data</text>
+
+                              <rect x="190" y="320" width="120" height="40" rx="6" fill="#6b7280" />
+                              <text x="250" y="340" textAnchor="middle" fill="white" fontSize="10" fontWeight="600">Redis</text>
+                              <text x="250" y="350" textAnchor="middle" fill="white" fontSize="8">Location Cache</text>
+
+                              <rect x="330" y="320" width="120" height="40" rx="6" fill="#6b7280" />
+                              <text x="390" y="340" textAnchor="middle" fill="white" fontSize="10" fontWeight="600">Kafka</text>
+                              <text x="390" y="350" textAnchor="middle" fill="white" fontSize="8">Event Stream</text>
+
+                              <rect x="470" y="320" width="120" height="40" rx="6" fill="#6b7280" />
+                              <text x="530" y="340" textAnchor="middle" fill="white" fontSize="10" fontWeight="600">S3</text>
+                              <text x="530" y="350" textAnchor="middle" fill="white" fontSize="8">Analytics</text>
+
+                              {/* Connection Lines */}
+                              <line x1="170" y1="60" x2="220" y2="60" stroke="#6b7280" strokeWidth="2" />
+                              <line x1="380" y1="60" x2="430" y2="60" stroke="#6b7280" strokeWidth="2" />
+                              <line x1="130" y1="190" x2="130" y2="220" stroke="#6b7280" strokeWidth="2" />
+                              <line x1="320" y1="190" x2="320" y2="220" stroke="#6b7280" strokeWidth="2" />
+                              <line x1="510" y1="190" x2="510" y2="220" stroke="#6b7280" strokeWidth="2" />
+                              <line x1="130" y1="270" x2="130" y2="320" stroke="#6b7280" strokeWidth="2" />
+                              <line x1="320" y1="270" x2="320" y2="320" stroke="#6b7280" strokeWidth="2" />
+                              <line x1="510" y1="270" x2="510" y2="320" stroke="#6b7280" strokeWidth="2" />
+                              </svg>
+                            </div>
+                          </div>
+
+                          <div className="space-y-6">
+                            <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+                              <h3 className="font-semibold text-gray-900 mb-4 flex items-center">
+                                <div className="w-6 h-6 bg-black-100 rounded-lg flex items-center justify-center mr-3">
+                                  <Server className="h-4 w-4 text-black-600" />
+                                </div>
+                                Core Services
+                              </h3>
+                              <div className="space-y-3 text-sm">
+                                <div className="flex items-start space-x-3 p-3 bg-gray-50 rounded-lg">
+                                  <div className="w-6 h-6 bg-black rounded-full flex items-center justify-center text-white text-xs font-bold">1</div>
+                                  <div>
+                                    <p className="font-medium text-gray-900">Matching Engine</p>
+                                    <p className="text-gray-600">Real-time driver-rider pairing algorithm</p>
+                                  </div>
+                                </div>
+                                <div className="flex items-start space-x-3 p-3 bg-gray-50 rounded-lg">
+                                  <div className="w-6 h-6 bg-black rounded-full flex items-center justify-center text-white text-xs font-bold">2</div>
+                                  <div>
+                                    <p className="font-medium text-gray-900">Location Service</p>
+                                    <p className="text-gray-600">GPS tracking and geofencing</p>
+                                  </div>
+                                </div>
+                                <div className="flex items-start space-x-3 p-3 bg-gray-50 rounded-lg">
+                                  <div className="w-6 h-6 bg-black rounded-full flex items-center justify-center text-white text-xs font-bold">3</div>
+                                  <div>
+                                    <p className="font-medium text-gray-900">Pricing Engine</p>
+                                    <p className="text-gray-600">Dynamic surge pricing algorithm</p>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+                              <h3 className="font-semibold text-gray-900 mb-4 flex items-center">
+                                <div className="w-6 h-6 bg-gray-100 rounded-lg flex items-center justify-center mr-3">
+                                  <Database className="h-4 w-4 text-gray-600" />
+                                </div>
+                                Data Architecture
+                              </h3>
+                              <div className="space-y-3 text-sm">
+                                <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                                  <span className="font-medium text-gray-700">User Data</span>
+                                  <span className="text-gray-600 font-medium">PostgreSQL • Sharded</span>
+                                </div>
+                                <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                                  <span className="font-medium text-gray-700">Location Cache</span>
+                                  <span className="text-gray-600 font-medium">Redis • Geospatial</span>
+                                </div>
+                                <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                                  <span className="font-medium text-gray-700">Event Stream</span>
+                                  <span className="text-gray-600 font-medium">Kafka • Real-time</span>
+                                </div>
+                                <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                                  <span className="font-medium text-gray-700">Analytics</span>
+                                  <span className="text-gray-600 font-medium">S3 • Data Lake</span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
+                    {question.title.includes('Twitter') && (
+                      <div className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-xl p-8 border border-blue-100">
+                        <div className="grid lg:grid-cols-3 gap-8">
+                          <div className="lg:col-span-2">
+                            <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+                              <svg viewBox="0 0 900 500" className="w-full h-auto">
+                              <defs>
+                                <linearGradient id="clientGradTwitter" x1="0" y1="0" x2="1" y2="1">
+                                  <stop offset="0%" stopColor="#3b82f6" />
+                                  <stop offset="100%" stopColor="#1d4ed8" />
+                                </linearGradient>
+                                <linearGradient id="feedGrad" x1="0" y1="0" x2="1" y2="1">
+                                  <stop offset="0%" stopColor="#10b981" />
+                                  <stop offset="100%" stopColor="#059669" />
+                                </linearGradient>
+                                <linearGradient id="trendingGrad" x1="0" y1="0" x2="1" y2="1">
+                                  <stop offset="0%" stopColor="#f59e0b" />
+                                  <stop offset="100%" stopColor="#d97706" />
+                                </linearGradient>
+                                <linearGradient id="notificationGrad" x1="0" y1="0" x2="1" y2="1">
+                                  <stop offset="0%" stopColor="#8b5cf6" />
+                                  <stop offset="100%" stopColor="#7c3aed" />
+                                </linearGradient>
+                                <linearGradient id="searchGrad" x1="0" y1="0" x2="1" y2="1">
+                                  <stop offset="0%" stopColor="#06b6d4" />
+                                  <stop offset="100%" stopColor="#0891b2" />
+                                </linearGradient>
+                              </defs>
+                              
+                              {/* Client Layer */}
+                              <rect x="50" y="30" width="120" height="60" rx="12" fill="url(#clientGradTwitter)" />
+                              <text x="110" y="55" textAnchor="middle" fill="white" fontSize="14" fontWeight="600">Client</text>
+                              <text x="110" y="70" textAnchor="middle" fill="white" fontSize="10">Web/Mobile Apps</text>
+
+                              {/* API Gateway */}
+                              <rect x="220" y="30" width="160" height="60" rx="12" fill="url(#feedGrad)" />
+                              <text x="300" y="50" textAnchor="middle" fill="white" fontSize="14" fontWeight="600">API Gateway</text>
+                              <text x="300" y="65" textAnchor="middle" fill="white" fontSize="9">Load Balancer • Auth • Rate Limits</text>
+
+                              {/* Feed Service */}
+                              <rect x="430" y="30" width="180" height="60" rx="12" fill="url(#trendingGrad)" />
+                              <text x="520" y="50" textAnchor="middle" fill="white" fontSize="14" fontWeight="600">Feed Service</text>
+                              <text x="520" y="65" textAnchor="middle" fill="white" fontSize="9">Timeline Generation • Ranking</text>
+
+                              {/* Tweet Service */}
+                              <rect x="50" y="140" width="160" height="50" rx="8" fill="url(#notificationGrad)" />
+                              <text x="130" y="160" textAnchor="middle" fill="white" fontSize="12" fontWeight="600">Tweet Service</text>
+                              <text x="130" y="175" textAnchor="middle" fill="white" fontSize="8">Creation • Storage • Retrieval</text>
+
+                              {/* Trending Engine */}
+                              <rect x="240" y="140" width="160" height="50" rx="8" fill="url(#trendingGrad)" />
+                              <text x="320" y="160" textAnchor="middle" fill="white" fontSize="12" fontWeight="600">Trending Engine</text>
+                              <text x="320" y="175" textAnchor="middle" fill="white" fontSize="8">Topic Detection • Ranking</text>
+
+                              {/* Search Service */}
+                              <rect x="430" y="140" width="160" height="50" rx="8" fill="url(#searchGrad)" />
+                              <text x="510" y="160" textAnchor="middle" fill="white" fontSize="12" fontWeight="600">Search Service</text>
+                              <text x="510" y="175" textAnchor="middle" fill="white" fontSize="8">Full-text Search • Filters</text>
+
+                              {/* Notification Service */}
+                              <rect x="50" y="220" width="160" height="50" rx="8" fill="url(#notificationGrad)" />
+                              <text x="130" y="240" textAnchor="middle" fill="white" fontSize="12" fontWeight="600">Notification Service</text>
+                              <text x="130" y="255" textAnchor="middle" fill="white" fontSize="8">Push • Email • SMS</text>
+
+                              {/* User Service */}
+                              <rect x="240" y="220" width="160" height="50" rx="8" fill="url(#feedGrad)" />
+                              <text x="320" y="240" textAnchor="middle" fill="white" fontSize="12" fontWeight="600">User Service</text>
+                              <text x="320" y="255" textAnchor="middle" fill="white" fontSize="8">Profiles • Followers • Auth</text>
+
+                              {/* Analytics Engine */}
+                              <rect x="430" y="220" width="160" height="50" rx="8" fill="url(#trendingGrad)" />
+                              <text x="510" y="240" textAnchor="middle" fill="white" fontSize="12" fontWeight="600">Analytics Engine</text>
+                              <text x="510" y="255" textAnchor="middle" fill="white" fontSize="8">Engagement • Metrics • ML</text>
+
+                              {/* Storage Layer */}
+                              <rect x="50" y="320" width="120" height="40" rx="6" fill="#6b7280" />
+                              <text x="110" y="340" textAnchor="middle" fill="white" fontSize="10" fontWeight="600">MySQL</text>
+                              <text x="110" y="350" textAnchor="middle" fill="white" fontSize="8">User Data</text>
+
+                              <rect x="190" y="320" width="120" height="40" rx="6" fill="#6b7280" />
+                              <text x="250" y="340" textAnchor="middle" fill="white" fontSize="10" fontWeight="600">Redis</text>
+                              <text x="250" y="350" textAnchor="middle" fill="white" fontSize="8">Feed Cache</text>
+
+                              <rect x="330" y="320" width="120" height="40" rx="6" fill="#6b7280" />
+                              <text x="390" y="340" textAnchor="middle" fill="white" fontSize="10" fontWeight="600">Elasticsearch</text>
+                              <text x="390" y="350" textAnchor="middle" fill="white" fontSize="8">Search Index</text>
+
+                              <rect x="470" y="320" width="120" height="40" rx="6" fill="#6b7280" />
+                              <text x="530" y="340" textAnchor="middle" fill="white" fontSize="10" fontWeight="600">Kafka</text>
+                              <text x="530" y="350" textAnchor="middle" fill="white" fontSize="8">Event Stream</text>
+
+                              {/* Connection Lines */}
+                              <line x1="170" y1="60" x2="220" y2="60" stroke="#6b7280" strokeWidth="2" />
+                              <line x1="380" y1="60" x2="430" y2="60" stroke="#6b7280" strokeWidth="2" />
+                              <line x1="130" y1="190" x2="130" y2="220" stroke="#6b7280" strokeWidth="2" />
+                              <line x1="320" y1="190" x2="320" y2="220" stroke="#6b7280" strokeWidth="2" />
+                              <line x1="510" y1="190" x2="510" y2="220" stroke="#6b7280" strokeWidth="2" />
+                              <line x1="130" y1="270" x2="130" y2="320" stroke="#6b7280" strokeWidth="2" />
+                              <line x1="320" y1="270" x2="320" y2="320" stroke="#6b7280" strokeWidth="2" />
+                              <line x1="510" y1="270" x2="510" y2="320" stroke="#6b7280" strokeWidth="2" />
+                              </svg>
+                            </div>
+                          </div>
+
+                          <div className="space-y-6">
+                            <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+                              <h3 className="font-semibold text-gray-900 mb-4 flex items-center">
+                                <div className="w-6 h-6 bg-blue-100 rounded-lg flex items-center justify-center mr-3">
+                                  <Server className="h-4 w-4 text-blue-600" />
+                                </div>
+                                Core Services
+                              </h3>
+                              <div className="space-y-3 text-sm">
+                                <div className="flex items-start space-x-3 p-3 bg-blue-50 rounded-lg">
+                                  <div className="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center text-white text-xs font-bold">1</div>
+                                  <div>
+                                    <p className="font-medium text-gray-900">Feed Service</p>
+                                    <p className="text-gray-600">Real-time timeline generation and ranking</p>
+                                  </div>
+                                </div>
+                                <div className="flex items-start space-x-3 p-3 bg-blue-50 rounded-lg">
+                                  <div className="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center text-white text-xs font-bold">2</div>
+                                  <div>
+                                    <p className="font-medium text-gray-900">Trending Engine</p>
+                                    <p className="text-gray-600">Topic detection and trending algorithms</p>
+                                  </div>
+                                </div>
+                                <div className="flex items-start space-x-3 p-3 bg-blue-50 rounded-lg">
+                                  <div className="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center text-white text-xs font-bold">3</div>
+                                  <div>
+                                    <p className="font-medium text-gray-900">Notification Service</p>
+                                    <p className="text-gray-600">Real-time push notifications and alerts</p>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+                              <h3 className="font-semibold text-gray-900 mb-4 flex items-center">
+                                <div className="w-6 h-6 bg-cyan-100 rounded-lg flex items-center justify-center mr-3">
+                                  <Database className="h-4 w-4 text-cyan-600" />
+                                </div>
+                                Data Architecture
+                              </h3>
+                              <div className="space-y-3 text-sm">
+                                <div className="flex items-center justify-between p-3 bg-cyan-50 rounded-lg">
+                                  <span className="font-medium text-gray-700">User Data</span>
+                                  <span className="text-cyan-600 font-medium">MySQL • Sharded</span>
+                                </div>
+                                <div className="flex items-center justify-between p-3 bg-cyan-50 rounded-lg">
+                                  <span className="font-medium text-gray-700">Feed Cache</span>
+                                  <span className="text-cyan-600 font-medium">Redis • Timeline</span>
+                                </div>
+                                <div className="flex items-center justify-between p-3 bg-cyan-50 rounded-lg">
+                                  <span className="font-medium text-gray-700">Search Index</span>
+                                  <span className="text-cyan-600 font-medium">Elasticsearch • Full-text</span>
+                                </div>
+                                <div className="flex items-center justify-between p-3 bg-cyan-50 rounded-lg">
+                                  <span className="font-medium text-gray-700">Event Stream</span>
+                                  <span className="text-cyan-600 font-medium">Kafka • Real-time</span>
                                 </div>
                               </div>
                             </div>
@@ -1562,170 +2183,681 @@ asyncio.run(say_hello())`}
                   </section>
                   )}
 
-                  {/* Data Flow Diagram */}
-                  <section>
-                    <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">
-                      <div className="w-8 h-8 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-lg flex items-center justify-center mr-3">
-                        <Network className="h-5 w-5 text-white" />
-                      </div>
-                      Data Flow & Processing Pipeline
-                    </h2>
-                    <div className="bg-gradient-to-br from-emerald-50 to-green-50 rounded-xl p-8 border border-green-100">
-                      <div className="grid md:grid-cols-2 gap-8">
-                        <div className="space-y-6">
+                  {/* Data Flow Diagram - Perplexity */}
+                  {question.title.includes('Perplexity') && (
+                    <section>
+                      <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                        <div className="w-8 h-8 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-lg flex items-center justify-center mr-3">
+                          <Network className="h-5 w-5 text-white" />
+                        </div>
+                        Data Flow & Processing Pipeline
+                      </h2>
+                      <div className="bg-gradient-to-br from-emerald-50 to-green-50 rounded-xl p-8 border border-green-100">
+                        <div className="grid md:grid-cols-2 gap-8">
+                          <div className="space-y-6">
+                            <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+                              <h3 className="font-semibold text-gray-900 mb-4">Request Processing Flow</h3>
+                              <div className="space-y-4">
+                                <div className="flex items-center space-x-3 p-3 bg-blue-50 rounded-lg">
+                                  <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white text-sm font-bold">1</div>
+                                  <div>
+                                    <p className="font-medium text-gray-900">Query Reception</p>
+                                    <p className="text-sm text-gray-600">User query received via API Gateway</p>
+                                  </div>
+                                </div>
+                                <div className="flex items-center space-x-3 p-3 bg-purple-50 rounded-lg">
+                                  <div className="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center text-white text-sm font-bold">2</div>
+                                  <div>
+                                    <p className="font-medium text-gray-900">Query Processing</p>
+                                    <p className="text-sm text-gray-600">Language detection & intent classification</p>
+                                  </div>
+                                </div>
+                                <div className="flex items-center space-x-3 p-3 bg-orange-50 rounded-lg">
+                                  <div className="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center text-white text-sm font-bold">3</div>
+                                  <div>
+                                    <p className="font-medium text-gray-900">Parallel Search</p>
+                                    <p className="text-sm text-gray-600">BM25 + Vector search execution</p>
+                                  </div>
+                                </div>
+                                <div className="flex items-center space-x-3 p-3 bg-red-50 rounded-lg">
+                                  <div className="w-8 h-8 bg-red-500 rounded-full flex items-center justify-center text-white text-sm font-bold">4</div>
+                                  <div>
+                                    <p className="font-medium text-gray-900">Response Generation</p>
+                                    <p className="text-sm text-gray-600">LLM synthesis with citations</p>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          
                           <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
-                            <h3 className="font-semibold text-gray-900 mb-4">Request Processing Flow</h3>
+                            <h3 className="font-semibold text-gray-900 mb-4">Performance Metrics</h3>
                             <div className="space-y-4">
-                              <div className="flex items-center space-x-3 p-3 bg-blue-50 rounded-lg">
-                                <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white text-sm font-bold">1</div>
-                                <div>
-                                  <p className="font-medium text-gray-900">Query Reception</p>
-                                  <p className="text-sm text-gray-600">User query received via API Gateway</p>
-                                </div>
+                              <div className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                                <span className="font-medium text-gray-700">Response Time (p95)</span>
+                                <span className="text-green-600 font-bold">~2.5s</span>
                               </div>
-                              <div className="flex items-center space-x-3 p-3 bg-purple-50 rounded-lg">
-                                <div className="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center text-white text-sm font-bold">2</div>
-                                <div>
-                                  <p className="font-medium text-gray-900">Query Processing</p>
-                                  <p className="text-sm text-gray-600">Language detection & intent classification</p>
-                                </div>
+                              <div className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                                <span className="font-medium text-gray-700">Throughput (QPS)</span>
+                                <span className="text-blue-600 font-bold">10,000+</span>
                               </div>
-                              <div className="flex items-center space-x-3 p-3 bg-orange-50 rounded-lg">
-                                <div className="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center text-white text-sm font-bold">3</div>
-                                <div>
-                                  <p className="font-medium text-gray-900">Parallel Search</p>
-                                  <p className="text-sm text-gray-600">BM25 + Vector search execution</p>
-                                </div>
+                              <div className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                                <span className="font-medium text-gray-700">Accuracy</span>
+                                <span className="text-purple-600 font-bold">94.2%</span>
                               </div>
-                              <div className="flex items-center space-x-3 p-3 bg-red-50 rounded-lg">
-                                <div className="w-8 h-8 bg-red-500 rounded-full flex items-center justify-center text-white text-sm font-bold">4</div>
-                                <div>
-                                  <p className="font-medium text-gray-900">Response Generation</p>
-                                  <p className="text-sm text-gray-600">LLM synthesis with citations</p>
-                                </div>
+                              <div className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                                <span className="font-medium text-gray-700">Availability</span>
+                                <span className="text-emerald-600 font-bold">99.9%</span>
                               </div>
-                            </div>
-                          </div>
-                        </div>
-                        
-                        <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
-                          <h3 className="font-semibold text-gray-900 mb-4">Performance Metrics</h3>
-                          <div className="space-y-4">
-                            <div className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
-                              <span className="font-medium text-gray-700">Response Time (p95)</span>
-                              <span className="text-green-600 font-bold">~2.5s</span>
-                            </div>
-                            <div className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
-                              <span className="font-medium text-gray-700">Throughput (QPS)</span>
-                              <span className="text-blue-600 font-bold">10,000+</span>
-                            </div>
-                            <div className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
-                              <span className="font-medium text-gray-700">Accuracy</span>
-                              <span className="text-purple-600 font-bold">94.2%</span>
-                            </div>
-                            <div className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
-                              <span className="font-medium text-gray-700">Availability</span>
-                              <span className="text-emerald-600 font-bold">99.9%</span>
                             </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                  </section>
+                    </section>
+                  )}
 
-                  {/* Scalability & Infrastructure */}
-                  <section>
-                    <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">
-                      <div className="w-8 h-8 bg-gradient-to-r from-orange-500 to-red-600 rounded-lg flex items-center justify-center mr-3">
-                        <Zap className="h-5 w-5 text-white" />
-                      </div>
-                      Scalability & Infrastructure
-                    </h2>
-                    <div className="bg-gradient-to-br from-orange-50 to-red-50 rounded-xl p-8 border border-orange-100">
-                      <div className="grid lg:grid-cols-3 gap-6">
-                        <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
-                          <div className="flex items-center mb-4">
-                            <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center mr-3">
-                              <Database className="h-5 w-5 text-blue-600" />
-                            </div>
-                            <h3 className="font-semibold text-gray-900">Database Architecture</h3>
-                          </div>
-                          <div className="space-y-3 text-sm">
-                            <div className="flex items-center justify-between">
-                              <span className="text-gray-600">Primary DB</span>
-                              <span className="font-medium">PostgreSQL</span>
-                            </div>
-                            <div className="flex items-center justify-between">
-                              <span className="text-gray-600">Search Engine</span>
-                              <span className="font-medium">Elasticsearch</span>
-                            </div>
-                            <div className="flex items-center justify-between">
-                              <span className="text-gray-600">Vector Store</span>
-                              <span className="font-medium">Pinecone</span>
-                            </div>
-                            <div className="flex items-center justify-between">
-                              <span className="text-gray-600">Cache</span>
-                              <span className="font-medium">Redis</span>
-                            </div>
-                          </div>
+                  {/* Data Flow Diagram - Netflix */}
+                  {question.title.includes('Netflix') && (
+                    <section>
+                      <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                        <div className="w-8 h-8 bg-gradient-to-r from-red-500 to-pink-600 rounded-lg flex items-center justify-center mr-3">
+                          <Network className="h-5 w-5 text-white" />
                         </div>
-
-                        <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
-                          <div className="flex items-center mb-4">
-                            <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center mr-3">
-                              <Network className="h-5 w-5 text-green-600" />
+                        Video Streaming Data Flow
+                      </h2>
+                      <div className="bg-gradient-to-br from-red-50 to-pink-50 rounded-xl p-8 border border-red-100">
+                        <div className="grid md:grid-cols-2 gap-8">
+                          <div className="space-y-6">
+                            <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+                              <h3 className="font-semibold text-gray-900 mb-4">Streaming Flow</h3>
+                              <div className="space-y-4">
+                                <div className="flex items-center space-x-3 p-3 bg-red-50 rounded-lg">
+                                  <div className="w-8 h-8 bg-red-500 rounded-full flex items-center justify-center text-white text-sm font-bold">1</div>
+                                  <div>
+                                    <p className="font-medium text-gray-900">Content Request</p>
+                                    <p className="text-sm text-gray-600">User selects video, device info sent</p>
+                                  </div>
+                                </div>
+                                <div className="flex items-center space-x-3 p-3 bg-pink-50 rounded-lg">
+                                  <div className="w-8 h-8 bg-pink-500 rounded-full flex items-center justify-center text-white text-sm font-bold">2</div>
+                                  <div>
+                                    <p className="font-medium text-gray-900">CDN Selection</p>
+                                    <p className="text-sm text-gray-600">Nearest edge server identified</p>
+                                  </div>
+                                </div>
+                                <div className="flex items-center space-x-3 p-3 bg-orange-50 rounded-lg">
+                                  <div className="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center text-white text-sm font-bold">3</div>
+                                  <div>
+                                    <p className="font-medium text-gray-900">Adaptive Streaming</p>
+                                    <p className="text-sm text-gray-600">Quality adjusted based on bandwidth</p>
+                                  </div>
+                                </div>
+                                <div className="flex items-center space-x-3 p-3 bg-purple-50 rounded-lg">
+                                  <div className="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center text-white text-sm font-bold">4</div>
+                                  <div>
+                                    <p className="font-medium text-gray-900">Analytics Tracking</p>
+                                    <p className="text-sm text-gray-600">Viewing behavior & recommendations</p>
+                                  </div>
+                                </div>
+                              </div>
                             </div>
-                            <h3 className="font-semibold text-gray-900">Deployment Strategy</h3>
                           </div>
-                          <div className="space-y-3 text-sm">
-                            <div className="flex items-center justify-between">
-                              <span className="text-gray-600">Containerization</span>
-                              <span className="font-medium">Docker</span>
-                            </div>
-                            <div className="flex items-center justify-between">
-                              <span className="text-gray-600">Orchestration</span>
-                              <span className="font-medium">Kubernetes</span>
-                            </div>
-                            <div className="flex items-center justify-between">
-                              <span className="text-gray-600">Load Balancer</span>
-                              <span className="font-medium">NGINX</span>
-                            </div>
-                            <div className="flex items-center justify-between">
-                              <span className="text-gray-600">CDN</span>
-                              <span className="font-medium">Cloudflare</span>
-                            </div>
-                          </div>
-                        </div>
-
-                        <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
-                          <div className="flex items-center mb-4">
-                            <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center mr-3">
-                              <Shield className="h-5 w-5 text-purple-600" />
-                            </div>
-                            <h3 className="font-semibold text-gray-900">Security & Monitoring</h3>
-                          </div>
-                          <div className="space-y-3 text-sm">
-                            <div className="flex items-center justify-between">
-                              <span className="text-gray-600">Authentication</span>
-                              <span className="font-medium">JWT + OAuth</span>
-                            </div>
-                            <div className="flex items-center justify-between">
-                              <span className="text-gray-600">Rate Limiting</span>
-                              <span className="font-medium">Redis-based</span>
-                            </div>
-                            <div className="flex items-center justify-between">
-                              <span className="text-gray-600">Monitoring</span>
-                              <span className="font-medium">Prometheus</span>
-                            </div>
-                            <div className="flex items-center justify-between">
-                              <span className="text-gray-600">Logging</span>
-                              <span className="font-medium">ELK Stack</span>
+                          
+                          <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+                            <h3 className="font-semibold text-gray-900 mb-4">Performance Metrics</h3>
+                            <div className="space-y-4">
+                              <div className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                                <span className="font-medium text-gray-700">Startup Time (p95)</span>
+                                <span className="text-green-600 font-bold">~3.0s</span>
+                              </div>
+                              <div className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                                <span className="font-medium text-gray-700">Concurrent Streams</span>
+                                <span className="text-blue-600 font-bold">100M+</span>
+                              </div>
+                              <div className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                                <span className="font-medium text-gray-700">Video Quality</span>
+                                <span className="text-purple-600 font-bold">4K HDR Adaptive</span>
+                              </div>
+                              <div className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                                <span className="font-medium text-gray-700">Global Coverage</span>
+                                <span className="text-emerald-600 font-bold">190+ Countries</span>
+                              </div>
                             </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                  </section>
+                    </section>
+                  )}
+
+                  {/* Data Flow Diagram - Uber */}
+                  {question.title.includes('Uber') && (
+                    <section>
+                      <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                        <div className="w-8 h-8 bg-gradient-to-r from-black to-gray-600 rounded-lg flex items-center justify-center mr-3">
+                          <Network className="h-5 w-5 text-white" />
+                        </div>
+                        Ride-Sharing Data Flow
+                      </h2>
+                      <div className="bg-gradient-to-br from-gray-50 to-black-50 rounded-xl p-8 border border-gray-100">
+                        <div className="grid md:grid-cols-2 gap-8">
+                          <div className="space-y-6">
+                            <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+                              <h3 className="font-semibold text-gray-900 mb-4">Ride Request Flow</h3>
+                              <div className="space-y-4">
+                                <div className="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg">
+                                  <div className="w-8 h-8 bg-black rounded-full flex items-center justify-center text-white text-sm font-bold">1</div>
+                                  <div>
+                                    <p className="font-medium text-gray-900">Ride Request</p>
+                                    <p className="text-sm text-gray-600">User requests ride with pickup/drop</p>
+                                  </div>
+                                </div>
+                                <div className="flex items-center space-x-3 p-3 bg-green-50 rounded-lg">
+                                  <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-white text-sm font-bold">2</div>
+                                  <div>
+                                    <p className="font-medium text-gray-900">Driver Matching</p>
+                                    <p className="text-sm text-gray-600">Nearest available driver found</p>
+                                  </div>
+                                </div>
+                                <div className="flex items-center space-x-3 p-3 bg-blue-50 rounded-lg">
+                                  <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white text-sm font-bold">3</div>
+                                  <div>
+                                    <p className="font-medium text-gray-900">Real-time Tracking</p>
+                                    <p className="text-sm text-gray-600">GPS updates every 5 seconds</p>
+                                  </div>
+                                </div>
+                                <div className="flex items-center space-x-3 p-3 bg-orange-50 rounded-lg">
+                                  <div className="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center text-white text-sm font-bold">4</div>
+                                  <div>
+                                    <p className="font-medium text-gray-900">Payment Processing</p>
+                                    <p className="text-sm text-gray-600">Automatic payment & receipt</p>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          
+                          <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+                            <h3 className="font-semibold text-gray-900 mb-4">Performance Metrics</h3>
+                            <div className="space-y-4">
+                              <div className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                                <span className="font-medium text-gray-700">Matching Time (p95)</span>
+                                <span className="text-green-600 font-bold">~5.0s</span>
+                              </div>
+                              <div className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                                <span className="font-medium text-gray-700">Concurrent Rides</span>
+                                <span className="text-blue-600 font-bold">10M+</span>
+                              </div>
+                              <div className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                                <span className="font-medium text-gray-700">Location Accuracy</span>
+                                <span className="text-purple-600 font-bold">±5 meters</span>
+                              </div>
+                              <div className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                                <span className="font-medium text-gray-700">Global Cities</span>
+                                <span className="text-emerald-600 font-bold">10,000+</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </section>
+                  )}
+
+                  {/* Data Flow Diagram - Twitter */}
+                  {question.title.includes('Twitter') && (
+                    <section>
+                      <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                        <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-cyan-600 rounded-lg flex items-center justify-center mr-3">
+                          <Network className="h-5 w-5 text-white" />
+                        </div>
+                        Social Media Data Flow
+                      </h2>
+                      <div className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-xl p-8 border border-blue-100">
+                        <div className="grid md:grid-cols-2 gap-8">
+                          <div className="space-y-6">
+                            <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+                              <h3 className="font-semibold text-gray-900 mb-4">Tweet Processing Flow</h3>
+                              <div className="space-y-4">
+                                <div className="flex items-center space-x-3 p-3 bg-blue-50 rounded-lg">
+                                  <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white text-sm font-bold">1</div>
+                                  <div>
+                                    <p className="font-medium text-gray-900">Tweet Creation</p>
+                                    <p className="text-sm text-gray-600">User composes & posts tweet</p>
+                                  </div>
+                                </div>
+                                <div className="flex items-center space-x-3 p-3 bg-cyan-50 rounded-lg">
+                                  <div className="w-8 h-8 bg-cyan-500 rounded-full flex items-center justify-center text-white text-sm font-bold">2</div>
+                                  <div>
+                                    <p className="font-medium text-gray-900">Content Processing</p>
+                                    <p className="text-sm text-gray-600">Media upload, hashtag extraction</p>
+                                  </div>
+                                </div>
+                                <div className="flex items-center space-x-3 p-3 bg-green-50 rounded-lg">
+                                  <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-white text-sm font-bold">3</div>
+                                  <div>
+                                    <p className="font-medium text-gray-900">Fan-out Distribution</p>
+                                    <p className="text-sm text-gray-600">Tweet pushed to followers' feeds</p>
+                                  </div>
+                                </div>
+                                <div className="flex items-center space-x-3 p-3 bg-purple-50 rounded-lg">
+                                  <div className="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center text-white text-sm font-bold">4</div>
+                                  <div>
+                                    <p className="font-medium text-gray-900">Trending Analysis</p>
+                                    <p className="text-sm text-gray-600">Engagement metrics & trending topics</p>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          
+                          <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+                            <h3 className="font-semibold text-gray-900 mb-4">Performance Metrics</h3>
+                            <div className="space-y-4">
+                              <div className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                                <span className="font-medium text-gray-700">Feed Latency (p95)</span>
+                                <span className="text-green-600 font-bold">~200ms</span>
+                              </div>
+                              <div className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                                <span className="font-medium text-gray-700">Daily Tweets</span>
+                                <span className="text-blue-600 font-bold">500M+</span>
+                              </div>
+                              <div className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                                <span className="font-medium text-gray-700">Active Users</span>
+                                <span className="text-purple-600 font-bold">400M+</span>
+                              </div>
+                              <div className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                                <span className="font-medium text-gray-700">Global Reach</span>
+                                <span className="text-emerald-600 font-bold">200+ Countries</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </section>
+                  )}
+
+                  {/* Scalability & Infrastructure - Perplexity */}
+                  {question.title.includes('Perplexity') && (
+                    <section>
+                      <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                        <div className="w-8 h-8 bg-gradient-to-r from-orange-500 to-red-600 rounded-lg flex items-center justify-center mr-3">
+                          <Zap className="h-5 w-5 text-white" />
+                        </div>
+                        Scalability & Infrastructure
+                      </h2>
+                      <div className="bg-gradient-to-br from-orange-50 to-red-50 rounded-xl p-8 border border-orange-100">
+                        <div className="grid lg:grid-cols-3 gap-6">
+                          <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+                            <div className="flex items-center mb-4">
+                              <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center mr-3">
+                                <Database className="h-5 w-5 text-blue-600" />
+                              </div>
+                              <h3 className="font-semibold text-gray-900">Database Architecture</h3>
+                            </div>
+                            <div className="space-y-3 text-sm">
+                              <div className="flex items-center justify-between">
+                                <span className="text-gray-600">Primary DB</span>
+                                <span className="font-medium">PostgreSQL</span>
+                              </div>
+                              <div className="flex items-center justify-between">
+                                <span className="text-gray-600">Search Engine</span>
+                                <span className="font-medium">Elasticsearch</span>
+                              </div>
+                              <div className="flex items-center justify-between">
+                                <span className="text-gray-600">Vector Store</span>
+                                <span className="font-medium">Pinecone</span>
+                              </div>
+                              <div className="flex items-center justify-between">
+                                <span className="text-gray-600">Cache</span>
+                                <span className="font-medium">Redis</span>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+                            <div className="flex items-center mb-4">
+                              <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center mr-3">
+                                <Network className="h-5 w-5 text-green-600" />
+                              </div>
+                              <h3 className="font-semibold text-gray-900">Deployment Strategy</h3>
+                            </div>
+                            <div className="space-y-3 text-sm">
+                              <div className="flex items-center justify-between">
+                                <span className="text-gray-600">Containerization</span>
+                                <span className="font-medium">Docker</span>
+                              </div>
+                              <div className="flex items-center justify-between">
+                                <span className="text-gray-600">Orchestration</span>
+                                <span className="font-medium">Kubernetes</span>
+                              </div>
+                              <div className="flex items-center justify-between">
+                                <span className="text-gray-600">Load Balancer</span>
+                                <span className="font-medium">NGINX</span>
+                              </div>
+                              <div className="flex items-center justify-between">
+                                <span className="text-gray-600">CDN</span>
+                                <span className="font-medium">Cloudflare</span>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+                            <div className="flex items-center mb-4">
+                              <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center mr-3">
+                                <Shield className="h-5 w-5 text-purple-600" />
+                              </div>
+                              <h3 className="font-semibold text-gray-900">Security & Monitoring</h3>
+                            </div>
+                            <div className="space-y-3 text-sm">
+                              <div className="flex items-center justify-between">
+                                <span className="text-gray-600">Authentication</span>
+                                <span className="font-medium">JWT + OAuth</span>
+                              </div>
+                              <div className="flex items-center justify-between">
+                                <span className="text-gray-600">Rate Limiting</span>
+                                <span className="font-medium">Redis-based</span>
+                              </div>
+                              <div className="flex items-center justify-between">
+                                <span className="text-gray-600">Monitoring</span>
+                                <span className="font-medium">Prometheus</span>
+                              </div>
+                              <div className="flex items-center justify-between">
+                                <span className="text-gray-600">Logging</span>
+                                <span className="font-medium">ELK Stack</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </section>
+                  )}
+
+                  {/* Scalability & Infrastructure - Netflix */}
+                  {question.title.includes('Netflix') && (
+                    <section>
+                      <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                        <div className="w-8 h-8 bg-gradient-to-r from-red-500 to-pink-600 rounded-lg flex items-center justify-center mr-3">
+                          <Zap className="h-5 w-5 text-white" />
+                        </div>
+                        Netflix Scalability & Infrastructure
+                      </h2>
+                      <div className="bg-gradient-to-br from-red-50 to-pink-50 rounded-xl p-8 border border-red-100">
+                        <div className="grid lg:grid-cols-3 gap-6">
+                          <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+                            <div className="flex items-center mb-4">
+                              <div className="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center mr-3">
+                                <Database className="h-5 w-5 text-red-600" />
+                              </div>
+                              <h3 className="font-semibold text-gray-900">Storage Architecture</h3>
+                            </div>
+                            <div className="space-y-3 text-sm">
+                              <div className="flex items-center justify-between">
+                                <span className="text-gray-600">Video Storage</span>
+                                <span className="font-medium">S3 + Glacier</span>
+                              </div>
+                              <div className="flex items-center justify-between">
+                                <span className="text-gray-600">User Data</span>
+                                <span className="font-medium">DynamoDB</span>
+                              </div>
+                              <div className="flex items-center justify-between">
+                                <span className="text-gray-600">Analytics</span>
+                                <span className="font-medium">Redshift</span>
+                              </div>
+                              <div className="flex items-center justify-between">
+                                <span className="text-gray-600">Cache</span>
+                                <span className="font-medium">ElastiCache</span>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+                            <div className="flex items-center mb-4">
+                              <div className="w-10 h-10 bg-pink-100 rounded-lg flex items-center justify-center mr-3">
+                                <Network className="h-5 w-5 text-pink-600" />
+                              </div>
+                              <h3 className="font-semibold text-gray-900">CDN & Distribution</h3>
+                            </div>
+                            <div className="space-y-3 text-sm">
+                              <div className="flex items-center justify-between">
+                                <span className="text-gray-600">Global CDN</span>
+                                <span className="font-medium">Open Connect</span>
+                              </div>
+                              <div className="flex items-center justify-between">
+                                <span className="text-gray-600">Edge Servers</span>
+                                <span className="font-medium">10,000+ Locations</span>
+                              </div>
+                              <div className="flex items-center justify-between">
+                                <span className="text-gray-600">Load Balancing</span>
+                                <span className="font-medium">Geographic Routing</span>
+                              </div>
+                              <div className="flex items-center justify-between">
+                                <span className="text-gray-600">Peering</span>
+                                <span className="font-medium">ISP Partnerships</span>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+                            <div className="flex items-center mb-4">
+                              <div className="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center mr-3">
+                                <Shield className="h-5 w-5 text-orange-600" />
+                              </div>
+                              <h3 className="font-semibold text-gray-900">Security & Monitoring</h3>
+                            </div>
+                            <div className="space-y-3 text-sm">
+                              <div className="flex items-center justify-between">
+                                <span className="text-gray-600">DRM</span>
+                                <span className="font-medium">Widevine + PlayReady</span>
+                              </div>
+                              <div className="flex items-center justify-between">
+                                <span className="text-gray-600">Authentication</span>
+                                <span className="font-medium">OAuth 2.0</span>
+                              </div>
+                              <div className="flex items-center justify-between">
+                                <span className="text-gray-600">Monitoring</span>
+                                <span className="font-medium">Atlas + Grafana</span>
+                              </div>
+                              <div className="flex items-center justify-between">
+                                <span className="text-gray-600">A/B Testing</span>
+                                <span className="font-medium">Netflix Experiment</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </section>
+                  )}
+
+                  {/* Scalability & Infrastructure - Uber */}
+                  {question.title.includes('Uber') && (
+                    <section>
+                      <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                        <div className="w-8 h-8 bg-gradient-to-r from-black to-gray-600 rounded-lg flex items-center justify-center mr-3">
+                          <Zap className="h-5 w-5 text-white" />
+                        </div>
+                        Uber Scalability & Infrastructure
+                      </h2>
+                      <div className="bg-gradient-to-br from-gray-50 to-black-50 rounded-xl p-8 border border-gray-100">
+                        <div className="grid lg:grid-cols-3 gap-6">
+                          <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+                            <div className="flex items-center mb-4">
+                              <div className="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center mr-3">
+                                <Database className="h-5 w-5 text-gray-600" />
+                              </div>
+                              <h3 className="font-semibold text-gray-900">Data Architecture</h3>
+                            </div>
+                            <div className="space-y-3 text-sm">
+                              <div className="flex items-center justify-between">
+                                <span className="text-gray-600">Primary DB</span>
+                                <span className="font-medium">PostgreSQL</span>
+                              </div>
+                              <div className="flex items-center justify-between">
+                                <span className="text-gray-600">Location Cache</span>
+                                <span className="font-medium">Redis</span>
+                              </div>
+                              <div className="flex items-center justify-between">
+                                <span className="text-gray-600">Event Stream</span>
+                                <span className="font-medium">Kafka</span>
+                              </div>
+                              <div className="flex items-center justify-between">
+                                <span className="text-gray-600">Analytics</span>
+                                <span className="font-medium">S3 + Athena</span>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+                            <div className="flex items-center mb-4">
+                              <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center mr-3">
+                                <Network className="h-5 w-5 text-green-600" />
+                              </div>
+                              <h3 className="font-semibold text-gray-900">Microservices</h3>
+                            </div>
+                            <div className="space-y-3 text-sm">
+                              <div className="flex items-center justify-between">
+                                <span className="text-gray-600">Matching Engine</span>
+                                <span className="font-medium">Go + gRPC</span>
+                              </div>
+                              <div className="flex items-center justify-between">
+                                <span className="text-gray-600">Location Service</span>
+                                <span className="font-medium">Java + Spring</span>
+                              </div>
+                              <div className="flex items-center justify-between">
+                                <span className="text-gray-600">Payment Service</span>
+                                <span className="font-medium">Node.js</span>
+                              </div>
+                              <div className="flex items-center justify-between">
+                                <span className="text-gray-600">Orchestration</span>
+                                <span className="font-medium">Kubernetes</span>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+                            <div className="flex items-center mb-4">
+                              <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center mr-3">
+                                <Shield className="h-5 w-5 text-blue-600" />
+                              </div>
+                              <h3 className="font-semibold text-gray-900">Security & Monitoring</h3>
+                            </div>
+                            <div className="space-y-3 text-sm">
+                              <div className="flex items-center justify-between">
+                                <span className="text-gray-600">Authentication</span>
+                                <span className="font-medium">OAuth 2.0 + JWT</span>
+                              </div>
+                              <div className="flex items-center justify-between">
+                                <span className="text-gray-600">Rate Limiting</span>
+                                <span className="font-medium">Token Bucket</span>
+                              </div>
+                              <div className="flex items-center justify-between">
+                                <span className="text-gray-600">Monitoring</span>
+                                <span className="font-medium">Prometheus</span>
+                              </div>
+                              <div className="flex items-center justify-between">
+                                <span className="text-gray-600">Logging</span>
+                                <span className="font-medium">ELK Stack</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </section>
+                  )}
+
+                  {/* Scalability & Infrastructure - Twitter */}
+                  {question.title.includes('Twitter') && (
+                    <section>
+                      <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                        <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-cyan-600 rounded-lg flex items-center justify-center mr-3">
+                          <Zap className="h-5 w-5 text-white" />
+                        </div>
+                        Twitter Scalability & Infrastructure
+                      </h2>
+                      <div className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-xl p-8 border border-blue-100">
+                        <div className="grid lg:grid-cols-3 gap-6">
+                          <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+                            <div className="flex items-center mb-4">
+                              <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center mr-3">
+                                <Database className="h-5 w-5 text-blue-600" />
+                              </div>
+                              <h3 className="font-semibold text-gray-900">Data Architecture</h3>
+                            </div>
+                            <div className="space-y-3 text-sm">
+                              <div className="flex items-center justify-between">
+                                <span className="text-gray-600">User Data</span>
+                                <span className="font-medium">MySQL</span>
+                              </div>
+                              <div className="flex items-center justify-between">
+                                <span className="text-gray-600">Feed Cache</span>
+                                <span className="font-medium">Redis</span>
+                              </div>
+                              <div className="flex items-center justify-between">
+                                <span className="text-gray-600">Search Index</span>
+                                <span className="font-medium">Elasticsearch</span>
+                              </div>
+                              <div className="flex items-center justify-between">
+                                <span className="text-gray-600">Event Stream</span>
+                                <span className="font-medium">Kafka</span>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+                            <div className="flex items-center mb-4">
+                              <div className="w-10 h-10 bg-cyan-100 rounded-lg flex items-center justify-center mr-3">
+                                <Network className="h-5 w-5 text-cyan-600" />
+                              </div>
+                              <h3 className="font-semibold text-gray-900">Feed Architecture</h3>
+                            </div>
+                            <div className="space-y-3 text-sm">
+                              <div className="flex items-center justify-between">
+                                <span className="text-gray-600">Fan-out Strategy</span>
+                                <span className="font-medium">Hybrid (Push/Pull)</span>
+                              </div>
+                              <div className="flex items-center justify-between">
+                                <span className="text-gray-600">Timeline Service</span>
+                                <span className="font-medium">Scala + Finagle</span>
+                              </div>
+                              <div className="flex items-center justify-between">
+                                <span className="text-gray-600">Load Balancing</span>
+                                <span className="font-medium">Gizzard</span>
+                              </div>
+                              <div className="flex items-center justify-between">
+                                <span className="text-gray-600">Caching</span>
+                                <span className="font-medium">Memcached</span>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+                            <div className="flex items-center mb-4">
+                              <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center mr-3">
+                                <Shield className="h-5 w-5 text-purple-600" />
+                              </div>
+                              <h3 className="font-semibold text-gray-900">Security & Monitoring</h3>
+                            </div>
+                            <div className="space-y-3 text-sm">
+                              <div className="flex items-center justify-between">
+                                <span className="text-gray-600">Authentication</span>
+                                <span className="font-medium">OAuth 1.0a</span>
+                              </div>
+                              <div className="flex items-center justify-between">
+                                <span className="text-gray-600">Rate Limiting</span>
+                                <span className="font-medium">Token Bucket</span>
+                              </div>
+                              <div className="flex items-center justify-between">
+                                <span className="text-gray-600">Monitoring</span>
+                                <span className="font-medium">Observability</span>
+                              </div>
+                              <div className="flex items-center justify-between">
+                                <span className="text-gray-600">Content Moderation</span>
+                                <span className="font-medium">ML + Human Review</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </section>
+                  )}
 
                   {/* Detailed HLD per Question */}
                   <section>
@@ -2170,6 +3302,9 @@ asyncio.run(say_hello())`}
                       {question.title.includes('Perplexity') && 'Perplexity LLD - Search Engine Implementation'}
                       {question.title.includes('ElevenLabs') && 'ElevenLabs LLD - Voice Generation Implementation'}
                       {question.title.includes('ChatGPT') && 'ChatGPT LLD - Chat Platform Implementation'}
+                      {question.title.includes('Netflix') && 'Netflix LLD - Video Streaming Implementation'}
+                      {question.title.includes('Uber') && 'Uber LLD - Ride-Sharing Implementation'}
+                      {question.title.includes('Twitter') && 'Twitter LLD - Social Media Implementation'}
 
                     </h2>
                     
@@ -2250,6 +3385,243 @@ asyncio.run(say_hello())`}
                               <div className="bg-white rounded-lg p-3">
                                 <span className="font-medium text-green-700">Memory System</span>
                                 <p className="text-gray-600">Context preservation</p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
+                    {question.title.includes('Netflix') && (
+                      <div className="bg-gradient-to-r from-red-50 to-pink-50 rounded-xl p-6 border border-red-200 mb-8">
+                        <div className="flex items-start space-x-4">
+                          <div className="w-12 h-12 bg-red-500 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <FileCode className="h-6 w-6 text-white" />
+                          </div>
+                          <div className="flex-1">
+                            <h3 className="text-lg font-bold text-gray-900 mb-2">🎯 Netflix Implementation: Global Video Streaming Platform</h3>
+                            <p className="text-gray-700 mb-4">Comprehensive implementation details for adaptive bitrate streaming with global CDN, personalized recommendations, and microservices architecture.</p>
+                            
+                            {/* APIs Section */}
+                            <div className="mb-6">
+                              <h4 className="font-semibold text-gray-900 mb-3">🔌 Core APIs</h4>
+                              <div className="grid md:grid-cols-2 gap-3 text-sm">
+                                <div className="bg-white rounded-lg p-3 border border-red-100">
+                                  <span className="font-medium text-red-700">Content API</span>
+                                  <p className="text-gray-600">GET /content/{'{id}'}, POST /content/upload</p>
+                                </div>
+                                <div className="bg-white rounded-lg p-3 border border-red-100">
+                                  <span className="font-medium text-red-700">Streaming API</span>
+                                  <p className="text-gray-600">GET /stream/{'{contentId}'}?quality={'{bitrate}'}</p>
+                                </div>
+                                <div className="bg-white rounded-lg p-3 border border-red-100">
+                                  <span className="font-medium text-red-700">User API</span>
+                                  <p className="text-gray-600">GET /user/profile, PUT /user/preferences</p>
+                                </div>
+                                <div className="bg-white rounded-lg p-3 border border-red-100">
+                                  <span className="font-medium text-red-700">Recommendation API</span>
+                                  <p className="text-gray-600">GET /recommendations?user={'{userId}'}</p>
+                                </div>
+                              </div>
+                            </div>
+
+                            {/* Database Schema */}
+                            <div className="mb-6">
+                              <h4 className="font-semibold text-gray-900 mb-3">🗄️ Database Schema</h4>
+                              <div className="grid md:grid-cols-2 gap-3 text-sm">
+                                <div className="bg-white rounded-lg p-3 border border-red-100">
+                                  <span className="font-medium text-red-700">Users Table</span>
+                                  <p className="text-gray-600">id, email, password_hash, subscription_plan, created_at</p>
+                                </div>
+                                <div className="bg-white rounded-lg p-3 border border-red-100">
+                                  <span className="font-medium text-red-700">Content Table</span>
+                                  <p className="text-gray-600">id, title, description, genre, duration, release_date</p>
+                                </div>
+                                <div className="bg-white rounded-lg p-3 border border-red-100">
+                                  <span className="font-medium text-red-700">Watch History</span>
+                                  <p className="text-gray-600">user_id, content_id, watch_time, completed, timestamp</p>
+                                </div>
+                                <div className="bg-white rounded-lg p-3 border border-red-100">
+                                  <span className="font-medium text-red-700">CDN Assets</span>
+                                  <p className="text-gray-600">content_id, quality, url, region, cache_status</p>
+                                </div>
+                              </div>
+                            </div>
+
+                            {/* Design Patterns */}
+                            <div>
+                              <h4 className="font-semibold text-gray-900 mb-3">🏗️ Design Patterns</h4>
+                              <div className="grid md:grid-cols-3 gap-3 text-sm">
+                                <div className="bg-white rounded-lg p-3 border border-red-100">
+                                  <span className="font-medium text-red-700">Microservices</span>
+                                  <p className="text-gray-600">Content, User, Recommendation services</p>
+                                </div>
+                                <div className="bg-white rounded-lg p-3 border border-red-100">
+                                  <span className="font-medium text-red-700">CQRS</span>
+                                  <p className="text-gray-600">Separate read/write models</p>
+                                </div>
+                                <div className="bg-white rounded-lg p-3 border border-red-100">
+                                  <span className="font-medium text-red-700">Event Sourcing</span>
+                                  <p className="text-gray-600">Watch history tracking</p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
+                    {question.title.includes('Uber') && (
+                      <div className="bg-gradient-to-r from-black-50 to-gray-50 rounded-xl p-6 border border-gray-200 mb-8">
+                        <div className="flex items-start space-x-4">
+                          <div className="w-12 h-12 bg-black rounded-lg flex items-center justify-center flex-shrink-0">
+                            <FileCode className="h-6 w-6 text-white" />
+                          </div>
+                          <div className="flex-1">
+                            <h3 className="text-lg font-bold text-gray-900 mb-2">🎯 Uber Implementation: Real-Time Ride-Sharing Platform</h3>
+                            <p className="text-gray-700 mb-4">Comprehensive implementation details for real-time driver-rider matching with dynamic pricing, location tracking, and event-driven architecture.</p>
+                            
+                            {/* APIs Section */}
+                            <div className="mb-6">
+                              <h4 className="font-semibold text-gray-900 mb-3">🔌 Core APIs</h4>
+                              <div className="grid md:grid-cols-2 gap-3 text-sm">
+                                <div className="bg-white rounded-lg p-3 border border-gray-100">
+                                  <span className="font-medium text-gray-700">Ride API</span>
+                                  <p className="text-gray-600">POST /rides/request, GET /rides/{'{rideId}'}</p>
+                                </div>
+                                <div className="bg-white rounded-lg p-3 border border-gray-100">
+                                  <span className="font-medium text-gray-700">Location API</span>
+                                  <p className="text-gray-600">PUT /location/update, GET /drivers/nearby</p>
+                                </div>
+                                <div className="bg-white rounded-lg p-3 border border-gray-100">
+                                  <span className="font-medium text-gray-700">Matching API</span>
+                                  <p className="text-gray-600">POST /matching/find-driver, PUT /matching/accept</p>
+                                </div>
+                                <div className="bg-white rounded-lg p-3 border border-gray-100">
+                                  <span className="font-medium text-gray-700">Pricing API</span>
+                                  <p className="text-gray-600">GET /pricing/estimate, POST /pricing/calculate</p>
+                                </div>
+                              </div>
+                            </div>
+
+                            {/* Database Schema */}
+                            <div className="mb-6">
+                              <h4 className="font-semibold text-gray-900 mb-3">🗄️ Database Schema</h4>
+                              <div className="grid md:grid-cols-2 gap-3 text-sm">
+                                <div className="bg-white rounded-lg p-3 border border-gray-100">
+                                  <span className="font-medium text-gray-700">Users Table</span>
+                                  <p className="text-gray-600">id, email, phone, user_type, rating, created_at</p>
+                                </div>
+                                <div className="bg-white rounded-lg p-3 border border-gray-100">
+                                  <span className="font-medium text-gray-700">Rides Table</span>
+                                  <p className="text-gray-600">id, rider_id, driver_id, pickup, destination, status</p>
+                                </div>
+                                <div className="bg-white rounded-lg p-3 border border-gray-100">
+                                  <span className="font-medium text-gray-700">Locations Table</span>
+                                  <p className="text-gray-600">user_id, latitude, longitude, timestamp, accuracy</p>
+                                </div>
+                                <div className="bg-white rounded-lg p-3 border border-gray-100">
+                                  <span className="font-medium text-gray-700">Pricing Table</span>
+                                  <p className="text-gray-600">ride_id, base_fare, surge_multiplier, total_fare</p>
+                                </div>
+                              </div>
+                            </div>
+
+                            {/* Design Patterns */}
+                            <div>
+                              <h4 className="font-semibold text-gray-900 mb-3">🏗️ Design Patterns</h4>
+                              <div className="grid md:grid-cols-3 gap-3 text-sm">
+                                <div className="bg-white rounded-lg p-3 border border-gray-100">
+                                  <span className="font-medium text-gray-700">Event-Driven</span>
+                                  <p className="text-gray-600">Location updates, ride events</p>
+                                </div>
+                                <div className="bg-white rounded-lg p-3 border border-gray-100">
+                                  <span className="font-medium text-gray-700">Saga Pattern</span>
+                                  <p className="text-gray-600">Distributed ride transactions</p>
+                                </div>
+                                <div className="bg-white rounded-lg p-3 border border-gray-100">
+                                  <span className="font-medium text-gray-700">CQRS</span>
+                                  <p className="text-gray-600">Read/write separation</p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
+                    {question.title.includes('Twitter') && (
+                      <div className="bg-gradient-to-r from-blue-50 to-cyan-50 rounded-xl p-6 border border-blue-200 mb-8">
+                        <div className="flex items-start space-x-4">
+                          <div className="w-12 h-12 bg-blue-500 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <FileCode className="h-6 w-6 text-white" />
+                          </div>
+                          <div className="flex-1">
+                            <h3 className="text-lg font-bold text-gray-900 mb-2">🎯 Twitter Implementation: Real-Time Social Media Platform</h3>
+                            <p className="text-gray-700 mb-4">Comprehensive implementation details for real-time feed generation with trending topics, global user interactions, and distributed architecture.</p>
+                            
+                            {/* APIs Section */}
+                            <div className="mb-6">
+                              <h4 className="font-semibold text-gray-900 mb-3">🔌 Core APIs</h4>
+                              <div className="grid md:grid-cols-2 gap-3 text-sm">
+                                <div className="bg-white rounded-lg p-3 border border-blue-100">
+                                  <span className="font-medium text-blue-700">Tweet API</span>
+                                  <p className="text-gray-600">POST /tweets, GET /tweets/{'{tweetId}'}</p>
+                                </div>
+                                <div className="bg-white rounded-lg p-3 border border-blue-100">
+                                  <span className="font-medium text-blue-700">Feed API</span>
+                                  <p className="text-gray-600">GET /feed/home, GET /feed/user/{'{userId}'}</p>
+                                </div>
+                                <div className="bg-white rounded-lg p-3 border border-blue-100">
+                                  <span className="font-medium text-blue-700">User API</span>
+                                  <p className="text-gray-600">POST /users/follow, GET /users/{'{userId}'}/followers</p>
+                                </div>
+                                <div className="bg-white rounded-lg p-3 border border-blue-100">
+                                  <span className="font-medium text-blue-700">Trending API</span>
+                                  <p className="text-gray-600">GET /trends, GET /trends/{'{location}'}</p>
+                                </div>
+                              </div>
+                            </div>
+
+                            {/* Database Schema */}
+                            <div className="mb-6">
+                              <h4 className="font-semibold text-gray-900 mb-3">🗄️ Database Schema</h4>
+                              <div className="grid md:grid-cols-2 gap-3 text-sm">
+                                <div className="bg-white rounded-lg p-3 border border-blue-100">
+                                  <span className="font-medium text-blue-700">Users Table</span>
+                                  <p className="text-gray-600">id, username, email, bio, followers_count, created_at</p>
+                                </div>
+                                <div className="bg-white rounded-lg p-3 border border-blue-100">
+                                  <span className="font-medium text-blue-700">Tweets Table</span>
+                                  <p className="text-gray-600">id, user_id, content, retweet_count, like_count, created_at</p>
+                                </div>
+                                <div className="bg-white rounded-lg p-3 border border-blue-100">
+                                  <span className="font-medium text-blue-700">Follows Table</span>
+                                  <p className="text-gray-600">follower_id, following_id, created_at</p>
+                                </div>
+                                <div className="bg-white rounded-lg p-3 border border-blue-100">
+                                  <span className="font-medium text-blue-700">Trending Topics</span>
+                                  <p className="text-gray-600">hashtag, tweet_count, location, trend_score</p>
+                                </div>
+                              </div>
+                            </div>
+
+                            {/* Design Patterns */}
+                            <div>
+                              <h4 className="font-semibold text-gray-900 mb-3">🏗️ Design Patterns</h4>
+                              <div className="grid md:grid-cols-3 gap-3 text-sm">
+                                <div className="bg-white rounded-lg p-3 border border-blue-100">
+                                  <span className="font-medium text-blue-700">Fan-out</span>
+                                  <p className="text-gray-600">Write to followers' timelines</p>
+                                </div>
+                                <div className="bg-white rounded-lg p-3 border border-blue-100">
+                                  <span className="font-medium text-blue-700">Event Sourcing</span>
+                                  <p className="text-gray-600">Tweet and interaction history</p>
+                                </div>
+                                <div className="bg-white rounded-lg p-3 border border-blue-100">
+                                  <span className="font-medium text-blue-700">CQRS</span>
+                                  <p className="text-gray-600">Read/write model separation</p>
+                                </div>
                               </div>
                             </div>
                           </div>
@@ -6053,6 +7425,714 @@ spec:
                     </section>
                   )}
 
+                  {question.title.includes('Netflix') && (
+                    <section>
+                      <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                        <div className="w-8 h-8 bg-gradient-to-r from-red-500 to-pink-600 rounded-lg flex items-center justify-center mr-3">
+                          <Code className="h-5 w-5 text-white" />
+                        </div>
+                        Netflix Pseudo Code Implementation
+                      </h2>
+                      <div className="bg-gradient-to-br from-red-50 to-pink-50 rounded-xl p-8 border border-red-100">
+                        <div className="grid lg:grid-cols-2 gap-8">
+                          <div className="space-y-6">
+                            <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+                              <h3 className="font-semibold text-gray-900 mb-4 flex items-center">
+                                <div className="w-6 h-6 bg-red-100 rounded-lg flex items-center justify-center mr-3">
+                                  <Server className="h-4 w-4 text-red-600" />
+                                </div>
+                                Adaptive Bitrate Streaming
+                              </h3>
+                              <pre className="text-sm bg-gray-50 p-4 rounded-lg overflow-x-auto">
+{`class AdaptiveBitrateStreamer:
+    def __init__(self):
+        self.cdn_manager = CDNManager()
+        self.quality_analyzer = QualityAnalyzer()
+        self.bandwidth_monitor = BandwidthMonitor()
+        self.segment_manager = SegmentManager()
+    
+    def stream_video(self, video_id: str, user_id: str, device_info: dict):
+        # 1. Get available quality levels
+        quality_levels = self.get_quality_levels(video_id)
+        
+        # 2. Monitor network conditions
+        bandwidth = self.bandwidth_monitor.get_current_bandwidth(user_id)
+        latency = self.bandwidth_monitor.get_latency(user_id)
+        
+        # 3. Select optimal quality
+        optimal_quality = self.select_quality(quality_levels, bandwidth, latency)
+        
+        # 4. Get CDN edge server
+        edge_server = self.cdn_manager.get_nearest_edge(user_id)
+        
+        # 5. Stream segments
+        for segment in self.segment_manager.get_segments(video_id):
+            # Download segment from optimal quality
+            segment_data = self.download_segment(edge_server, video_id, segment, optimal_quality)
+            
+            # Monitor playback and adjust quality
+            playback_metrics = self.monitor_playback(segment_data)
+            optimal_quality = self.adjust_quality(playback_metrics, bandwidth)
+            
+            yield segment_data
+    
+    def select_quality(self, quality_levels: list, bandwidth: float, latency: float):
+        # Buffer-based quality selection
+        buffer_level = self.get_buffer_level()
+        
+        if buffer_level < 2.0:  # Less than 2 seconds buffered
+            return self.get_lower_quality(quality_levels)
+        elif buffer_level > 10.0:  # More than 10 seconds buffered
+            return self.get_higher_quality(quality_levels, bandwidth)
+        else:
+            return self.get_current_quality(quality_levels, bandwidth)`}
+                              </pre>
+                            </div>
+
+                            <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+                              <h3 className="font-semibold text-gray-900 mb-4 flex items-center">
+                                <div className="w-6 h-6 bg-pink-100 rounded-lg flex items-center justify-center mr-3">
+                                  <Database className="h-4 w-4 text-pink-600" />
+                                </div>
+                                Recommendation Engine
+                              </h3>
+                              <pre className="text-sm bg-gray-50 p-4 rounded-lg overflow-x-auto">
+{`class RecommendationEngine:
+    def __init__(self):
+        self.user_profile_service = UserProfileService()
+        self.content_analyzer = ContentAnalyzer()
+        self.collaborative_filter = CollaborativeFilter()
+        self.content_based_filter = ContentBasedFilter()
+        self.ml_predictor = MLPredictor()
+    
+    def get_recommendations(self, user_id: str, context: dict):
+        # 1. Get user profile and history
+        user_profile = self.user_profile_service.get_profile(user_id)
+        watch_history = self.user_profile_service.get_watch_history(user_id)
+        
+        # 2. Generate multiple recommendation types
+        collaborative_recs = self.collaborative_filter.get_recommendations(user_id)
+        content_based_recs = self.content_based_filter.get_recommendations(watch_history)
+        trending_recs = self.get_trending_content(user_profile.region)
+        
+        # 3. Blend recommendations
+        blended_recs = self.blend_recommendations([
+            collaborative_recs,
+            content_based_recs,
+            trending_recs
+        ], weights=[0.4, 0.4, 0.2])
+        
+        # 4. Apply personalization
+        personalized_recs = self.apply_personalization(blended_recs, user_profile)
+        
+        # 5. Filter and rank
+        final_recs = self.rank_and_filter(personalized_recs, context)
+        
+        return final_recs[:20]  # Return top 20 recommendations
+    
+    def blend_recommendations(self, rec_lists: list, weights: list):
+        # Weighted blending of different recommendation sources
+        blended = {}
+        for rec_list, weight in zip(rec_lists, weights):
+            for item in rec_list:
+                if item.id not in blended:
+                    blended[item.id] = 0
+                blended[item.id] += item.score * weight
+        
+        return [Item(id=k, score=v) for k, v in blended.items()]`}
+                              </pre>
+                            </div>
+                          </div>
+
+                          <div className="space-y-6">
+                            <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+                              <h3 className="font-semibold text-gray-900 mb-4 flex items-center">
+                                <div className="w-6 h-6 bg-orange-100 rounded-lg flex items-center justify-center mr-3">
+                                  <Zap className="h-4 w-4 text-orange-600" />
+                                </div>
+                                CDN Management
+                              </h3>
+                              <pre className="text-sm bg-gray-50 p-4 rounded-lg overflow-x-auto">
+{`class CDNManager:
+    def __init__(self):
+        self.edge_servers = EdgeServerManager()
+        self.cache_manager = CacheManager()
+        self.load_balancer = LoadBalancer()
+        self.geo_locator = GeoLocator()
+    
+    def get_nearest_edge(self, user_id: str):
+        # 1. Get user location
+        user_location = self.geo_locator.get_location(user_id)
+        
+        # 2. Find nearest edge servers
+        nearby_servers = self.edge_servers.get_nearby_servers(user_location)
+        
+        # 3. Check server health and load
+        healthy_servers = [s for s in nearby_servers if s.is_healthy()]
+        
+        # 4. Select optimal server based on load
+        optimal_server = self.load_balancer.select_server(healthy_servers)
+        
+        return optimal_server
+    
+    def cache_content(self, content_id: str, quality_levels: list):
+        # Cache content across edge servers
+        for edge_server in self.edge_servers.get_all_servers():
+            for quality in quality_levels:
+                self.cache_manager.cache_content(edge_server, content_id, quality)
+    
+    def invalidate_cache(self, content_id: str):
+        # Invalidate cached content across all edge servers
+        for edge_server in self.edge_servers.get_all_servers():
+            self.cache_manager.invalidate_content(edge_server, content_id)`}
+                              </pre>
+                            </div>
+
+                            <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+                              <h3 className="font-semibold text-gray-900 mb-4 flex items-center">
+                                <div className="w-6 h-6 bg-cyan-100 rounded-lg flex items-center justify-center mr-3">
+                                  <Shield className="h-4 w-4 text-cyan-600" />
+                                </div>
+                                Performance Monitoring
+                              </h3>
+                              <div className="space-y-3 text-sm">
+                                <div className="bg-gray-50 rounded-lg p-3">
+                                  <p className="font-medium text-gray-900 mb-2">Streaming Metrics</p>
+                                  <div className="space-y-1">
+                                    <div className="flex justify-between">
+                                      <span className="text-gray-600">Startup time p95:</span>
+                                      <span className="font-medium">&lt; 3.0s</span>
+                                    </div>
+                                    <div className="flex justify-between">
+                                      <span className="text-gray-600">Concurrent streams:</span>
+                                      <span className="font-medium">100M+</span>
+                                    </div>
+                                    <div className="flex justify-between">
+                                      <span className="text-gray-600">CDN hit ratio:</span>
+                                      <span className="font-medium">&gt; 95%</span>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div className="bg-gray-50 rounded-lg p-3">
+                                  <p className="font-medium text-gray-900 mb-2">Quality Metrics</p>
+                                  <div className="space-y-1">
+                                    <div className="flex justify-between">
+                                      <span className="text-gray-600">4K streams:</span>
+                                      <span className="font-medium">25%</span>
+                                    </div>
+                                    <div className="flex justify-between">
+                                      <span className="text-gray-600">HD streams:</span>
+                                      <span className="font-medium">60%</span>
+                                    </div>
+                                    <div className="flex justify-between">
+                                      <span className="text-gray-600">SD streams:</span>
+                                      <span className="font-medium">15%</span>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </section>
+                  )}
+
+                  {question.title.includes('Uber') && (
+                    <section>
+                      <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                        <div className="w-8 h-8 bg-gradient-to-r from-black to-gray-600 rounded-lg flex items-center justify-center mr-3">
+                          <Code className="h-5 w-5 text-white" />
+                        </div>
+                        Uber Pseudo Code Implementation
+                      </h2>
+                      <div className="bg-gradient-to-br from-black-50 to-gray-50 rounded-xl p-8 border border-gray-100">
+                        <div className="grid lg:grid-cols-2 gap-8">
+                          <div className="space-y-6">
+                            <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+                              <h3 className="font-semibold text-gray-900 mb-4 flex items-center">
+                                <div className="w-6 h-6 bg-black-100 rounded-lg flex items-center justify-center mr-3">
+                                  <Server className="h-4 w-4 text-black-600" />
+                                </div>
+                                Driver-Rider Matching Engine
+                              </h3>
+                              <pre className="text-sm bg-gray-50 p-4 rounded-lg overflow-x-auto">
+{`class MatchingEngine:
+    def __init__(self):
+        self.location_service = LocationService()
+        self.driver_manager = DriverManager()
+        self.rider_manager = RiderManager()
+        self.pricing_engine = PricingEngine()
+        self.eta_calculator = ETACalculator()
+    
+    def match_driver_rider(self, rider_request: RideRequest):
+        # 1. Get rider location and destination
+        rider_location = rider_request.pickup_location
+        destination = rider_request.destination
+        
+        # 2. Find nearby available drivers
+        nearby_drivers = self.driver_manager.get_nearby_drivers(
+            rider_location, 
+            radius_km=5.0
+        )
+        
+        # 3. Filter drivers by vehicle type and rating
+        suitable_drivers = self.filter_drivers(nearby_drivers, rider_request)
+        
+        # 4. Calculate ETAs and scores for each driver
+        driver_scores = []
+        for driver in suitable_drivers:
+            eta = self.eta_calculator.calculate_eta(driver.location, rider_location)
+            score = self.calculate_driver_score(driver, eta, rider_request)
+            driver_scores.append((driver, score, eta))
+        
+        # 5. Select best driver
+        best_driver, score, eta = max(driver_scores, key=lambda x: x[1])
+        
+        # 6. Create ride and notify driver
+        ride = self.create_ride(rider_request, best_driver, eta)
+        self.notify_driver(best_driver, ride)
+        
+        return ride
+    
+    def calculate_driver_score(self, driver: Driver, eta: float, request: RideRequest):
+        # Multi-factor scoring algorithm
+        base_score = 100
+        
+        # ETA factor (lower is better)
+        eta_score = max(0, 100 - (eta * 10))
+        
+        # Rating factor
+        rating_score = driver.rating * 20
+        
+        # Distance factor (closer is better)
+        distance_score = max(0, 100 - (driver.distance_to_rider * 20))
+        
+        # Vehicle type bonus
+        vehicle_bonus = 10 if driver.vehicle_type == request.vehicle_type else 0
+        
+        return base_score + eta_score + rating_score + distance_score + vehicle_bonus`}
+                              </pre>
+                            </div>
+
+                            <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+                              <h3 className="font-semibold text-gray-900 mb-4 flex items-center">
+                                <div className="w-6 h-6 bg-gray-100 rounded-lg flex items-center justify-center mr-3">
+                                  <Database className="h-4 w-4 text-gray-600" />
+                                </div>
+                                Dynamic Pricing Engine
+                              </h3>
+                              <pre className="text-sm bg-gray-50 p-4 rounded-lg overflow-x-auto">
+{`class PricingEngine:
+    def __init__(self):
+        self.demand_analyzer = DemandAnalyzer()
+        self.supply_analyzer = SupplyAnalyzer()
+        self.weather_service = WeatherService()
+        self.event_service = EventService()
+        self.historical_data = HistoricalDataService()
+    
+    def calculate_price(self, ride_request: RideRequest):
+        # 1. Get base fare
+        base_fare = self.get_base_fare(ride_request.distance, ride_request.vehicle_type)
+        
+        # 2. Calculate demand multiplier
+        demand_multiplier = self.calculate_demand_multiplier(ride_request)
+        
+        # 3. Calculate supply multiplier
+        supply_multiplier = self.calculate_supply_multiplier(ride_request)
+        
+        # 4. Apply weather factor
+        weather_factor = self.get_weather_factor(ride_request.pickup_location)
+        
+        # 5. Apply event factor
+        event_factor = self.get_event_factor(ride_request.pickup_location)
+        
+        # 6. Calculate final price
+        final_price = base_fare * demand_multiplier * supply_multiplier * weather_factor * event_factor
+        
+        # 7. Apply price caps
+        max_multiplier = 3.0  # Maximum 3x surge pricing
+        final_price = min(final_price, base_fare * max_multiplier)
+        
+        return final_price
+    
+    def calculate_demand_multiplier(self, request: RideRequest):
+        # Analyze current demand in the area
+        current_demand = self.demand_analyzer.get_demand(request.pickup_location)
+        historical_demand = self.historical_data.get_average_demand(
+            request.pickup_location, 
+            request.time
+        )
+        
+        demand_ratio = current_demand / historical_demand if historical_demand > 0 else 1.0
+        
+        # Apply sigmoid function for smooth multiplier
+        multiplier = 1.0 + (2.0 / (1 + math.exp(-5 * (demand_ratio - 1))))
+        
+        return multiplier`}
+                              </pre>
+                            </div>
+                          </div>
+
+                          <div className="space-y-6">
+                            <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+                              <h3 className="font-semibold text-gray-900 mb-4 flex items-center">
+                                <div className="w-6 h-6 bg-green-100 rounded-lg flex items-center justify-center mr-3">
+                                  <Zap className="h-4 w-4 text-green-600" />
+                                </div>
+                                Real-Time Location Tracking
+                              </h3>
+                              <pre className="text-sm bg-gray-50 p-4 rounded-lg overflow-x-auto">
+{`class LocationTracker:
+    def __init__(self):
+        self.gps_service = GPSService()
+        self.websocket_manager = WebSocketManager()
+        self.location_cache = LocationCache()
+        self.route_optimizer = RouteOptimizer()
+    
+    def track_driver_location(self, driver_id: str):
+        # 1. Get GPS coordinates
+        gps_coords = self.gps_service.get_location(driver_id)
+        
+        # 2. Validate and filter coordinates
+        if self.is_valid_location(gps_coords):
+            # 3. Update location cache
+            self.location_cache.update_location(driver_id, gps_coords)
+            
+            # 4. Broadcast to relevant riders
+            self.broadcast_location_update(driver_id, gps_coords)
+            
+            # 5. Update ETA for active rides
+            self.update_ride_etas(driver_id, gps_coords)
+    
+    def broadcast_location_update(self, driver_id: str, location: Location):
+        # Get all riders waiting for this driver
+        waiting_riders = self.get_waiting_riders(driver_id)
+        
+        for rider_id in waiting_riders:
+            # Send location update via WebSocket
+            self.websocket_manager.send_message(
+                rider_id,
+                {
+                    "type": "location_update",
+                    "driver_id": driver_id,
+                    "location": location,
+                    "eta": self.calculate_eta(location, rider_id)
+                }
+            )
+    
+    def is_valid_location(self, coords: Location):
+        # Validate GPS coordinates
+        if not (0 <= coords.lat <= 90 and -180 <= coords.lng <= 180):
+            return False
+        
+        # Check for unrealistic movement (speed > 200 km/h)
+        last_location = self.location_cache.get_last_location(coords.driver_id)
+        if last_location:
+            distance = self.calculate_distance(last_location, coords)
+            time_diff = coords.timestamp - last_location.timestamp
+            speed = distance / time_diff if time_diff > 0 else 0
+            
+            if speed > 200:  # km/h
+                return False
+        
+        return True`}
+                              </pre>
+                            </div>
+
+                            <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+                              <h3 className="font-semibold text-gray-900 mb-4 flex items-center">
+                                <div className="w-6 h-6 bg-blue-100 rounded-lg flex items-center justify-center mr-3">
+                                  <Shield className="h-4 w-4 text-blue-600" />
+                                </div>
+                                Performance Monitoring
+                              </h3>
+                              <div className="space-y-3 text-sm">
+                                <div className="bg-gray-50 rounded-lg p-3">
+                                  <p className="font-medium text-gray-900 mb-2">Matching Metrics</p>
+                                  <div className="space-y-1">
+                                    <div className="flex justify-between">
+                                      <span className="text-gray-600">Matching time p95:</span>
+                                      <span className="font-medium">&lt; 5.0s</span>
+                                    </div>
+                                    <div className="flex justify-between">
+                                      <span className="text-gray-600">Concurrent rides:</span>
+                                      <span className="font-medium">10M+</span>
+                                    </div>
+                                    <div className="flex justify-between">
+                                      <span className="text-gray-600">Success rate:</span>
+                                      <span className="font-medium">&gt; 98%</span>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div className="bg-gray-50 rounded-lg p-3">
+                                  <p className="font-medium text-gray-900 mb-2">Location Accuracy</p>
+                                  <div className="space-y-1">
+                                    <div className="flex justify-between">
+                                      <span className="text-gray-600">GPS accuracy:</span>
+                                      <span className="font-medium">±5 meters</span>
+                                    </div>
+                                    <div className="flex justify-between">
+                                      <span className="text-gray-600">Update frequency:</span>
+                                      <span className="font-medium">5 seconds</span>
+                                    </div>
+                                    <div className="flex justify-between">
+                                      <span className="text-gray-600">Global coverage:</span>
+                                      <span className="font-medium">10,000+ cities</span>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </section>
+                  )}
+
+                  {question.title.includes('Twitter') && (
+                    <section>
+                      <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                        <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-cyan-600 rounded-lg flex items-center justify-center mr-3">
+                          <Code className="h-5 w-5 text-white" />
+                        </div>
+                        Twitter Pseudo Code Implementation
+                      </h2>
+                      <div className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-xl p-8 border border-blue-100">
+                        <div className="grid lg:grid-cols-2 gap-8">
+                          <div className="space-y-6">
+                            <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+                              <h3 className="font-semibold text-gray-900 mb-4 flex items-center">
+                                <div className="w-6 h-6 bg-blue-100 rounded-lg flex items-center justify-center mr-3">
+                                  <Server className="h-4 w-4 text-blue-600" />
+                                </div>
+                                Real-Time Feed Generation
+                              </h3>
+                              <pre className="text-sm bg-gray-50 p-4 rounded-lg overflow-x-auto">
+{`class FeedGenerator:
+    def __init__(self):
+        self.tweet_service = TweetService()
+        self.user_service = UserService()
+        self.follow_service = FollowService()
+        self.ranking_engine = RankingEngine()
+        self.cache_manager = CacheManager()
+    
+    def generate_feed(self, user_id: str, page: int = 1, limit: int = 20):
+        # 1. Check cache first
+        cache_key = f"feed:{user_id}:{page}"
+        cached_feed = self.cache_manager.get(cache_key)
+        if cached_feed:
+            return cached_feed
+        
+        # 2. Get user's following list
+        following = self.follow_service.get_following(user_id)
+        
+        # 3. Get recent tweets from followed users
+        recent_tweets = self.tweet_service.get_recent_tweets(following, limit=100)
+        
+        # 4. Apply ranking algorithm
+        ranked_tweets = self.ranking_engine.rank_tweets(recent_tweets, user_id)
+        
+        # 5. Apply pagination
+        start_idx = (page - 1) * limit
+        end_idx = start_idx + limit
+        paginated_tweets = ranked_tweets[start_idx:end_idx]
+        
+        # 6. Cache result
+        self.cache_manager.set(cache_key, paginated_tweets, ttl=300)  # 5 minutes
+        
+        return paginated_tweets
+    
+    def rank_tweets(self, tweets: list, user_id: str):
+        # Multi-factor ranking algorithm
+        for tweet in tweets:
+            # Engagement score
+            engagement_score = self.calculate_engagement_score(tweet)
+            
+            # Recency score
+            recency_score = self.calculate_recency_score(tweet.created_at)
+            
+            # User relationship score
+            relationship_score = self.calculate_relationship_score(tweet.author_id, user_id)
+            
+            # Content relevance score
+            relevance_score = self.calculate_relevance_score(tweet, user_id)
+            
+            # Final score
+            tweet.score = (engagement_score * 0.3 + 
+                          recency_score * 0.25 + 
+                          relationship_score * 0.25 + 
+                          relevance_score * 0.2)
+        
+        return sorted(tweets, key=lambda x: x.score, reverse=True)`}
+                              </pre>
+                            </div>
+
+                            <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+                              <h3 className="font-semibold text-gray-900 mb-4 flex items-center">
+                                <div className="w-6 h-6 bg-cyan-100 rounded-lg flex items-center justify-center mr-3">
+                                  <Database className="h-4 w-4 text-cyan-600" />
+                                </div>
+                                Trending Topics Engine
+                              </h3>
+                              <pre className="text-sm bg-gray-50 p-4 rounded-lg overflow-x-auto">
+{`class TrendingEngine:
+    def __init__(self):
+        self.hashtag_extractor = HashtagExtractor()
+        self.topic_classifier = TopicClassifier()
+        self.engagement_calculator = EngagementCalculator()
+        self.trending_analyzer = TrendingAnalyzer()
+    
+    def calculate_trending_topics(self, time_window: str = "1h"):
+        # 1. Get recent tweets
+        recent_tweets = self.get_recent_tweets(time_window)
+        
+        # 2. Extract hashtags and topics
+        hashtags = self.hashtag_extractor.extract_hashtags(recent_tweets)
+        topics = self.topic_classifier.classify_topics(recent_tweets)
+        
+        # 3. Calculate engagement metrics
+        trending_data = {}
+        for hashtag in hashtags:
+            engagement = self.engagement_calculator.calculate_hashtag_engagement(hashtag)
+            trending_data[hashtag] = engagement
+        
+        # 4. Apply trending algorithm
+        trending_topics = self.trending_analyzer.analyze_trends(trending_data)
+        
+        # 5. Filter and rank
+        filtered_topics = self.filter_trending_topics(trending_topics)
+        ranked_topics = self.rank_trending_topics(filtered_topics)
+        
+        return ranked_topics[:10]  # Return top 10 trending topics
+    
+    def calculate_hashtag_engagement(self, hashtag: str):
+        # Multi-factor engagement calculation
+        tweets_count = self.get_tweets_count(hashtag)
+        retweets_count = self.get_retweets_count(hashtag)
+        likes_count = self.get_likes_count(hashtag)
+        replies_count = self.get_replies_count(hashtag)
+        
+        # Weighted engagement score
+        engagement_score = (tweets_count * 1 + 
+                           retweets_count * 2 + 
+                           likes_count * 1 + 
+                           replies_count * 3)
+        
+        # Apply velocity factor (growth rate)
+        velocity = self.calculate_velocity(hashtag)
+        
+        return engagement_score * velocity`}
+                              </pre>
+                            </div>
+                          </div>
+
+                          <div className="space-y-6">
+                            <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+                              <h3 className="font-semibold text-gray-900 mb-4 flex items-center">
+                                <div className="w-6 h-6 bg-green-100 rounded-lg flex items-center justify-center mr-3">
+                                  <Zap className="h-4 w-4 text-green-600" />
+                                </div>
+                                Notification Service
+                              </h3>
+                              <pre className="text-sm bg-gray-50 p-4 rounded-lg overflow-x-auto">
+{`class NotificationService:
+    def __init__(self):
+        self.notification_queue = NotificationQueue()
+        self.push_service = PushNotificationService()
+        self.email_service = EmailService()
+        self.sms_service = SMSService()
+        self.user_preferences = UserPreferencesService()
+    
+    def send_notification(self, user_id: str, notification_type: str, data: dict):
+        # 1. Get user preferences
+        preferences = self.user_preferences.get_preferences(user_id)
+        
+        # 2. Check if user wants this type of notification
+        if not preferences.get(notification_type, True):
+            return
+        
+        # 3. Create notification
+        notification = self.create_notification(user_id, notification_type, data)
+        
+        # 4. Add to queue for processing
+        self.notification_queue.add(notification)
+        
+        # 5. Process notification based on type
+        if notification_type == "mention":
+            self.process_mention_notification(notification)
+        elif notification_type == "like":
+            self.process_like_notification(notification)
+        elif notification_type == "retweet":
+            self.process_retweet_notification(notification)
+        elif notification_type == "follow":
+            self.process_follow_notification(notification)
+    
+    def process_mention_notification(self, notification: Notification):
+        # High priority notification
+        # Send immediately via push notification
+        self.push_service.send_push(notification.user_id, {
+            "title": "You were mentioned",
+            "body": f"@{notification.data['mentioner']} mentioned you in a tweet",
+            "data": notification.data
+        })
+        
+        # Also send email if user has email notifications enabled
+        if self.user_preferences.get_email_notifications(notification.user_id):
+            self.email_service.send_email(notification.user_id, "mention", notification.data)`}
+                              </pre>
+                            </div>
+
+                            <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+                              <h3 className="font-semibold text-gray-900 mb-4 flex items-center">
+                                <div className="w-6 h-6 bg-purple-100 rounded-lg flex items-center justify-center mr-3">
+                                  <Shield className="h-4 w-4 text-purple-600" />
+                                </div>
+                                Performance Monitoring
+                              </h3>
+                              <div className="space-y-3 text-sm">
+                                <div className="bg-gray-50 rounded-lg p-3">
+                                  <p className="font-medium text-gray-900 mb-2">Feed Metrics</p>
+                                  <div className="space-y-1">
+                                    <div className="flex justify-between">
+                                      <span className="text-gray-600">Feed latency p95:</span>
+                                      <span className="font-medium">&lt; 200ms</span>
+                                    </div>
+                                    <div className="flex justify-between">
+                                      <span className="text-gray-600">Daily tweets:</span>
+                                      <span className="font-medium">500M+</span>
+                                    </div>
+                                    <div className="flex justify-between">
+                                      <span className="text-gray-600">Active users:</span>
+                                      <span className="font-medium">400M+</span>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div className="bg-gray-50 rounded-lg p-3">
+                                  <p className="font-medium text-gray-900 mb-2">Trending Metrics</p>
+                                  <div className="space-y-1">
+                                    <div className="flex justify-between">
+                                      <span className="text-gray-600">Topics analyzed:</span>
+                                      <span className="font-medium">10K+ daily</span>
+                                    </div>
+                                    <div className="flex justify-between">
+                                      <span className="text-gray-600">Update frequency:</span>
+                                      <span className="font-medium">5 minutes</span>
+                                    </div>
+                                    <div className="flex justify-between">
+                                      <span className="text-gray-600">Global reach:</span>
+                                      <span className="font-medium">200+ countries</span>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </section>
+                  )}
+
                   {question.title.includes('Top 20 Asked AI/ML Questions') && (
                     <section>
                       <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">
@@ -7353,11 +9433,448 @@ print(a + b)
                     </section>
                   )}
 
+                  {/* Top August Repos Content */}
+                  {question.title.includes('Top August Repos') && (
+                    <section className="bg-white rounded-xl shadow-sm border border-gray-200">
+                      <div className="p-6">
+                        <div className="mb-6">
+                          <h2 className="text-2xl font-bold text-gray-900 mb-2">🔥 Top 10 AI GitHub Repositories (2025)</h2>
+                          <p className="text-gray-600">Discover the most trending AI projects and cutting-edge tools that are shaping the future of artificial intelligence.</p>
+                        </div>
 
+                        <div className="space-y-6">
+                          {/* Repo 1 */}
+                          <div className="bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg p-6 border border-purple-100">
+                            <div className="flex items-start justify-between">
+                              <div className="flex-1">
+                                <h3 className="text-lg font-bold text-gray-900 mb-2">1. AutoGPT</h3>
+                                <p className="text-gray-700 mb-3">Autonomous AI agent that executes multi-step tasks using LLMs. This revolutionary project enables AI to work autonomously on complex tasks without human intervention.</p>
+                                <div className="flex items-center space-x-4 text-sm">
+                                  <span className="px-2 py-1 bg-purple-100 text-purple-700 rounded-full">Autonomous AI</span>
+                                  <span className="px-2 py-1 bg-blue-100 text-blue-700 rounded-full">LLM</span>
+                                  <span className="px-2 py-1 bg-green-100 text-green-700 rounded-full">Task Automation</span>
+                                </div>
+                              </div>
+                              <a href="https://github.com/Torantulino/Auto-GPT" target="_blank" rel="noopener noreferrer" className="ml-4 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors text-sm font-medium">
+                                View Repo →
+                              </a>
+                            </div>
+                          </div>
+
+                          {/* Repo 2 */}
+                          <div className="bg-gradient-to-r from-blue-50 to-cyan-50 rounded-lg p-6 border border-blue-100">
+                            <div className="flex items-start justify-between">
+                              <div className="flex-1">
+                                <h3 className="text-lg font-bold text-gray-900 mb-2">2. Stable Diffusion WebUI</h3>
+                                <p className="text-gray-700 mb-3">Web-based interface for Stable Diffusion image generation. The most popular and feature-rich UI for running Stable Diffusion models locally.</p>
+                                <div className="flex items-center space-x-4 text-sm">
+                                  <span className="px-2 py-1 bg-blue-100 text-blue-700 rounded-full">Image Generation</span>
+                                  <span className="px-2 py-1 bg-purple-100 text-purple-700 rounded-full">Stable Diffusion</span>
+                                  <span className="px-2 py-1 bg-green-100 text-green-700 rounded-full">Web UI</span>
+                                </div>
+                              </div>
+                              <a href="https://github.com/AUTOMATIC1111/stable-diffusion-webui" target="_blank" rel="noopener noreferrer" className="ml-4 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium">
+                                View Repo →
+                              </a>
+                            </div>
+                          </div>
+
+                          {/* Repo 3 */}
+                          <div className="bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg p-6 border border-green-100">
+                            <div className="flex items-start justify-between">
+                              <div className="flex-1">
+                                <h3 className="text-lg font-bold text-gray-900 mb-2">3. LangChain</h3>
+                                <p className="text-gray-700 mb-3">Framework for building applications powered by LLMs. Provides tools for creating complex AI applications with chains, agents, and memory.</p>
+                                <div className="flex items-center space-x-4 text-sm">
+                                  <span className="px-2 py-1 bg-green-100 text-green-700 rounded-full">Framework</span>
+                                  <span className="px-2 py-1 bg-blue-100 text-blue-700 rounded-full">LLM Apps</span>
+                                  <span className="px-2 py-1 bg-purple-100 text-purple-700 rounded-full">Agents</span>
+                                </div>
+                              </div>
+                              <a href="https://github.com/langchain-ai/langchain" target="_blank" rel="noopener noreferrer" className="ml-4 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors text-sm font-medium">
+                                View Repo →
+                              </a>
+                            </div>
+                          </div>
+
+                          {/* Repo 4 */}
+                          <div className="bg-gradient-to-r from-orange-50 to-red-50 rounded-lg p-6 border border-orange-100">
+                            <div className="flex items-start justify-between">
+                              <div className="flex-1">
+                                <h3 className="text-lg font-bold text-gray-900 mb-2">4. Dify</h3>
+                                <p className="text-gray-700 mb-3">Open-source LLM app development platform with RAG, agents, and observability. Enables rapid development of AI applications.</p>
+                                <div className="flex items-center space-x-4 text-sm">
+                                  <span className="px-2 py-1 bg-orange-100 text-orange-700 rounded-full">Development Platform</span>
+                                  <span className="px-2 py-1 bg-blue-100 text-blue-700 rounded-full">RAG</span>
+                                  <span className="px-2 py-1 bg-purple-100 text-purple-700 rounded-full">Observability</span>
+                                </div>
+                              </div>
+                              <a href="https://github.com/langgenius/dify" target="_blank" rel="noopener noreferrer" className="ml-4 px-4 py-2 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition-colors text-sm font-medium">
+                                View Repo →
+                              </a>
+                            </div>
+                          </div>
+
+                          {/* Repo 5 */}
+                          <div className="bg-gradient-to-r from-indigo-50 to-purple-50 rounded-lg p-6 border border-indigo-100">
+                            <div className="flex items-start justify-between">
+                              <div className="flex-1">
+                                <h3 className="text-lg font-bold text-gray-900 mb-2">5. Open-WebUI</h3>
+                                <p className="text-gray-700 mb-3">Chat-based interface supporting multiple LLM providers like OpenAI & Ollama. A modern, responsive web UI for AI chat applications.</p>
+                                <div className="flex items-center space-x-4 text-sm">
+                                  <span className="px-2 py-1 bg-indigo-100 text-indigo-700 rounded-full">Chat Interface</span>
+                                  <span className="px-2 py-1 bg-blue-100 text-blue-700 rounded-full">Multi-Provider</span>
+                                  <span className="px-2 py-1 bg-green-100 text-green-700 rounded-full">Web UI</span>
+                                </div>
+                              </div>
+                              <a href="https://github.com/open-webui/open-webui" target="_blank" rel="noopener noreferrer" className="ml-4 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors text-sm font-medium">
+                                View Repo →
+                              </a>
+                            </div>
+                          </div>
+
+                          {/* Repo 6 */}
+                          <div className="bg-gradient-to-r from-teal-50 to-cyan-50 rounded-lg p-6 border border-teal-100">
+                            <div className="flex items-start justify-between">
+                              <div className="flex-1">
+                                <h3 className="text-lg font-bold text-gray-900 mb-2">6. Langflow</h3>
+                                <p className="text-gray-700 mb-3">Drag-and-drop visual tool for designing AI agent workflows. Simplifies the creation of complex AI pipelines and automation.</p>
+                                <div className="flex items-center space-x-4 text-sm">
+                                  <span className="px-2 py-1 bg-teal-100 text-teal-700 rounded-full">Visual Tool</span>
+                                  <span className="px-2 py-1 bg-blue-100 text-blue-700 rounded-full">Workflows</span>
+                                  <span className="px-2 py-1 bg-purple-100 text-purple-700 rounded-full">Drag & Drop</span>
+                                </div>
+                              </div>
+                              <a href="https://github.com/langflow-ai/langflow" target="_blank" rel="noopener noreferrer" className="ml-4 px-4 py-2 bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition-colors text-sm font-medium">
+                                View Repo →
+                              </a>
+                            </div>
+                          </div>
+
+                          {/* Repo 7 */}
+                          <div className="bg-gradient-to-r from-pink-50 to-rose-50 rounded-lg p-6 border border-pink-100">
+                            <div className="flex items-start justify-between">
+                              <div className="flex-1">
+                                <h3 className="text-lg font-bold text-gray-900 mb-2">7. TensorZero</h3>
+                                <p className="text-gray-700 mb-3">Infrastructure for optimizing, observing, and evaluating LLM apps. Provides comprehensive tools for LLM application monitoring and optimization.</p>
+                                <div className="flex items-center space-x-4 text-sm">
+                                  <span className="px-2 py-1 bg-pink-100 text-pink-700 rounded-full">Infrastructure</span>
+                                  <span className="px-2 py-1 bg-blue-100 text-blue-700 rounded-full">Optimization</span>
+                                  <span className="px-2 py-1 bg-green-100 text-green-700 rounded-full">Monitoring</span>
+                                </div>
+                              </div>
+                              <a href="https://github.com/tensorzero/tensorzero" target="_blank" rel="noopener noreferrer" className="ml-4 px-4 py-2 bg-pink-600 text-white rounded-lg hover:bg-pink-700 transition-colors text-sm font-medium">
+                                View Repo →
+                              </a>
+                            </div>
+                          </div>
+
+                          {/* Repo 8 */}
+                          <div className="bg-gradient-to-r from-yellow-50 to-amber-50 rounded-lg p-6 border border-yellow-100">
+                            <div className="flex items-start justify-between">
+                              <div className="flex-1">
+                                <h3 className="text-lg font-bold text-gray-900 mb-2">8. vLLM</h3>
+                                <p className="text-gray-700 mb-3">High-performance serving engine for LLMs with optimized memory and batching. Enables efficient deployment of large language models.</p>
+                                <div className="flex items-center space-x-4 text-sm">
+                                  <span className="px-2 py-1 bg-yellow-100 text-yellow-700 rounded-full">High Performance</span>
+                                  <span className="px-2 py-1 bg-blue-100 text-blue-700 rounded-full">Serving Engine</span>
+                                  <span className="px-2 py-1 bg-green-100 text-green-700 rounded-full">Optimized Memory</span>
+                                </div>
+                              </div>
+                              <a href="https://github.com/vllm-project/vllm" target="_blank" rel="noopener noreferrer" className="ml-4 px-4 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition-colors text-sm font-medium">
+                                View Repo →
+                              </a>
+                            </div>
+                          </div>
+
+                          {/* Repo 9 */}
+                          <div className="bg-gradient-to-r from-lime-50 to-green-50 rounded-lg p-6 border border-lime-100">
+                            <div className="flex items-start justify-between">
+                              <div className="flex-1">
+                                <h3 className="text-lg font-bold text-gray-900 mb-2">9. ComfyUI</h3>
+                                <p className="text-gray-700 mb-3">Modular, node-based interface for Stable Diffusion & ControlNet. Advanced UI for creating complex image generation workflows.</p>
+                                <div className="flex items-center space-x-4 text-sm">
+                                  <span className="px-2 py-1 bg-lime-100 text-lime-700 rounded-full">Modular UI</span>
+                                  <span className="px-2 py-1 bg-blue-100 text-blue-700 rounded-full">Node-based</span>
+                                  <span className="px-2 py-1 bg-purple-100 text-purple-700 rounded-full">ControlNet</span>
+                                </div>
+                              </div>
+                              <a href="https://github.com/comfyanonymous/ComfyUI" target="_blank" rel="noopener noreferrer" className="ml-4 px-4 py-2 bg-lime-600 text-white rounded-lg hover:bg-lime-700 transition-colors text-sm font-medium">
+                                View Repo →
+                              </a>
+                            </div>
+                          </div>
+
+                          {/* Repo 10 */}
+                          <div className="bg-gradient-to-r from-sky-50 to-blue-50 rounded-lg p-6 border border-sky-100">
+                            <div className="flex items-start justify-between">
+                              <div className="flex-1">
+                                <h3 className="text-lg font-bold text-gray-900 mb-2">10. MiniCPM-o</h3>
+                                <p className="text-gray-700 mb-3">GPT-4o level multimodal LLM for text, vision, and speech with mobile optimization. Compact yet powerful AI model for edge devices.</p>
+                                <div className="flex items-center space-x-4 text-sm">
+                                  <span className="px-2 py-1 bg-sky-100 text-sky-700 rounded-full">Multimodal</span>
+                                  <span className="px-2 py-1 bg-blue-100 text-blue-700 rounded-full">Mobile Optimized</span>
+                                  <span className="px-2 py-1 bg-green-100 text-green-700 rounded-full">Edge AI</span>
+                                </div>
+                              </div>
+                              <a href="https://github.com/OpenBMB/MiniCPM-o" target="_blank" rel="noopener noreferrer" className="ml-4 px-4 py-2 bg-sky-600 text-white rounded-lg hover:bg-sky-700 transition-colors text-sm font-medium">
+                                View Repo →
+                              </a>
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Summary */}
+                        <div className="mt-8 bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg p-6 border border-purple-100">
+                          <h3 className="text-lg font-bold text-gray-900 mb-3">🚀 Key Trends in AI Development</h3>
+                          <div className="grid md:grid-cols-2 gap-4 text-sm">
+                            <div>
+                              <h4 className="font-semibold text-gray-900 mb-2">Emerging Technologies</h4>
+                              <ul className="space-y-1 text-gray-700">
+                                <li>• Autonomous AI agents and automation</li>
+                                <li>• Multimodal AI capabilities</li>
+                                <li>• Edge AI and mobile optimization</li>
+                                <li>• Visual workflow design tools</li>
+                              </ul>
+                            </div>
+                            <div>
+                              <h4 className="font-semibold text-gray-900 mb-2">Development Focus</h4>
+                              <ul className="space-y-1 text-gray-700">
+                                <li>• High-performance serving engines</li>
+                                <li>• Comprehensive monitoring and observability</li>
+                                <li>• User-friendly interfaces and UIs</li>
+                                <li>• Open-source collaboration and innovation</li>
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </section>
+                  )}
                 </div>
               )}
             </div>
           </div>
+        )}
+
+        {/* GitHub Repos Content - Direct Display (No Tabs) */}
+        {question.title.includes('Top August Repos') && (
+          <div className="bg-white rounded-xl shadow-sm border border-gray-200">
+            <div className="p-6">
+              <div className="mb-6">
+                <h2 className="text-2xl font-bold text-gray-900 mb-2">🔥 Top 10 AI GitHub Repositories (2025)</h2>
+                <p className="text-gray-600">Discover the most trending AI projects and cutting-edge tools that are shaping the future of artificial intelligence.</p>
+              </div>
+
+              <div className="space-y-6">
+                {/* Repo 1 */}
+                <div className="bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg p-6 border border-purple-100">
+                  <div className="flex items-start justify-between">
+                    <div className="flex-1">
+                      <h3 className="text-lg font-bold text-gray-900 mb-2">1. AutoGPT</h3>
+                      <p className="text-gray-700 mb-3">Autonomous AI agent that executes multi-step tasks using LLMs. This revolutionary project enables AI to work autonomously on complex tasks without human intervention.</p>
+                      <div className="flex items-center space-x-4 text-sm">
+                        <span className="px-2 py-1 bg-purple-100 text-purple-700 rounded-full">Autonomous AI</span>
+                        <span className="px-2 py-1 bg-blue-100 text-blue-700 rounded-full">LLM</span>
+                        <span className="px-2 py-1 bg-green-100 text-green-700 rounded-full">Task Automation</span>
+                      </div>
+                    </div>
+                    <a href="https://github.com/Torantulino/Auto-GPT" target="_blank" rel="noopener noreferrer" className="ml-4 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors text-sm font-medium">
+                      View Repo →
+                    </a>
+                  </div>
+                </div>
+
+                {/* Repo 2 */}
+                <div className="bg-gradient-to-r from-blue-50 to-cyan-50 rounded-lg p-6 border border-blue-100">
+                  <div className="flex items-start justify-between">
+                    <div className="flex-1">
+                      <h3 className="text-lg font-bold text-gray-900 mb-2">2. Stable Diffusion WebUI</h3>
+                      <p className="text-gray-700 mb-3">Web-based interface for Stable Diffusion image generation. The most popular and feature-rich UI for running Stable Diffusion models locally.</p>
+                      <div className="flex items-center space-x-4 text-sm">
+                        <span className="px-2 py-1 bg-blue-100 text-blue-700 rounded-full">Image Generation</span>
+                        <span className="px-2 py-1 bg-purple-100 text-purple-700 rounded-full">Stable Diffusion</span>
+                        <span className="px-2 py-1 bg-green-100 text-green-700 rounded-full">Web UI</span>
+                      </div>
+                    </div>
+                    <a href="https://github.com/AUTOMATIC1111/stable-diffusion-webui" target="_blank" rel="noopener noreferrer" className="ml-4 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium">
+                      View Repo →
+                    </a>
+                  </div>
+                </div>
+
+                {/* Repo 3 */}
+                <div className="bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg p-6 border border-green-100">
+                  <div className="flex items-start justify-between">
+                    <div className="flex-1">
+                      <h3 className="text-lg font-bold text-gray-900 mb-2">3. LangChain</h3>
+                      <p className="text-gray-700 mb-3">Framework for building applications powered by LLMs. Provides tools for creating complex AI applications with chains, agents, and memory.</p>
+                      <div className="flex items-center space-x-4 text-sm">
+                        <span className="px-2 py-1 bg-green-100 text-green-700 rounded-full">Framework</span>
+                        <span className="px-2 py-1 bg-blue-100 text-blue-700 rounded-full">LLM Apps</span>
+                        <span className="px-2 py-1 bg-purple-100 text-purple-700 rounded-full">Agents</span>
+                      </div>
+                    </div>
+                    <a href="https://github.com/langchain-ai/langchain" target="_blank" rel="noopener noreferrer" className="ml-4 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors text-sm font-medium">
+                      View Repo →
+                    </a>
+                  </div>
+                </div>
+
+                {/* Repo 4 */}
+                <div className="bg-gradient-to-r from-orange-50 to-red-50 rounded-lg p-6 border border-orange-100">
+                  <div className="flex items-start justify-between">
+                    <div className="flex-1">
+                      <h3 className="text-lg font-bold text-gray-900 mb-2">4. Dify</h3>
+                      <p className="text-gray-700 mb-3">Open-source LLM app development platform with RAG, agents, and observability. Enables rapid development of AI applications.</p>
+                      <div className="flex items-center space-x-4 text-sm">
+                        <span className="px-2 py-1 bg-orange-100 text-orange-700 rounded-full">Development Platform</span>
+                        <span className="px-2 py-1 bg-blue-100 text-blue-700 rounded-full">RAG</span>
+                        <span className="px-2 py-1 bg-purple-100 text-purple-700 rounded-full">Observability</span>
+                      </div>
+                    </div>
+                    <a href="https://github.com/langgenius/dify" target="_blank" rel="noopener noreferrer" className="ml-4 px-4 py-2 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition-colors text-sm font-medium">
+                      View Repo →
+                    </a>
+                  </div>
+                </div>
+
+                {/* Repo 5 */}
+                <div className="bg-gradient-to-r from-indigo-50 to-purple-50 rounded-lg p-6 border border-indigo-100">
+                  <div className="flex items-start justify-between">
+                    <div className="flex-1">
+                      <h3 className="text-lg font-bold text-gray-900 mb-2">5. Open-WebUI</h3>
+                      <p className="text-gray-700 mb-3">Chat-based interface supporting multiple LLM providers like OpenAI & Ollama. A modern, responsive web UI for AI chat applications.</p>
+                      <div className="flex items-center space-x-4 text-sm">
+                        <span className="px-2 py-1 bg-indigo-100 text-indigo-700 rounded-full">Chat Interface</span>
+                        <span className="px-2 py-1 bg-blue-100 text-blue-700 rounded-full">Multi-Provider</span>
+                        <span className="px-2 py-1 bg-green-100 text-green-700 rounded-full">Web UI</span>
+                      </div>
+                    </div>
+                    <a href="https://github.com/open-webui/open-webui" target="_blank" rel="noopener noreferrer" className="ml-4 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors text-sm font-medium">
+                      View Repo →
+                    </a>
+                  </div>
+                </div>
+
+                {/* Repo 6 */}
+                <div className="bg-gradient-to-r from-teal-50 to-cyan-50 rounded-lg p-6 border border-teal-100">
+                  <div className="flex items-start justify-between">
+                    <div className="flex-1">
+                      <h3 className="text-lg font-bold text-gray-900 mb-2">6. Langflow</h3>
+                      <p className="text-gray-700 mb-3">Drag-and-drop visual tool for designing AI agent workflows. Simplifies the creation of complex AI applications with an intuitive interface.</p>
+                      <div className="flex items-center space-x-4 text-sm">
+                        <span className="px-2 py-1 bg-teal-100 text-teal-700 rounded-full">Visual Design</span>
+                        <span className="px-2 py-1 bg-blue-100 text-blue-700 rounded-full">Drag & Drop</span>
+                        <span className="px-2 py-1 bg-purple-100 text-purple-700 rounded-full">Workflows</span>
+                      </div>
+                    </div>
+                    <a href="https://github.com/langflow-ai/langflow" target="_blank" rel="noopener noreferrer" className="ml-4 px-4 py-2 bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition-colors text-sm font-medium">
+                      View Repo →
+                    </a>
+                  </div>
+                </div>
+
+                {/* Repo 7 */}
+                <div className="bg-gradient-to-r from-pink-50 to-rose-50 rounded-lg p-6 border border-pink-100">
+                  <div className="flex items-start justify-between">
+                    <div className="flex-1">
+                      <h3 className="text-lg font-bold text-gray-900 mb-2">7. TensorZero</h3>
+                      <p className="text-gray-700 mb-3">Infrastructure for optimizing, observing, and evaluating LLM apps. Provides comprehensive monitoring and evaluation tools for AI applications.</p>
+                      <div className="flex items-center space-x-4 text-sm">
+                        <span className="px-2 py-1 bg-pink-100 text-pink-700 rounded-full">Infrastructure</span>
+                        <span className="px-2 py-1 bg-blue-100 text-blue-700 rounded-full">Monitoring</span>
+                        <span className="px-2 py-1 bg-green-100 text-green-700 rounded-full">Evaluation</span>
+                      </div>
+                    </div>
+                    <a href="https://github.com/tensorzero/tensorzero" target="_blank" rel="noopener noreferrer" className="ml-4 px-4 py-2 bg-pink-600 text-white rounded-lg hover:bg-pink-700 transition-colors text-sm font-medium">
+                      View Repo →
+                    </a>
+                  </div>
+                </div>
+
+                {/* Repo 8 */}
+                <div className="bg-gradient-to-r from-yellow-50 to-amber-50 rounded-lg p-6 border border-yellow-100">
+                  <div className="flex items-start justify-between">
+                    <div className="flex-1">
+                      <h3 className="text-lg font-bold text-gray-900 mb-2">8. vLLM</h3>
+                      <p className="text-gray-700 mb-3">High-performance serving engine for LLMs with optimized memory and batching. Enables efficient deployment of large language models.</p>
+                      <div className="flex items-center space-x-4 text-sm">
+                        <span className="px-2 py-1 bg-yellow-100 text-yellow-700 rounded-full">High Performance</span>
+                        <span className="px-2 py-1 bg-blue-100 text-blue-700 rounded-full">Serving Engine</span>
+                        <span className="px-2 py-1 bg-green-100 text-green-700 rounded-full">Optimized Memory</span>
+                      </div>
+                    </div>
+                    <a href="https://github.com/vllm-project/vllm" target="_blank" rel="noopener noreferrer" className="ml-4 px-4 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition-colors text-sm font-medium">
+                      View Repo →
+                    </a>
+                  </div>
+                </div>
+
+                {/* Repo 9 */}
+                <div className="bg-gradient-to-r from-lime-50 to-green-50 rounded-lg p-6 border border-lime-100">
+                  <div className="flex items-start justify-between">
+                    <div className="flex-1">
+                      <h3 className="text-lg font-bold text-gray-900 mb-2">9. ComfyUI</h3>
+                      <p className="text-gray-700 mb-3">Modular, node-based interface for Stable Diffusion & ControlNet. Advanced UI for creating complex image generation workflows.</p>
+                      <div className="flex items-center space-x-4 text-sm">
+                        <span className="px-2 py-1 bg-lime-100 text-lime-700 rounded-full">Modular UI</span>
+                        <span className="px-2 py-1 bg-blue-100 text-blue-700 rounded-full">Node-based</span>
+                        <span className="px-2 py-1 bg-purple-100 text-purple-700 rounded-full">ControlNet</span>
+                      </div>
+                    </div>
+                    <a href="https://github.com/comfyanonymous/ComfyUI" target="_blank" rel="noopener noreferrer" className="ml-4 px-4 py-2 bg-lime-600 text-white rounded-lg hover:bg-lime-700 transition-colors text-sm font-medium">
+                      View Repo →
+                    </a>
+                  </div>
+                </div>
+
+                {/* Repo 10 */}
+                <div className="bg-gradient-to-r from-sky-50 to-blue-50 rounded-lg p-6 border border-sky-100">
+                  <div className="flex items-start justify-between">
+                    <div className="flex-1">
+                      <h3 className="text-lg font-bold text-gray-900 mb-2">10. MiniCPM-o</h3>
+                      <p className="text-gray-700 mb-3">GPT-4o level multimodal LLM for text, vision, and speech with mobile optimization. Compact yet powerful AI model for edge devices.</p>
+                      <div className="flex items-center space-x-4 text-sm">
+                        <span className="px-2 py-1 bg-sky-100 text-sky-700 rounded-full">Multimodal</span>
+                        <span className="px-2 py-1 bg-blue-100 text-blue-700 rounded-full">Mobile Optimized</span>
+                        <span className="px-2 py-1 bg-green-100 text-green-700 rounded-full">Edge AI</span>
+                      </div>
+                    </div>
+                    <a href="https://github.com/OpenBMB/MiniCPM-o" target="_blank" rel="noopener noreferrer" className="ml-4 px-4 py-2 bg-sky-600 text-white rounded-lg hover:bg-sky-700 transition-colors text-sm font-medium">
+                      View Repo →
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              {/* Summary */}
+              <div className="mt-8 bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg p-6 border border-purple-100">
+                <h3 className="text-lg font-bold text-gray-900 mb-3">🚀 Key Trends in AI Development</h3>
+                <div className="grid md:grid-cols-2 gap-4 text-sm">
+                  <div>
+                    <h4 className="font-semibold text-gray-900 mb-2">Emerging Technologies</h4>
+                    <ul className="space-y-1 text-gray-700">
+                      <li>• Autonomous AI agents and automation</li>
+                      <li>• Multimodal AI capabilities</li>
+                      <li>• Edge AI and mobile optimization</li>
+                      <li>• Visual workflow design tools</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-gray-900 mb-2">Development Focus</h4>
+                    <ul className="space-y-1 text-gray-700">
+                      <li>• High-performance serving engines</li>
+                      <li>• Comprehensive monitoring and observability</li>
+                      <li>• User-friendly interfaces and UIs</li>
+                      <li>• Open-source collaboration and innovation</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
         </div>
       </div>
     </div>
