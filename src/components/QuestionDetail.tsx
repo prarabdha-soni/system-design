@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, Eye, Code, Clock, CheckCircle, Copy, FileCode, FileText, File as FileIcon, Folder, Star, GitBranch, Search as SearchIcon, Moon, Sun, Server, Database, Shield, Zap, Network, Target, MessageSquare, Brain } from 'lucide-react';
 import { Question } from '../data/questions';
 import ViewTracker from '../utils/viewTracker';
@@ -284,18 +285,18 @@ const RepoBrowser: React.FC<{ question: Question }> = ({ question }) => {
 
 interface QuestionDetailProps {
   question: Question;
-  onBack: () => void;
 }
 
-const QuestionDetail: React.FC<QuestionDetailProps> = ({ question, onBack }) => {
-  const [activeTab, setActiveTab] = useState(question.title.includes('Multimodal Pretraining') || question.title.includes('Concurrency and Coroutines') ? 'lld' : 'hld');
+const QuestionDetail: React.FC<QuestionDetailProps> = ({ question }) => {
+  const navigate = useNavigate();
+  const [activeTab, setActiveTab] = useState(question.title.includes('Multimodal Pretraining') || question.title.includes('Concurrency and Coroutines') || question.title.includes('Top 20 Asked AI/ML Questions') || question.title.includes('Top 20 Easy DSA Questions') || question.title.includes('Top 20 Medium DSA Questions') || question.title.includes('Top 20 Hard DSA Questions') ? 'lld' : 'hld');
 
   // Track question view when component mounts
   useEffect(() => {
     ViewTracker.trackQuestionView(question.id);
   }, [question.id]);
 
-  const tabs = question.title.includes('Multimodal Pretraining') || question.title.includes('Concurrency and Coroutines')
+  const tabs = question.title.includes('Multimodal Pretraining') || question.title.includes('Concurrency and Coroutines') || question.title.includes('Top 20 Asked AI/ML Questions') || question.title.includes('Top 20 Easy DSA Questions') || question.title.includes('Top 20 Medium DSA Questions') || question.title.includes('Top 20 Hard DSA Questions')
     ? [
         { id: 'lld', label: 'Q&A', icon: FileText },
       ]
@@ -319,7 +320,7 @@ const QuestionDetail: React.FC<QuestionDetailProps> = ({ question, onBack }) => 
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
               <button
-                onClick={onBack}
+                onClick={() => navigate('/')}
                 className="flex items-center space-x-2 text-gray-600 hover:text-gray-900 transition-colors"
               >
                 <ArrowLeft className="h-5 w-5" />
@@ -4153,11 +4154,11 @@ class TextAnalyzer implements ITextAnalyzer {
                                       <span className="text-gray-600">Authorization:</span>
                                       <span className="font-mono text-xs">Bearer {`{token}`}</span>
                                     </div>
-                                  </div>
+                                    </div>
                                 </div>
                                 <div className="bg-gray-50 rounded-lg p-4">
                                   <p className="font-medium text-gray-900 mb-2">Request Body:</p>
-                                  <pre className="text-xs bg-gray-100 p-2 rounded overflow-x-auto">
+                                    <pre className="text-xs bg-gray-100 p-2 rounded overflow-x-auto">
 {`{
   "text": "string",
   "voice_id": "string",
@@ -4168,8 +4169,8 @@ class TextAnalyzer implements ITextAnalyzer {
   },
   "output_format": "mp3_44100_128"
 }`}
-                                  </pre>
-                                </div>
+                                    </pre>
+                                  </div>
                                 <div className="bg-gray-50 rounded-lg p-4">
                                   <p className="font-medium text-gray-900 mb-2">Response:</p>
                                   <pre className="text-xs bg-gray-100 p-2 rounded overflow-x-auto">
@@ -4201,10 +4202,10 @@ class TextAnalyzer implements ITextAnalyzer {
                                     <span className="font-medium text-gray-900">GET /api/v1/voices</span>
                                     <span className="text-green-600 text-xs font-medium">200 OK</span>
                                   </div>
-                                </div>
+                                    </div>
                                 <div className="bg-gray-50 rounded-lg p-4">
                                   <p className="font-medium text-gray-900 mb-2">Response:</p>
-                                  <pre className="text-xs bg-gray-100 p-2 rounded overflow-x-auto">
+                                    <pre className="text-xs bg-gray-100 p-2 rounded overflow-x-auto">
 {`{
   "voices": [
     {
@@ -4219,9 +4220,9 @@ class TextAnalyzer implements ITextAnalyzer {
     }
   ]
 }`}
-                                  </pre>
+                                    </pre>
+                                  </div>
                                 </div>
-                              </div>
                             </div>
 
                             <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
@@ -4237,7 +4238,7 @@ class TextAnalyzer implements ITextAnalyzer {
                                     <span className="font-medium text-gray-900">POST /api/v1/voices/add</span>
                                     <span className="text-green-600 text-xs font-medium">200 OK</span>
                                   </div>
-                                </div>
+                                    </div>
                                 <div className="bg-gray-50 rounded-lg p-4">
                                   <p className="font-medium text-gray-900 mb-2">Request Body:</p>
                                   <pre className="text-xs bg-gray-100 p-2 rounded overflow-x-auto">
@@ -4251,12 +4252,12 @@ class TextAnalyzer implements ITextAnalyzer {
   }
 }`}
                                   </pre>
+                                    </div>
+                                  </div>
                                 </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+                                  </div>
+                                    </div>
+                                    </div>
                     </section>
                   )}
 
@@ -4266,7 +4267,7 @@ class TextAnalyzer implements ITextAnalyzer {
                       <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">
                         <div className="w-8 h-8 bg-gradient-to-r from-green-500 to-emerald-600 rounded-lg flex items-center justify-center mr-3">
                           <Database className="h-5 w-5 text-white" />
-                        </div>
+                                  </div>
                         Perplexity Database Schemas
                       </h2>
                       <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-8 border border-green-100">
@@ -4282,7 +4283,7 @@ class TextAnalyzer implements ITextAnalyzer {
                                 <div className="flex justify-between items-center p-2 bg-gray-50 rounded">
                                   <span className="font-medium">email</span>
                                   <span className="text-gray-600">VARCHAR(255) UNIQUE</span>
-                                </div>
+                              </div>
                                 <div className="flex justify-between items-center p-2 bg-gray-50 rounded">
                                   <span className="font-medium">password_hash</span>
                                   <span className="text-gray-600">VARCHAR(255)</span>
@@ -4524,12 +4525,12 @@ class TextAnalyzer implements ITextAnalyzer {
                             <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
                               <span className="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">Q1</span>
                               Why do we need vision encoders for multimodal pretraining?
-                            </h3>
-                            <div className="bg-gray-50 rounded-lg p-4">
+                              </h3>
+                                <div className="bg-gray-50 rounded-lg p-4">
                               <p className="text-gray-700 leading-relaxed">
                                 In multimodal pretraining, we need to align text with images. Since transformers work on discrete tokens, we must convert images into a tokenized representation. Vision encoders (like ViT, VQ-VAE, or VQGAN) transform continuous image data into discrete embeddings (tokens), making it possible to use next-token prediction or contrastive objectives similar to text pretraining.
                               </p>
-                            </div>
+                                  </div>
                           </div>
 
                           {/* Q2 */}
@@ -4857,9 +4858,9 @@ class TextAnalyzer implements ITextAnalyzer {
                                     </div>
                                     <div className="flex justify-between">
                                       <span className="text-gray-600">- validateQuery(query: string): boolean</span>
-                                    </div>
                                   </div>
                                 </div>
+                                  </div>
                                 <div className="border border-gray-200 rounded-lg p-4">
                                   <p className="font-medium text-gray-900 mb-2">QueryOrchestrator</p>
                                   <div className="space-y-1 text-xs">
@@ -4871,9 +4872,9 @@ class TextAnalyzer implements ITextAnalyzer {
                                     </div>
                                     <div className="flex justify-between">
                                       <span className="text-gray-600">+ selectIndexes(intent: QueryIntent): IndexType[]</span>
-                                    </div>
                                   </div>
                                 </div>
+                                  </div>
                               </div>
                             </div>
                           </div>
@@ -4893,9 +4894,9 @@ class TextAnalyzer implements ITextAnalyzer {
                                     </div>
                                     <div className="flex justify-between">
                                       <span className="text-gray-600">- mergeResults(results: SearchResult[]): Document[]</span>
-                                    </div>
                                   </div>
                                 </div>
+                                  </div>
                                 <div className="border border-gray-200 rounded-lg p-4">
                                   <p className="font-medium text-gray-900 mb-2">LLMSynthesizer</p>
                                   <div className="space-y-1 text-xs">
@@ -4937,7 +4938,7 @@ class TextAnalyzer implements ITextAnalyzer {
                                   <div className="space-y-1 text-xs">
                                     <div className="flex justify-between">
                                       <span className="text-gray-600">+ sendMessage(message: Message): Promise&lt;Response&gt;</span>
-                                    </div>
+                                  </div>
                                     <div className="flex justify-between">
                                       <span className="text-gray-600">+ streamResponse(conversationId: string): Observable&lt;string&gt;</span>
                                     </div>
@@ -4954,10 +4955,10 @@ class TextAnalyzer implements ITextAnalyzer {
                                     </div>
                                     <div className="flex justify-between">
                                       <span className="text-gray-600">+ getConversation(id: string): Promise&lt;Conversation&gt;</span>
-                                    </div>
+                                  </div>
                                     <div className="flex justify-between">
                                       <span className="text-gray-600">+ updateContext(conversationId: string, context: Context): void</span>
-                                    </div>
+                                </div>
                                   </div>
                                 </div>
                               </div>
@@ -4996,7 +4997,7 @@ class TextAnalyzer implements ITextAnalyzer {
                                     </div>
                                   </div>
                                 </div>
-                              </div>
+                                  </div>
                             </div>
                           </div>
                         </div>
@@ -5227,7 +5228,7 @@ class TextAnalyzer implements ITextAnalyzer {
                               <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">Q1</span>
                               What is the difference between coroutines and threads?
                             </h3>
-                            <div className="bg-gray-50 rounded-lg p-4">
+                                <div className="bg-gray-50 rounded-lg p-4">
                               <p className="text-gray-700 leading-relaxed mb-3">
                                 <strong>Answer:</strong>
                               </p>
@@ -5236,8 +5237,8 @@ class TextAnalyzer implements ITextAnalyzer {
                                 <li>Threads are heavier since each requires its own stack and involve preemptive multitasking, where the OS decides when to switch.</li>
                                 <li>Context switching in threads is expensive, while in coroutines it's controlled manually via await.</li>
                               </ul>
-                            </div>
-                          </div>
+                                  </div>
+                                    </div>
 
                           {/* Q2 */}
                           <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
@@ -5254,8 +5255,8 @@ class TextAnalyzer implements ITextAnalyzer {
                                 <li>Required because Python uses reference counting for memory management, and updating reference counts isn't thread-safe.</li>
                                 <li>Removing GIL would either risk deadlocks or hurt single-thread performance.</li>
                               </ul>
-                            </div>
-                          </div>
+                                    </div>
+                                    </div>
 
                           {/* Q3 */}
                           <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
@@ -5289,8 +5290,8 @@ class TextAnalyzer implements ITextAnalyzer {
                                 <li>Non-blocking: Yields control while waiting (e.g., <code>await asyncio.sleep</code>).</li>
                                 <li>Non-blocking allows concurrency without waiting.</li>
                               </ul>
-                            </div>
-                          </div>
+                                  </div>
+                                </div>
 
                           {/* Q5 */}
                           <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
@@ -5298,7 +5299,7 @@ class TextAnalyzer implements ITextAnalyzer {
                               <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">Q5</span>
                               Why are threading and multiprocessing synchronous while asyncio is asynchronous?
                             </h3>
-                            <div className="bg-gray-50 rounded-lg p-4">
+                                <div className="bg-gray-50 rounded-lg p-4">
                               <p className="text-gray-700 leading-relaxed mb-3">
                                 <strong>Answer:</strong>
                               </p>
@@ -5306,8 +5307,8 @@ class TextAnalyzer implements ITextAnalyzer {
                                 <li>Threading and multiprocessing still wait for blocking calls to complete, so execution can be delayed.</li>
                                 <li>AsyncIO uses an event loop where tasks yield control instead of blocking → allowing true asynchronous execution.</li>
                               </ul>
-                            </div>
-                          </div>
+                                  </div>
+                                    </div>
 
                           {/* Q6 */}
                           <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
@@ -5323,8 +5324,8 @@ class TextAnalyzer implements ITextAnalyzer {
                                 <li>Threading uses multiple threads that may access shared memory simultaneously → race conditions.</li>
                                 <li>Asyncio uses a single thread, so race conditions only occur at explicit await points, making them rarer.</li>
                               </ul>
-                            </div>
-                          </div>
+                                    </div>
+                                    </div>
 
                           {/* Q7 */}
                           <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
@@ -5346,12 +5347,12 @@ urls = ["https://example.com", "https://python.org"]
 
 with ThreadPool(5) as pool:
     results = pool.map(fetch, urls)`}
-                              </pre>
+                                    </pre>
                               <p className="text-gray-700 leading-relaxed">
                                 <code>ThreadPool.map()</code> executes the function across threads and collects results.
                               </p>
-                            </div>
-                          </div>
+                                  </div>
+                                </div>
 
                           {/* Q8 */}
                           <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
@@ -5359,7 +5360,7 @@ with ThreadPool(5) as pool:
                               <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">Q8</span>
                               How do you use a Pool in multiprocessing?
                             </h3>
-                            <div className="bg-gray-50 rounded-lg p-4">
+                                <div className="bg-gray-50 rounded-lg p-4">
                               <p className="text-gray-700 leading-relaxed mb-3">
                                 <strong>Answer:</strong>
                               </p>
@@ -5375,8 +5376,8 @@ with Pool(4) as pool:
                               <p className="text-gray-700 leading-relaxed">
                                 Each worker runs in a separate process, enabling parallel execution on multiple CPUs.
                               </p>
-                            </div>
-                          </div>
+                                  </div>
+                                    </div>
 
                           {/* Q9 */}
                           <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
@@ -5393,8 +5394,8 @@ with Pool(4) as pool:
                                 <li>ProcessPoolExecutor: Uses processes, good for CPU-bound tasks.</li>
                                 <li>Both provide a unified API via <code>executor.map</code>.</li>
                               </ul>
-                            </div>
-                          </div>
+                                    </div>
+                                    </div>
 
                           {/* Q10 */}
                           <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
@@ -5416,9 +5417,9 @@ with ThreadPoolExecutor(3) as executor:
     futures = [executor.submit(fetch, url) for url in urls]
     for future in as_completed(futures):
         print(future.result())`}
-                              </pre>
-                            </div>
-                          </div>
+                                    </pre>
+                                  </div>
+                                </div>
 
                           {/* Q11 */}
                           <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
@@ -5438,8 +5439,8 @@ with ThreadPoolExecutor(3) as executor:
                                 <li><code>asyncio.to_thread(fn, *args)</code> → runs a blocking function in a separate thread.</li>
                                 <li><code>asyncio.wait_for(coro, timeout)</code> → adds timeout.</li>
                               </ul>
+                              </div>
                             </div>
-                          </div>
 
                           {/* Q12 */}
                           <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
@@ -5609,13 +5610,13 @@ asyncio.run(say_hello())`}
                       </h2>
                       <div className="bg-gradient-to-br from-indigo-50 to-purple-50 rounded-xl p-8 border border-indigo-100">
                         <div className="grid lg:grid-cols-3 gap-6">
-                          <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
-                            <h3 className="font-semibold text-gray-900 mb-4 flex items-center">
-                              <div className="w-6 h-6 bg-blue-100 rounded-lg flex items-center justify-center mr-3">
+                            <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+                              <h3 className="font-semibold text-gray-900 mb-4 flex items-center">
+                                <div className="w-6 h-6 bg-blue-100 rounded-lg flex items-center justify-center mr-3">
                                 <Server className="h-4 w-4 text-blue-600" />
-                              </div>
+                                </div>
                               Search Service Container
-                            </h3>
+                              </h3>
                             <div className="space-y-3 text-sm">
                               <div className="bg-gray-50 rounded-lg p-3">
                                 <p className="font-medium text-gray-900 mb-2">Dockerfile (Search API)</p>
@@ -5628,22 +5629,22 @@ COPY . .
 EXPOSE 8000
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0"]`}
                                 </pre>
-                              </div>
+                                  </div>
                               <div className="bg-gray-50 rounded-lg p-3">
                                 <p className="font-medium text-gray-900 mb-2">Resource Limits</p>
                                 <div className="space-y-1">
-                                  <div className="flex justify-between">
+                                    <div className="flex justify-between">
                                     <span className="text-gray-600">CPU:</span>
                                     <span className="font-medium">4 cores</span>
-                                  </div>
-                                  <div className="flex justify-between">
+                                    </div>
+                                    <div className="flex justify-between">
                                     <span className="text-gray-600">Memory:</span>
                                     <span className="font-medium">8GB</span>
-                                  </div>
-                                  <div className="flex justify-between">
+                                    </div>
+                                    <div className="flex justify-between">
                                     <span className="text-gray-600">GPU:</span>
                                     <span className="font-medium">1x V100</span>
-                                  </div>
+                                    </div>
                                 </div>
                               </div>
                             </div>
@@ -5659,7 +5660,7 @@ CMD ["uvicorn", "main:app", "--host", "0.0.0.0"]`}
                             <div className="space-y-3 text-sm">
                               <div className="bg-gray-50 rounded-lg p-3">
                                 <p className="font-medium text-gray-900 mb-2">Search Service Deployment</p>
-                                <pre className="text-xs bg-gray-100 p-2 rounded overflow-x-auto">
+                                    <pre className="text-xs bg-gray-100 p-2 rounded overflow-x-auto">
 {`apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -5679,23 +5680,23 @@ spec:
         image: perplexity-search:latest
         ports:
         - containerPort: 8000`}
-                                </pre>
-                              </div>
+                                    </pre>
+                                  </div>
                               <div className="bg-gray-50 rounded-lg p-3">
                                 <p className="font-medium text-gray-900 mb-2">Auto-scaling</p>
                                 <div className="space-y-1">
                                   <div className="flex justify-between">
                                     <span className="text-gray-600">Min replicas:</span>
                                     <span className="font-medium">5</span>
-                                  </div>
+                                </div>
                                   <div className="flex justify-between">
                                     <span className="text-gray-600">Max replicas:</span>
                                     <span className="font-medium">50</span>
                                   </div>
-                                  <div className="flex justify-between">
+                                    <div className="flex justify-between">
                                     <span className="text-gray-600">CPU threshold:</span>
                                     <span className="font-medium">70%</span>
-                                  </div>
+                                    </div>
                                 </div>
                               </div>
                             </div>
@@ -5712,35 +5713,35 @@ spec:
                               <div className="bg-gray-50 rounded-lg p-3">
                                 <p className="font-medium text-gray-900 mb-2">Search Metrics</p>
                                 <div className="space-y-1">
-                                  <div className="flex justify-between">
+                                    <div className="flex justify-between">
                                     <span className="text-gray-600">Search latency p95:</span>
                                     <span className="font-medium">&lt; 2.5s</span>
-                                  </div>
-                                  <div className="flex justify-between">
+                                    </div>
+                                    <div className="flex justify-between">
                                     <span className="text-gray-600">Search accuracy:</span>
                                     <span className="font-medium">&gt; 94%</span>
-                                  </div>
+                                    </div>
                                   <div className="flex justify-between">
                                     <span className="text-gray-600">QPS:</span>
                                     <span className="font-medium">10k+</span>
                                   </div>
                                 </div>
-                              </div>
+                                  </div>
                               <div className="bg-gray-50 rounded-lg p-3">
                                 <p className="font-medium text-gray-900 mb-2">Alert Rules</p>
                                 <div className="space-y-1">
-                                  <div className="flex justify-between">
+                                    <div className="flex justify-between">
                                     <span className="text-gray-600">High search latency:</span>
                                     <span className="font-medium">p95 &gt; 3s</span>
-                                  </div>
-                                  <div className="flex justify-between">
+                                    </div>
+                                    <div className="flex justify-between">
                                     <span className="text-gray-600">Low accuracy:</span>
                                     <span className="font-medium">&lt; 90%</span>
-                                  </div>
-                                  <div className="flex justify-between">
+                                    </div>
+                                    <div className="flex justify-between">
                                     <span className="text-gray-600">Index health:</span>
                                     <span className="font-medium">ES cluster status</span>
-                                  </div>
+                                    </div>
                                 </div>
                               </div>
                             </div>
@@ -5770,7 +5771,7 @@ spec:
                             <div className="space-y-3 text-sm">
                               <div className="bg-gray-50 rounded-lg p-3">
                                 <p className="font-medium text-gray-900 mb-2">Dockerfile (Chat API)</p>
-                                <pre className="text-xs bg-gray-100 p-2 rounded overflow-x-auto">
+                                    <pre className="text-xs bg-gray-100 p-2 rounded overflow-x-auto">
 {`FROM python:3.9-slim
 WORKDIR /app
 COPY requirements.txt .
@@ -5778,23 +5779,23 @@ RUN pip install -r requirements.txt
 COPY . .
 EXPOSE 8000
 CMD ["uvicorn", "chat_service:app", "--host", "0.0.0.0"]`}
-                                </pre>
-                              </div>
+                                    </pre>
+                                  </div>
                               <div className="bg-gray-50 rounded-lg p-3">
                                 <p className="font-medium text-gray-900 mb-2">Resource Limits</p>
                                 <div className="space-y-1">
-                                  <div className="flex justify-between">
+                                    <div className="flex justify-between">
                                     <span className="text-gray-600">CPU:</span>
                                     <span className="font-medium">8 cores</span>
-                                  </div>
-                                  <div className="flex justify-between">
+                                    </div>
+                                    <div className="flex justify-between">
                                     <span className="text-gray-600">Memory:</span>
                                     <span className="font-medium">16GB</span>
-                                  </div>
-                                  <div className="flex justify-between">
+                                    </div>
+                                    <div className="flex justify-between">
                                     <span className="text-gray-600">GPU:</span>
                                     <span className="font-medium">2x A100</span>
-                                  </div>
+                                    </div>
                                 </div>
                               </div>
                             </div>
@@ -5810,7 +5811,7 @@ CMD ["uvicorn", "chat_service:app", "--host", "0.0.0.0"]`}
                             <div className="space-y-3 text-sm">
                               <div className="bg-gray-50 rounded-lg p-3">
                                 <p className="font-medium text-gray-900 mb-2">Chat Service Deployment</p>
-                                <pre className="text-xs bg-gray-100 p-2 rounded overflow-x-auto">
+                                    <pre className="text-xs bg-gray-100 p-2 rounded overflow-x-auto">
 {`apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -5830,23 +5831,23 @@ spec:
         image: chatgpt-chat:latest
         ports:
         - containerPort: 8000`}
-                                </pre>
-                              </div>
+                                    </pre>
+                                  </div>
                               <div className="bg-gray-50 rounded-lg p-3">
                                 <p className="font-medium text-gray-900 mb-2">Auto-scaling</p>
                                 <div className="space-y-1">
                                   <div className="flex justify-between">
                                     <span className="text-gray-600">Min replicas:</span>
                                     <span className="font-medium">10</span>
-                                  </div>
+                                </div>
                                   <div className="flex justify-between">
                                     <span className="text-gray-600">Max replicas:</span>
                                     <span className="font-medium">100</span>
                                   </div>
-                                  <div className="flex justify-between">
+                                    <div className="flex justify-between">
                                     <span className="text-gray-600">Memory threshold:</span>
                                     <span className="font-medium">80%</span>
-                                  </div>
+                                    </div>
                                 </div>
                               </div>
                             </div>
@@ -5863,14 +5864,14 @@ spec:
                               <div className="bg-gray-50 rounded-lg p-3">
                                 <p className="font-medium text-gray-900 mb-2">Chat Metrics</p>
                                 <div className="space-y-1">
-                                  <div className="flex justify-between">
+                                    <div className="flex justify-between">
                                     <span className="text-gray-600">Response time p95:</span>
                                     <span className="font-medium">&lt; 2.0s</span>
-                                  </div>
-                                  <div className="flex justify-between">
+                                    </div>
+                                    <div className="flex justify-between">
                                     <span className="text-gray-600">Concurrent sessions:</span>
                                     <span className="font-medium">1M+</span>
-                                  </div>
+                                    </div>
                                   <div className="flex justify-between">
                                     <span className="text-gray-600">Token throughput:</span>
                                     <span className="font-medium">100k/s</span>
@@ -5883,11 +5884,11 @@ spec:
                                   <div className="flex justify-between">
                                     <span className="text-gray-600">High response time:</span>
                                     <span className="font-medium">p95 &gt; 3s</span>
-                                  </div>
+                            </div>
                                   <div className="flex justify-between">
                                     <span className="text-gray-600">Memory pressure:</span>
                                     <span className="font-medium">&gt; 90%</span>
-                                  </div>
+                          </div>
                                   <div className="flex justify-between">
                                     <span className="text-gray-600">GPU utilization:</span>
                                     <span className="font-medium">&lt; 50%</span>
@@ -5911,13 +5912,13 @@ spec:
                       </h2>
                       <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-8 border border-purple-100">
                         <div className="grid lg:grid-cols-3 gap-6">
-                          <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
-                            <h3 className="font-semibold text-gray-900 mb-4 flex items-center">
-                              <div className="w-6 h-6 bg-purple-100 rounded-lg flex items-center justify-center mr-3">
+                            <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+                              <h3 className="font-semibold text-gray-900 mb-4 flex items-center">
+                                <div className="w-6 h-6 bg-purple-100 rounded-lg flex items-center justify-center mr-3">
                                 <Server className="h-4 w-4 text-purple-600" />
-                              </div>
+                                </div>
                               Voice Service Container
-                            </h3>
+                              </h3>
                             <div className="space-y-3 text-sm">
                               <div className="bg-gray-50 rounded-lg p-3">
                                 <p className="font-medium text-gray-900 mb-2">Dockerfile (Voice API)</p>
@@ -5930,22 +5931,22 @@ COPY . .
 EXPOSE 8000
 CMD ["uvicorn", "voice_service:app", "--host", "0.0.0.0"]`}
                                 </pre>
-                              </div>
+                                  </div>
                               <div className="bg-gray-50 rounded-lg p-3">
                                 <p className="font-medium text-gray-900 mb-2">Resource Limits</p>
                                 <div className="space-y-1">
-                                  <div className="flex justify-between">
+                                    <div className="flex justify-between">
                                     <span className="text-gray-600">CPU:</span>
                                     <span className="font-medium">16 cores</span>
-                                  </div>
-                                  <div className="flex justify-between">
+                                    </div>
+                                    <div className="flex justify-between">
                                     <span className="text-gray-600">Memory:</span>
                                     <span className="font-medium">32GB</span>
-                                  </div>
-                                  <div className="flex justify-between">
+                                    </div>
+                                    <div className="flex justify-between">
                                     <span className="text-gray-600">GPU:</span>
                                     <span className="font-medium">4x V100</span>
-                                  </div>
+                                    </div>
                                 </div>
                               </div>
                             </div>
@@ -5961,7 +5962,7 @@ CMD ["uvicorn", "voice_service:app", "--host", "0.0.0.0"]`}
                             <div className="space-y-3 text-sm">
                               <div className="bg-gray-50 rounded-lg p-3">
                                 <p className="font-medium text-gray-900 mb-2">Voice Service Deployment</p>
-                                <pre className="text-xs bg-gray-100 p-2 rounded overflow-x-auto">
+                                    <pre className="text-xs bg-gray-100 p-2 rounded overflow-x-auto">
 {`apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -5981,23 +5982,23 @@ spec:
         image: elevenlabs-voice:latest
         ports:
         - containerPort: 8000`}
-                                </pre>
-                              </div>
+                                    </pre>
+                                  </div>
                               <div className="bg-gray-50 rounded-lg p-3">
                                 <p className="font-medium text-gray-900 mb-2">Auto-scaling</p>
                                 <div className="space-y-1">
                                   <div className="flex justify-between">
                                     <span className="text-gray-600">Min replicas:</span>
                                     <span className="font-medium">8</span>
-                                  </div>
+                                </div>
                                   <div className="flex justify-between">
                                     <span className="text-gray-600">Max replicas:</span>
                                     <span className="font-medium">40</span>
                                   </div>
-                                  <div className="flex justify-between">
+                                    <div className="flex justify-between">
                                     <span className="text-gray-600">GPU threshold:</span>
                                     <span className="font-medium">85%</span>
-                                  </div>
+                                    </div>
                                 </div>
                               </div>
                             </div>
@@ -6014,35 +6015,1335 @@ spec:
                               <div className="bg-gray-50 rounded-lg p-3">
                                 <p className="font-medium text-gray-900 mb-2">Voice Metrics</p>
                                 <div className="space-y-1">
-                                  <div className="flex justify-between">
+                                    <div className="flex justify-between">
                                     <span className="text-gray-600">Generation time p95:</span>
                                     <span className="font-medium">&lt; 3.0s</span>
-                                  </div>
-                                  <div className="flex justify-between">
+                                    </div>
+                                    <div className="flex justify-between">
                                     <span className="text-gray-600">Concurrent users:</span>
                                     <span className="font-medium">10K+</span>
-                                  </div>
+                                    </div>
                                   <div className="flex justify-between">
                                     <span className="text-gray-600">Audio quality:</span>
                                     <span className="font-medium">&gt; 95%</span>
                                   </div>
                                 </div>
-                              </div>
+                                  </div>
                               <div className="bg-gray-50 rounded-lg p-3">
                                 <p className="font-medium text-gray-900 mb-2">Alert Rules</p>
                                 <div className="space-y-1">
-                                  <div className="flex justify-between">
+                                    <div className="flex justify-between">
                                     <span className="text-gray-600">High generation time:</span>
                                     <span className="font-medium">p95 &gt; 5s</span>
-                                  </div>
-                                  <div className="flex justify-between">
+                                    </div>
+                                    <div className="flex justify-between">
                                     <span className="text-gray-600">GPU utilization:</span>
                                     <span className="font-medium">&lt; 60%</span>
-                                  </div>
-                                  <div className="flex justify-between">
+                                    </div>
+                                    <div className="flex justify-between">
                                     <span className="text-gray-600">Audio quality:</span>
                                     <span className="font-medium">&lt; 90%</span>
+                                    </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </section>
+                  )}
+
+                  {question.title.includes('Top 20 Asked AI/ML Questions') && (
+                    <section>
+                      <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                        <div className="w-8 h-8 bg-gradient-to-r from-red-500 to-pink-600 rounded-lg flex items-center justify-center mr-3">
+                          <Brain className="h-5 w-5 text-white" />
+                        </div>
+                        Top 20 Asked AI/ML Questions - Comprehensive Q&A Guide
+                      </h2>
+                      <div className="bg-gradient-to-br from-red-50 to-pink-50 rounded-xl p-8 border border-red-100">
+                        <div className="space-y-8">
+                          {/* NumPy & Pandas Section */}
+                          <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+                            <h3 className="text-xl font-bold text-gray-900 mb-6 flex items-center">
+                              <span className="bg-blue-100 text-blue-800 px-4 py-2 rounded-lg text-lg font-semibold mr-3">NumPy & Pandas</span>
+                            </h3>
+                            
+                            {/* Q1 */}
+                            <div className="mb-6">
+                              <h4 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                <span className="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">Q1</span>
+                                What are NumPy broadcasting rules? Give an example.
+                              </h4>
+                              <div className="bg-gray-50 rounded-lg p-4">
+                                <p className="text-gray-700 leading-relaxed mb-3">
+                                  <strong>Answer:</strong> Broadcasting lets arrays of different shapes participate in arithmetic. NumPy aligns dimensions from the end: if they're equal or one is 1, they are compatible.
+                                </p>
+                                <p className="text-gray-700 leading-relaxed mb-3">
+                                  <strong>Example:</strong>
+                                </p>
+                                <pre className="bg-gray-100 p-3 rounded text-sm mb-3 overflow-x-auto">
+{`a = np.array([1,2,3])      # shape (3,)
+b = np.array([[10],[20]])  # shape (2,1)
+print(a + b)
+# [[11 12 13],
+#  [21 22 23]]`}
+                                    </pre>
                                   </div>
+                                </div>
+
+                            {/* Q2 */}
+                            <div className="mb-6">
+                              <h4 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                <span className="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">Q2</span>
+                                How do you group data in Pandas and compute multiple statistics?
+                              </h4>
+                                <div className="bg-gray-50 rounded-lg p-4">
+                                <p className="text-gray-700 leading-relaxed mb-3">
+                                  <strong>Answer:</strong> Use groupby + agg:
+                                </p>
+                                <pre className="bg-gray-100 p-3 rounded text-sm mb-3 overflow-x-auto">
+{`df.groupby("category")["sales"].agg(["mean","count"])`}
+                                </pre>
+                                  </div>
+                                    </div>
+
+                            {/* Q3 */}
+                            <div className="mb-6">
+                              <h4 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                <span className="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">Q3</span>
+                                What are common data cleaning steps before ML?
+                              </h4>
+                              <div className="bg-gray-50 rounded-lg p-4">
+                                <p className="text-gray-700 leading-relaxed">
+                                  <strong>Answer:</strong> Handle missing values, handle outliers, normalize/scale, fix categorical inconsistencies, remove duplicates.
+                                </p>
+                              </div>
+                            </div>
+
+                            {/* Q4 */}
+                            <div className="mb-6">
+                              <h4 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                <span className="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">Q4</span>
+                                What's the difference between loc and iloc in Pandas?
+                              </h4>
+                              <div className="bg-gray-50 rounded-lg p-4">
+                                <p className="text-gray-700 leading-relaxed">
+                                  <strong>Answer:</strong> loc: label-based indexing (row/col names). iloc: integer position-based indexing.
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+
+                          {/* Probability & Statistics Section */}
+                          <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+                            <h3 className="text-xl font-bold text-gray-900 mb-6 flex items-center">
+                              <span className="bg-purple-100 text-purple-800 px-4 py-2 rounded-lg text-lg font-semibold mr-3">Probability & Statistics</span>
+                            </h3>
+                            
+                            {/* Q5 */}
+                            <div className="mb-6">
+                              <h4 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                <span className="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">Q5</span>
+                                Explain Bayes' theorem with a real-world ML use case.
+                              </h4>
+                              <div className="bg-gray-50 rounded-lg p-4">
+                                <p className="text-gray-700 leading-relaxed mb-3">
+                                  <strong>Answer:</strong> P(A|B) = (P(B|A)P(A))/P(B). Example: Spam detection.
+                                </p>
+                              </div>
+                            </div>
+
+                            {/* Q6 */}
+                            <div className="mb-6">
+                              <h4 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                <span className="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">Q6</span>
+                                How do you perform A/B testing in analytics?
+                              </h4>
+                              <div className="bg-gray-50 rounded-lg p-4">
+                                <p className="text-gray-700 leading-relaxed">
+                                  <strong>Answer:</strong> Define null hypothesis, split users, collect metrics, run t-test/z-test, check p-value.
+                                </p>
+                              </div>
+                            </div>
+
+                            {/* Q7 */}
+                            <div className="mb-6">
+                              <h4 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                <span className="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">Q7</span>
+                                Why is the Central Limit Theorem (CLT) important?
+                              </h4>
+                              <div className="bg-gray-50 rounded-lg p-4">
+                                <p className="text-gray-700 leading-relaxed">
+                                  <strong>Answer:</strong> Distribution of sample means approaches normal as n grows. Enables hypothesis testing.
+                                </p>
+                              </div>
+                            </div>
+
+                            {/* Q8 */}
+                            <div className="mb-6">
+                              <h4 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                <span className="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">Q8</span>
+                                Explain p-value in simple terms.
+                              </h4>
+                              <div className="bg-gray-50 rounded-lg p-4">
+                                <p className="text-gray-700 leading-relaxed">
+                                  <strong>Answer:</strong> Probability of observing results as extreme as data if null hypothesis is true.
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+
+                          {/* Machine Learning Algorithms Section */}
+                          <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+                            <h3 className="text-xl font-bold text-gray-900 mb-6 flex items-center">
+                              <span className="bg-green-100 text-green-800 px-4 py-2 rounded-lg text-lg font-semibold mr-3">Machine Learning Algorithms</span>
+                            </h3>
+                            
+                            {/* Q9 */}
+                            <div className="mb-6">
+                              <h4 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                <span className="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">Q9</span>
+                                How do you implement linear regression from scratch?
+                              </h4>
+                              <div className="bg-gray-50 rounded-lg p-4">
+                                <p className="text-gray-700 leading-relaxed">
+                                  <strong>Answer:</strong> Hypothesis y = Xw + b, Loss = MSE, Update weights using gradient descent.
+                                </p>
+                              </div>
+                            </div>
+
+                            {/* Q10 */}
+                            <div className="mb-6">
+                              <h4 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                <span className="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">Q10</span>
+                                Why is logistic regression better than linear regression for classification?
+                              </h4>
+                              <div className="bg-gray-50 rounded-lg p-4">
+                                <p className="text-gray-700 leading-relaxed">
+                                  <strong>Answer:</strong> Uses sigmoid to map outputs to [0,1]. Probabilistic interpretation.
+                                </p>
+                              </div>
+                            </div>
+
+                            {/* Q11 */}
+                            <div className="mb-6">
+                              <h4 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                <span className="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">Q11</span>
+                                How does a decision tree split nodes?
+                              </h4>
+                              <div className="bg-gray-50 rounded-lg p-4">
+                                <p className="text-gray-700 leading-relaxed">
+                                  <strong>Answer:</strong> By maximizing information gain or minimizing Gini impurity/entropy.
+                                </p>
+                              </div>
+                            </div>
+
+                            {/* Q12 */}
+                            <div className="mb-6">
+                              <h4 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                <span className="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">Q12</span>
+                                Why do random forests reduce overfitting?
+                              </h4>
+                              <div className="bg-gray-50 rounded-lg p-4">
+                                <p className="text-gray-700 leading-relaxed">
+                                  <strong>Answer:</strong> Bagging + random feature selection → diversity of trees reduces variance.
+                                </p>
+                              </div>
+                            </div>
+
+                            {/* Q13 */}
+                            <div className="mb-6">
+                              <h4 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                <span className="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">Q13</span>
+                                What's the difference between bagging and boosting?
+                              </h4>
+                              <div className="bg-gray-50 rounded-lg p-4">
+                                <p className="text-gray-700 leading-relaxed">
+                                  <strong>Answer:</strong> Bagging is parallel, reduces variance. Boosting is sequential, reduces bias.
+                                </p>
+                              </div>
+                            </div>
+
+                            {/* Q14 */}
+                            <div className="mb-6">
+                              <h4 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                <span className="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">Q14</span>
+                                How does gradient boosting differ from random forests?
+                              </h4>
+                              <div className="bg-gray-50 rounded-lg p-4">
+                                <p className="text-gray-700 leading-relaxed">
+                                  <strong>Answer:</strong> Gradient boosting builds trees sequentially correcting errors, RF builds independent trees.
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+
+                          {/* Unsupervised Learning Section */}
+                          <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+                            <h3 className="text-xl font-bold text-gray-900 mb-6 flex items-center">
+                              <span className="bg-orange-100 text-orange-800 px-4 py-2 rounded-lg text-lg font-semibold mr-3">Unsupervised Learning</span>
+                            </h3>
+                            
+                            {/* Q15 */}
+                            <div className="mb-6">
+                              <h4 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                <span className="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">Q15</span>
+                                How does K-Means clustering work?
+                              </h4>
+                              <div className="bg-gray-50 rounded-lg p-4">
+                                <p className="text-gray-700 leading-relaxed">
+                                  <strong>Answer:</strong> Randomly initialize k centroids → assign points → recompute centroids → repeat. Limitations: spherical clusters, sensitive to init.
+                                </p>
+                              </div>
+                            </div>
+
+                            {/* Q16 */}
+                            <div className="mb-6">
+                              <h4 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                <span className="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">Q16</span>
+                                How does PCA reduce dimensionality?
+                              </h4>
+                              <div className="bg-gray-50 rounded-lg p-4">
+                                <p className="text-gray-700 leading-relaxed">
+                                  <strong>Answer:</strong> Standardize → covariance matrix → eigen decomposition → select top components → project.
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+
+                          {/* Deep Learning Basics Section */}
+                          <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+                            <h3 className="text-xl font-bold text-gray-900 mb-6 flex items-center">
+                              <span className="bg-indigo-100 text-indigo-800 px-4 py-2 rounded-lg text-lg font-semibold mr-3">Deep Learning Basics</span>
+                            </h3>
+                            
+                            {/* Q17 */}
+                            <div className="mb-6">
+                              <h4 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                <span className="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">Q17</span>
+                                What are the main steps to build a neural network from scratch?
+                              </h4>
+                              <div className="bg-gray-50 rounded-lg p-4">
+                                <p className="text-gray-700 leading-relaxed">
+                                  <strong>Answer:</strong> Initialize weights → forward pass → compute loss → backpropagation → update weights.
+                                </p>
+                              </div>
+                            </div>
+
+                            {/* Q18 */}
+                            <div className="mb-6">
+                              <h4 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                <span className="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">Q18</span>
+                                Why is ReLU preferred over sigmoid/tanh?
+                              </h4>
+                              <div className="bg-gray-50 rounded-lg p-4">
+                                <p className="text-gray-700 leading-relaxed">
+                                  <strong>Answer:</strong> Reduces vanishing gradient, faster, sparse activation.
+                                </p>
+                              </div>
+                            </div>
+
+                            {/* Q19 */}
+                            <div className="mb-6">
+                              <h4 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                <span className="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">Q19</span>
+                                What makes CNNs powerful for vision tasks?
+                              </h4>
+                              <div className="bg-gray-50 rounded-lg p-4">
+                                <p className="text-gray-700 leading-relaxed">
+                                  <strong>Answer:</strong> Local feature extraction, weight sharing, translation invariance.
+                                </p>
+                              </div>
+                            </div>
+
+                            {/* Q20 */}
+                            <div className="mb-6">
+                              <h4 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                <span className="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">Q20</span>
+                                Why are LSTMs better than vanilla RNNs?
+                              </h4>
+                              <div className="bg-gray-50 rounded-lg p-4">
+                                <p className="text-gray-700 leading-relaxed">
+                                  <strong>Answer:</strong> Use gates to capture long-term dependencies, solve vanishing gradient.
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </section>
+                  )}
+
+                  {question.title.includes('Top 20 Easy DSA Questions') && (
+                    <section>
+                      <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                        <div className="w-8 h-8 bg-gradient-to-r from-green-500 to-emerald-600 rounded-lg flex items-center justify-center mr-3">
+                          <Code className="h-5 w-5 text-white" />
+                        </div>
+                        Top 20 Easy DSA Questions - Foundation Problems
+                      </h2>
+                      <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-8 border border-green-100">
+                        <div className="space-y-8">
+                          <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+                            <h3 className="text-xl font-bold text-gray-900 mb-6 flex items-center">
+                              <span className="bg-green-100 text-green-800 px-4 py-2 rounded-lg text-lg font-semibold mr-3">Easy Level</span>
+                            </h3>
+                            
+                            <div className="space-y-6">
+                              {/* Q1 */}
+                              <div className="mb-6">
+                                <h4 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                  <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">Q1</span>
+                                  Two Sum (LeetCode #1)
+                                </h4>
+                                <div className="bg-gray-50 rounded-lg p-4">
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Problem:</strong> Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.
+                                  </p>
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Approach:</strong> Use HashMap to store complements. Time: O(n), Space: O(n)
+                                  </p>
+                                </div>
+                              </div>
+
+                              {/* Q2 */}
+                              <div className="mb-6">
+                                <h4 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                  <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">Q2</span>
+                                  Valid Parentheses (LC #20)
+                                </h4>
+                                <div className="bg-gray-50 rounded-lg p-4">
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Problem:</strong> Given a string s containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
+                                  </p>
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Approach:</strong> Use Stack to match opening and closing brackets. Time: O(n), Space: O(n)
+                                  </p>
+                                </div>
+                              </div>
+
+                              {/* Q3 */}
+                              <div className="mb-6">
+                                <h4 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                  <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">Q3</span>
+                                  Merge Two Sorted Lists (LC #21)
+                                </h4>
+                                <div className="bg-gray-50 rounded-lg p-4">
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Problem:</strong> Merge two sorted linked lists and return it as a sorted list.
+                                  </p>
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Approach:</strong> Compare nodes and link them in order. Time: O(n+m), Space: O(1)
+                                  </p>
+                                </div>
+                              </div>
+
+                              {/* Q4 */}
+                              <div className="mb-6">
+                                <h4 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                  <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">Q4</span>
+                                  Maximum Subarray / Kadane's Algorithm (LC #53)
+                                </h4>
+                                <div className="bg-gray-50 rounded-lg p-4">
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Problem:</strong> Find the contiguous subarray with the largest sum.
+                                  </p>
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Approach:</strong> Kadane's algorithm - keep track of current sum and max sum. Time: O(n), Space: O(1)
+                                  </p>
+                                </div>
+                              </div>
+
+                              {/* Q6 */}
+                              <div className="mb-6">
+                                <h4 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                  <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">Q6</span>
+                                  Valid Palindrome (LC #125)
+                                </h4>
+                                <div className="bg-gray-50 rounded-lg p-4">
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Problem:</strong> Determine if a string is a palindrome, considering only alphanumeric characters and ignoring cases.
+                                  </p>
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Approach:</strong> Two pointers from both ends. Time: O(n), Space: O(1)
+                                  </p>
+                                </div>
+                              </div>
+
+                              {/* Q7 */}
+                              <div className="mb-6">
+                                <h4 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                  <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">Q7</span>
+                                  Linked List Cycle Detection (LC #141)
+                                </h4>
+                                <div className="bg-gray-50 rounded-lg p-4">
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Problem:</strong> Determine if a linked list has a cycle in it.
+                                  </p>
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Approach:</strong> Floyd's Cycle-Finding Algorithm (fast and slow pointers). Time: O(n), Space: O(1)
+                                  </p>
+                                </div>
+                              </div>
+
+                              {/* Q8 */}
+                              <div className="mb-6">
+                                <h4 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                  <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">Q8</span>
+                                  Min Stack (LC #155)
+                                </h4>
+                                <div className="bg-gray-50 rounded-lg p-4">
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Problem:</strong> Design a stack that supports push, pop, top, and retrieving the minimum element in constant time.
+                                  </p>
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Approach:</strong> Use two stacks or store min with each element. Time: O(1) for all operations, Space: O(n)
+                                  </p>
+                                </div>
+                              </div>
+
+                              {/* Q9 */}
+                              <div className="mb-6">
+                                <h4 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                  <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">Q9</span>
+                                  Intersection of Two Linked Lists (LC #160)
+                                </h4>
+                                <div className="bg-gray-50 rounded-lg p-4">
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Problem:</strong> Find the node at which the intersection of two singly linked lists begins.
+                                  </p>
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Approach:</strong> Two pointers technique or find lengths first. Time: O(n+m), Space: O(1)
+                                  </p>
+                                </div>
+                              </div>
+
+                              {/* Q10 */}
+                              <div className="mb-6">
+                                <h4 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                  <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">Q10</span>
+                                  Majority Element (LC #169)
+                                </h4>
+                                <div className="bg-gray-50 rounded-lg p-4">
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Problem:</strong> Find the majority element that appears more than ⌊n/2⌋ times.
+                                  </p>
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Approach:</strong> Boyer-Moore Voting Algorithm. Time: O(n), Space: O(1)
+                                  </p>
+                                </div>
+                              </div>
+
+                              {/* Q11 */}
+                              <div className="mb-6">
+                                <h4 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                  <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">Q11</span>
+                                  Excel Sheet Column Number (LC #171)
+                                </h4>
+                                <div className="bg-gray-50 rounded-lg p-4">
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Problem:</strong> Convert a column title to its corresponding column number.
+                                  </p>
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Approach:</strong> Base-26 conversion. Time: O(n), Space: O(1)
+                                  </p>
+                                </div>
+                              </div>
+
+                              {/* Q12 */}
+                              <div className="mb-6">
+                                <h4 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                  <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">Q12</span>
+                                  Happy Number (LC #202)
+                                </h4>
+                                <div className="bg-gray-50 rounded-lg p-4">
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Problem:</strong> Determine if a number is happy (sum of squares of digits eventually equals 1).
+                                  </p>
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Approach:</strong> Use HashSet to detect cycles. Time: O(log n), Space: O(log n)
+                                  </p>
+                                </div>
+                              </div>
+
+                              {/* Q13 */}
+                              <div className="mb-6">
+                                <h4 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                  <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">Q13</span>
+                                  Contains Duplicate (LC #217)
+                                </h4>
+                                <div className="bg-gray-50 rounded-lg p-4">
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Problem:</strong> Return true if any value appears at least twice in the array.
+                                  </p>
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Approach:</strong> Use HashSet. Time: O(n), Space: O(n)
+                                  </p>
+                                </div>
+                              </div>
+
+                              {/* Q14 */}
+                              <div className="mb-6">
+                                <h4 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                  <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">Q14</span>
+                                  Implement Queue using Stacks (LC #232)
+                                </h4>
+                                <div className="bg-gray-50 rounded-lg p-4">
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Problem:</strong> Implement a first in first out (FIFO) queue using only two stacks.
+                                  </p>
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Approach:</strong> Use two stacks - one for push, one for pop. Time: O(1) amortized, Space: O(n)
+                                  </p>
+                                </div>
+                              </div>
+
+                              {/* Q15 */}
+                              <div className="mb-6">
+                                <h4 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                  <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">Q15</span>
+                                  First Unique Character in a String (LC #387)
+                                </h4>
+                                <div className="bg-gray-50 rounded-lg p-4">
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Problem:</strong> Find the first non-repeating character in a string and return its index.
+                                  </p>
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Approach:</strong> Count characters, then find first with count 1. Time: O(n), Space: O(1)
+                                  </p>
+                                </div>
+                              </div>
+
+                              {/* Q16 */}
+                              <div className="mb-6">
+                                <h4 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                  <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">Q16</span>
+                                  Valid Anagram (LC #242)
+                                </h4>
+                                <div className="bg-gray-50 rounded-lg p-4">
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Problem:</strong> Determine if two strings are anagrams of each other.
+                                  </p>
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Approach:</strong> Count characters or sort strings. Time: O(n), Space: O(1)
+                                  </p>
+                                </div>
+                              </div>
+
+                              {/* Q17 */}
+                              <div className="mb-6">
+                                <h4 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                  <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">Q17</span>
+                                  Move Zeroes (LC #283)
+                                </h4>
+                                <div className="bg-gray-50 rounded-lg p-4">
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Problem:</strong> Move all 0's to the end while maintaining the relative order of non-zero elements.
+                                  </p>
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Approach:</strong> Two pointers - one for current position, one for next non-zero. Time: O(n), Space: O(1)
+                                  </p>
+                                </div>
+                              </div>
+
+                              {/* Q18 */}
+                              <div className="mb-6">
+                                <h4 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                  <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">Q18</span>
+                                  Reverse Linked List (LC #206)
+                                </h4>
+                                <div className="bg-gray-50 rounded-lg p-4">
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Problem:</strong> Reverse a singly linked list.
+                                  </p>
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Approach:</strong> Iterative with three pointers or recursive. Time: O(n), Space: O(1)
+                                  </p>
+                                </div>
+                              </div>
+
+                              {/* Q19 */}
+                              <div className="mb-6">
+                                <h4 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                  <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">Q19</span>
+                                  Binary Search (LC #704)
+                                </h4>
+                                <div className="bg-gray-50 rounded-lg p-4">
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Problem:</strong> Search for a target value in a sorted array.
+                                  </p>
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Approach:</strong> Classic binary search. Time: O(log n), Space: O(1)
+                                  </p>
+                                </div>
+                              </div>
+
+                              {/* Q20 */}
+                              <div className="mb-6">
+                                <h4 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                  <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">Q20</span>
+                                  Fibonacci Number (LC #509)
+                                </h4>
+                                <div className="bg-gray-50 rounded-lg p-4">
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Problem:</strong> Calculate the nth Fibonacci number.
+                                  </p>
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Approach:</strong> Iterative, recursive, or memoization. Time: O(n), Space: O(1)
+                                  </p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </section>
+                  )}
+
+                  {question.title.includes('Top 20 Medium DSA Questions') && (
+                    <section>
+                      <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                        <div className="w-8 h-8 bg-gradient-to-r from-yellow-500 to-orange-600 rounded-lg flex items-center justify-center mr-3">
+                          <Code className="h-5 w-5 text-white" />
+                        </div>
+                        Top 20 Medium DSA Questions - Pattern Recognition
+                      </h2>
+                      <div className="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-xl p-8 border border-yellow-100">
+                        <div className="space-y-8">
+                          <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+                            <h3 className="text-xl font-bold text-gray-900 mb-6 flex items-center">
+                              <span className="bg-yellow-100 text-yellow-800 px-4 py-2 rounded-lg text-lg font-semibold mr-3">Medium Level</span>
+                            </h3>
+                            
+                            <div className="space-y-6">
+                              {/* Q1 */}
+                              <div className="mb-6">
+                                <h4 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                  <span className="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">Q1</span>
+                                  Add Two Numbers (LC #2)
+                                </h4>
+                                <div className="bg-gray-50 rounded-lg p-4">
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Problem:</strong> Add two numbers represented by linked lists.
+                                  </p>
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Approach:</strong> Simulate addition with carry. Time: O(max(n,m)), Space: O(max(n,m))
+                                  </p>
+                                </div>
+                              </div>
+
+                              {/* Q2 */}
+                              <div className="mb-6">
+                                <h4 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                  <span className="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">Q2</span>
+                                  Longest Substring Without Repeating Characters (LC #3)
+                                </h4>
+                                <div className="bg-gray-50 rounded-lg p-4">
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Problem:</strong> Find the length of the longest substring without repeating characters.
+                                  </p>
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Approach:</strong> Sliding window with HashSet. Time: O(n), Space: O(min(m,n))
+                                  </p>
+                                </div>
+                              </div>
+
+                              {/* Q3 */}
+                              <div className="mb-6">
+                                <h4 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                  <span className="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">Q3</span>
+                                  Container With Most Water (LC #11)
+                                </h4>
+                                <div className="bg-gray-50 rounded-lg p-4">
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Problem:</strong> Find two lines that together with the x-axis forms a container that would hold the greatest amount of water.
+                                  </p>
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Approach:</strong> Two pointers from ends. Time: O(n), Space: O(1)
+                                  </p>
+                                </div>
+                              </div>
+
+                              {/* Q4 */}
+                              <div className="mb-6">
+                                <h4 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                  <span className="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">Q4</span>
+                                  3Sum (LC #15)
+                                </h4>
+                                <div className="bg-gray-50 rounded-lg p-4">
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Problem:</strong> Find all unique triplets in the array which gives the sum of zero.
+                                  </p>
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Approach:</strong> Sort + Two pointers. Time: O(n²), Space: O(1)
+                                  </p>
+                                </div>
+                              </div>
+
+                              {/* Q6 */}
+                              <div className="mb-6">
+                                <h4 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                  <span className="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">Q6</span>
+                                  Rotate Image (LC #48)
+                                </h4>
+                                <div className="bg-gray-50 rounded-lg p-4">
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Problem:</strong> Rotate the image by 90 degrees (clockwise).
+                                  </p>
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Approach:</strong> Transpose then reverse rows. Time: O(n²), Space: O(1)
+                                  </p>
+                                </div>
+                              </div>
+
+                              {/* Q7 */}
+                              <div className="mb-6">
+                                <h4 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                  <span className="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">Q7</span>
+                                  Product of Array Except Self (LC #238)
+                                </h4>
+                                <div className="bg-gray-50 rounded-lg p-4">
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Problem:</strong> Return an array such that each element is equal to the product of all the elements in the original array except the one at i.
+                                  </p>
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Approach:</strong> Use left and right product arrays. Time: O(n), Space: O(1)
+                                  </p>
+                                </div>
+                              </div>
+
+                              {/* Q8 */}
+                              <div className="mb-6">
+                                <h4 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                  <span className="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">Q8</span>
+                                  Subarray Sum Equals K (LC #560)
+                                </h4>
+                                <div className="bg-gray-50 rounded-lg p-4">
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Problem:</strong> Find the total number of continuous subarrays whose sum equals to k.
+                                  </p>
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Approach:</strong> Use HashMap to store prefix sums. Time: O(n), Space: O(n)
+                                  </p>
+                                </div>
+                              </div>
+
+                              {/* Q9 */}
+                              <div className="mb-6">
+                                <h4 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                  <span className="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">Q9</span>
+                                  Coin Change (LC #322)
+                                </h4>
+                                <div className="bg-gray-50 rounded-lg p-4">
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Problem:</strong> Find the fewest number of coins that you need to make up that amount.
+                                  </p>
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Approach:</strong> Dynamic programming with bottom-up approach. Time: O(amount * coins), Space: O(amount)
+                                  </p>
+                                </div>
+                              </div>
+
+                              {/* Q10 */}
+                              <div className="mb-6">
+                                <h4 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                  <span className="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">Q10</span>
+                                  Longest Increasing Subsequence (LC #300)
+                                </h4>
+                                <div className="bg-gray-50 rounded-lg p-4">
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Problem:</strong> Find the length of the longest strictly increasing subsequence.
+                                  </p>
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Approach:</strong> Dynamic programming or binary search with patience sorting. Time: O(n log n), Space: O(n)
+                                  </p>
+                                </div>
+                              </div>
+
+                              {/* Q11 */}
+                              <div className="mb-6">
+                                <h4 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                  <span className="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">Q11</span>
+                                  Number of Islands (LC #200)
+                                </h4>
+                                <div className="bg-gray-50 rounded-lg p-4">
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Problem:</strong> Count the number of islands in a 2D grid map.
+                                  </p>
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Approach:</strong> DFS or BFS to mark visited islands. Time: O(m*n), Space: O(m*n)
+                                  </p>
+                                </div>
+                              </div>
+
+                              {/* Q12 */}
+                              <div className="mb-6">
+                                <h4 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                  <span className="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">Q12</span>
+                                  Word Search (LC #79)
+                                </h4>
+                                <div className="bg-gray-50 rounded-lg p-4">
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Problem:</strong> Find if the word exists in the grid by connecting adjacent cells.
+                                  </p>
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Approach:</strong> Backtracking with DFS. Time: O(m*n*4^L), Space: O(L)
+                                  </p>
+                                </div>
+                              </div>
+
+                              {/* Q13 */}
+                              <div className="mb-6">
+                                <h4 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                  <span className="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">Q13</span>
+                                  Minimum Path Sum (LC #64)
+                                </h4>
+                                <div className="bg-gray-50 rounded-lg p-4">
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Problem:</strong> Find a path from top left to bottom right which minimizes the sum of all numbers along its path.
+                                  </p>
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Approach:</strong> Dynamic programming. Time: O(m*n), Space: O(1)
+                                  </p>
+                                </div>
+                              </div>
+
+                              {/* Q14 */}
+                              <div className="mb-6">
+                                <h4 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                  <span className="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">Q14</span>
+                                  Unique Paths (LC #62)
+                                </h4>
+                                <div className="bg-gray-50 rounded-lg p-4">
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Problem:</strong> Find the number of unique paths from top-left to bottom-right corner.
+                                  </p>
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Approach:</strong> Dynamic programming or combinatorics. Time: O(m*n), Space: O(n)
+                                  </p>
+                                </div>
+                              </div>
+
+                              {/* Q15 */}
+                              <div className="mb-6">
+                                <h4 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                  <span className="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">Q15</span>
+                                  Course Schedule (LC #207)
+                                </h4>
+                                <div className="bg-gray-50 rounded-lg p-4">
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Problem:</strong> Determine if it is possible to finish all courses given prerequisites.
+                                  </p>
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Approach:</strong> Topological sort with DFS or BFS. Time: O(V+E), Space: O(V+E)
+                                  </p>
+                                </div>
+                              </div>
+
+                              {/* Q16 */}
+                              <div className="mb-6">
+                                <h4 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                  <span className="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">Q16</span>
+                                  Kth Largest Element in an Array (LC #215)
+                                </h4>
+                                <div className="bg-gray-50 rounded-lg p-4">
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Problem:</strong> Find the kth largest element in an unsorted array.
+                                  </p>
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Approach:</strong> Quickselect algorithm. Time: O(n) average, Space: O(1)
+                                  </p>
+                                </div>
+                              </div>
+
+                              {/* Q17 */}
+                              <div className="mb-6">
+                                <h4 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                  <span className="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">Q17</span>
+                                  Search in Rotated Sorted Array (LC #33)
+                                </h4>
+                                <div className="bg-gray-50 rounded-lg p-4">
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Problem:</strong> Search for a target value in a rotated sorted array.
+                                  </p>
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Approach:</strong> Modified binary search. Time: O(log n), Space: O(1)
+                                  </p>
+                                </div>
+                              </div>
+
+                              {/* Q18 */}
+                              <div className="mb-6">
+                                <h4 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                  <span className="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">Q18</span>
+                                  Combination Sum (LC #39)
+                                </h4>
+                                <div className="bg-gray-50 rounded-lg p-4">
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Problem:</strong> Find all unique combinations in candidates where the candidate numbers sum to target.
+                                  </p>
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Approach:</strong> Backtracking with DFS. Time: O(n^(target/min)), Space: O(target/min)
+                                  </p>
+                                </div>
+                              </div>
+
+                              {/* Q19 */}
+                              <div className="mb-6">
+                                <h4 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                  <span className="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">Q19</span>
+                                  Letter Combinations of a Phone Number (LC #17)
+                                </h4>
+                                <div className="bg-gray-50 rounded-lg p-4">
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Problem:</strong> Return all possible letter combinations that the number could represent.
+                                  </p>
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Approach:</strong> Backtracking with DFS. Time: O(4^n), Space: O(n)
+                                  </p>
+                                </div>
+                              </div>
+
+                              {/* Q20 */}
+                              <div className="mb-6">
+                                <h4 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                  <span className="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">Q20</span>
+                                  Spiral Matrix (LC #54)
+                                </h4>
+                                <div className="bg-gray-50 rounded-lg p-4">
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Problem:</strong> Return all elements of the matrix in spiral order.
+                                  </p>
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Approach:</strong> Use four boundaries and traverse in spiral order. Time: O(m*n), Space: O(1)
+                                  </p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </section>
+                  )}
+
+                  {question.title.includes('Top 20 Hard DSA Questions') && (
+                    <section>
+                      <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                        <div className="w-8 h-8 bg-gradient-to-r from-red-500 to-pink-600 rounded-lg flex items-center justify-center mr-3">
+                          <Code className="h-5 w-5 text-white" />
+                        </div>
+                        Top 20 Hard DSA Questions - Advanced Algorithms
+                      </h2>
+                      <div className="bg-gradient-to-br from-red-50 to-pink-50 rounded-xl p-8 border border-red-100">
+                        <div className="space-y-8">
+                          <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+                            <h3 className="text-xl font-bold text-gray-900 mb-6 flex items-center">
+                              <span className="bg-red-100 text-red-800 px-4 py-2 rounded-lg text-lg font-semibold mr-3">Hard Level</span>
+                            </h3>
+                            
+                            <div className="space-y-6">
+                              {/* Q1 */}
+                              <div className="mb-6">
+                                <h4 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                  <span className="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">Q1</span>
+                                  Median of Two Sorted Arrays (LC #4)
+                                </h4>
+                                <div className="bg-gray-50 rounded-lg p-4">
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Problem:</strong> Find the median of two sorted arrays.
+                                  </p>
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Approach:</strong> Binary search on smaller array. Time: O(log(min(m,n))), Space: O(1)
+                                  </p>
+                                </div>
+                              </div>
+
+                              {/* Q2 */}
+                              <div className="mb-6">
+                                <h4 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                  <span className="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">Q2</span>
+                                  Longest Valid Parentheses (LC #32)
+                                </h4>
+                                <div className="bg-gray-50 rounded-lg p-4">
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Problem:</strong> Find the length of the longest valid parentheses substring.
+                                  </p>
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Approach:</strong> Stack with index tracking. Time: O(n), Space: O(n)
+                                  </p>
+                                </div>
+                              </div>
+
+                              {/* Q3 */}
+                              <div className="mb-6">
+                                <h4 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                  <span className="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">Q3</span>
+                                  Trapping Rain Water (LC #42)
+                                </h4>
+                                <div className="bg-gray-50 rounded-lg p-4">
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Problem:</strong> Compute how much water it can trap after raining.
+                                  </p>
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Approach:</strong> Two pointers or precompute max heights. Time: O(n), Space: O(1)
+                                  </p>
+                                </div>
+                              </div>
+
+                              {/* Q4 */}
+                              <div className="mb-6">
+                                <h4 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                  <span className="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">Q4</span>
+                                  N-Queens (LC #51)
+                                </h4>
+                                <div className="bg-gray-50 rounded-lg p-4">
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Problem:</strong> Place n queens on an n×n chessboard so that no two queens threaten each other.
+                                  </p>
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Approach:</strong> Backtracking with diagonal checks. Time: O(n!), Space: O(n²)
+                                  </p>
+                                </div>
+                              </div>
+
+                              {/* Q6 */}
+                              <div className="mb-6">
+                                <h4 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                  <span className="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">Q6</span>
+                                  Minimum Window Substring (LC #76)
+                                </h4>
+                                <div className="bg-gray-50 rounded-lg p-4">
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Problem:</strong> Find the minimum window substring of s that contains all characters in t.
+                                  </p>
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Approach:</strong> Sliding window with HashMap. Time: O(n), Space: O(k)
+                                  </p>
+                                </div>
+                              </div>
+
+                              {/* Q7 */}
+                              <div className="mb-6">
+                                <h4 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                  <span className="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">Q7</span>
+                                  Regular Expression Matching (LC #10)
+                                </h4>
+                                <div className="bg-gray-50 rounded-lg p-4">
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Problem:</strong> Implement regular expression matching with support for '.' and '*'.
+                                  </p>
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Approach:</strong> Dynamic programming. Time: O(m*n), Space: O(m*n)
+                                  </p>
+                                </div>
+                              </div>
+
+                              {/* Q8 */}
+                              <div className="mb-6">
+                                <h4 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                  <span className="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">Q8</span>
+                                  Wildcard Matching (LC #44)
+                                </h4>
+                                <div className="bg-gray-50 rounded-lg p-4">
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Problem:</strong> Implement wildcard pattern matching with support for '?' and '*'.
+                                  </p>
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Approach:</strong> Dynamic programming or greedy with backtracking. Time: O(m*n), Space: O(m*n)
+                                  </p>
+                                </div>
+                              </div>
+
+                              {/* Q9 */}
+                              <div className="mb-6">
+                                <h4 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                  <span className="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">Q9</span>
+                                  Merge k Sorted Lists (LC #23)
+                                </h4>
+                                <div className="bg-gray-50 rounded-lg p-4">
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Problem:</strong> Merge k sorted linked lists and return it as one sorted list.
+                                  </p>
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Approach:</strong> Use min heap or divide and conquer. Time: O(n log k), Space: O(k)
+                                  </p>
+                                </div>
+                              </div>
+
+                              {/* Q10 */}
+                              <div className="mb-6">
+                                <h4 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                  <span className="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">Q10</span>
+                                  Largest Rectangle in Histogram (LC #84)
+                                </h4>
+                                <div className="bg-gray-50 rounded-lg p-4">
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Problem:</strong> Find the largest rectangle area in a histogram.
+                                  </p>
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Approach:</strong> Use monotonic stack. Time: O(n), Space: O(n)
+                                  </p>
+                                </div>
+                              </div>
+
+                              {/* Q11 */}
+                              <div className="mb-6">
+                                <h4 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                  <span className="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">Q11</span>
+                                  Maximal Rectangle (LC #85)
+                                </h4>
+                                <div className="bg-gray-50 rounded-lg p-4">
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Problem:</strong> Find the maximal rectangle containing only 1's in a binary matrix.
+                                  </p>
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Approach:</strong> Use histogram approach with monotonic stack. Time: O(m*n), Space: O(n)
+                                  </p>
+                                </div>
+                              </div>
+
+                              {/* Q12 */}
+                              <div className="mb-6">
+                                <h4 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                  <span className="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">Q12</span>
+                                  Sliding Window Maximum (LC #239)
+                                </h4>
+                                <div className="bg-gray-50 rounded-lg p-4">
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Problem:</strong> Find the maximum element in each sliding window of size k.
+                                  </p>
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Approach:</strong> Use monotonic deque. Time: O(n), Space: O(k)
+                                  </p>
+                                </div>
+                              </div>
+
+                              {/* Q13 */}
+                              <div className="mb-6">
+                                <h4 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                  <span className="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">Q13</span>
+                                  Word Break II (LC #140)
+                                </h4>
+                                <div className="bg-gray-50 rounded-lg p-4">
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Problem:</strong> Return all possible word break combinations.
+                                  </p>
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Approach:</strong> Backtracking with memoization. Time: O(n³), Space: O(n³)
+                                  </p>
+                                </div>
+                              </div>
+
+                              {/* Q14 */}
+                              <div className="mb-6">
+                                <h4 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                  <span className="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">Q14</span>
+                                  Palindrome Partitioning II (LC #132)
+                                </h4>
+                                <div className="bg-gray-50 rounded-lg p-4">
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Problem:</strong> Find the minimum cuts needed for a palindrome partitioning.
+                                  </p>
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Approach:</strong> Dynamic programming with palindrome check. Time: O(n²), Space: O(n²)
+                                  </p>
+                                </div>
+                              </div>
+
+                              {/* Q15 */}
+                              <div className="mb-6">
+                                <h4 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                  <span className="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">Q15</span>
+                                  Edit Distance (LC #72)
+                                </h4>
+                                <div className="bg-gray-50 rounded-lg p-4">
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Problem:</strong> Find the minimum number of operations required to convert word1 to word2.
+                                  </p>
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Approach:</strong> Dynamic programming. Time: O(m*n), Space: O(m*n)
+                                  </p>
+                                </div>
+                              </div>
+
+                              {/* Q16 */}
+                              <div className="mb-6">
+                                <h4 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                  <span className="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">Q16</span>
+                                  Longest Increasing Path in a Matrix (LC #329)
+                                </h4>
+                                <div className="bg-gray-50 rounded-lg p-4">
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Problem:</strong> Find the length of the longest increasing path in a matrix.
+                                  </p>
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Approach:</strong> DFS with memoization. Time: O(m*n), Space: O(m*n)
+                                  </p>
+                                </div>
+                              </div>
+
+                              {/* Q17 */}
+                              <div className="mb-6">
+                                <h4 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                  <span className="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">Q17</span>
+                                  Alien Dictionary (LC #269)
+                                </h4>
+                                <div className="bg-gray-50 rounded-lg p-4">
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Problem:</strong> Find the order of characters in an alien language.
+                                  </p>
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Approach:</strong> Topological sort with cycle detection. Time: O(V+E), Space: O(V+E)
+                                  </p>
+                                </div>
+                              </div>
+
+                              {/* Q18 */}
+                              <div className="mb-6">
+                                <h4 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                  <span className="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">Q18</span>
+                                  Shortest Path in a Grid with Obstacles Elimination (LC #1293)
+                                </h4>
+                                <div className="bg-gray-50 rounded-lg p-4">
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Problem:</strong> Find the shortest path from top-left to bottom-right with k obstacles elimination.
+                                  </p>
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Approach:</strong> BFS with state (row, col, obstacles). Time: O(m*n*k), Space: O(m*n*k)
+                                  </p>
+                                </div>
+                              </div>
+
+                              {/* Q19 */}
+                              <div className="mb-6">
+                                <h4 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                  <span className="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">Q19</span>
+                                  Maximum Profit in Job Scheduling (LC #1235)
+                                </h4>
+                                <div className="bg-gray-50 rounded-lg p-4">
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Problem:</strong> Find the maximum profit from scheduling non-overlapping jobs.
+                                  </p>
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Approach:</strong> Dynamic programming with binary search. Time: O(n log n), Space: O(n)
+                                  </p>
+                                </div>
+                              </div>
+
+                              {/* Q20 */}
+                              <div className="mb-6">
+                                <h4 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                                  <span className="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-semibold mr-3">Q20</span>
+                                  Minimum Cost to Cut a Stick (LC #1547)
+                                </h4>
+                                <div className="bg-gray-50 rounded-lg p-4">
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Problem:</strong> Find the minimum cost to cut a stick into pieces at given positions.
+                                  </p>
+                                  <p className="text-gray-700 leading-relaxed mb-3">
+                                    <strong>Approach:</strong> Dynamic programming on intervals. Time: O(n³), Space: O(n²)
+                                  </p>
                                 </div>
                               </div>
                             </div>
