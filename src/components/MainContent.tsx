@@ -54,7 +54,24 @@ const MainContent: React.FC = () => {
   );
 
   const sortedSystemDesignQuestions = useMemo(() => {
-    return systemDesignQuestions.sort((a, b) => b.views - a.views);
+    return systemDesignQuestions.sort((a, b) => {
+      // Priority order: Perplexity, ChatGPT, ElevenLabs first, then by views
+      const priorityOrder: Record<string, number> = {
+        'Design Perplexity (AI-Powered Search Engine)': 1,
+        'Design ChatGPT (AI Chat Platform)': 2,
+        'Design ElevenLabs (AI Voice Generation)': 3
+      };
+      
+      const aPriority = priorityOrder[a.title] || 999;
+      const bPriority = priorityOrder[b.title] || 999;
+      
+      if (aPriority !== bPriority) {
+        return aPriority - bPriority;
+      }
+      
+      // If same priority, sort by views
+      return b.views - a.views;
+    });
   }, [systemDesignQuestions]);
 
   const sortedAiMlQuestions = useMemo(() => {
